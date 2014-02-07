@@ -1,1 +1,0 @@
-<cfoutput>По русски</cfoutput>
