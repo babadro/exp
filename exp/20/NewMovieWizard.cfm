@@ -102,7 +102,7 @@
 				value="#actorID#" checked="#isChecked#">
 				<cfoutput>#nameFirst# #nameLast#</cfoutput><br>
 			</cfloop>
-			<cfdump var="#session.movWiz.actorIDs#">
+			
 		</cfif>
 		
 		</cfcase>
