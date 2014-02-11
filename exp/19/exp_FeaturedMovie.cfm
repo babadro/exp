@@ -1,7 +1,7 @@
 <cfif (not isDefined("Application.movieRotation"))
 	or (dateCompare(Application.movieRotation.currentUntil, now()) eq -1)>
 	<cflock scope = "Application" type = "Exclusive" timeout = "10">
-	
+		
 		<cfif not isDefined("Application.movieRotation")>
 			<cfquery name = "GetFilmIDs" datasource = "#Request.dataSource#">
 				SELECT FilmID FROM Films
@@ -23,6 +23,7 @@
 		
 		<cfset st.currentMovie = listGetAt(st.movieList, st.currentPos)>
 		<cfset st.currentUntil = dateAdd("s", 5, now())>
+		
 	</cflock>
 </cfif>
 
@@ -37,7 +38,7 @@
 	FROM Films f, FilmsRatings r
 	WHERE FilmID = 
 	<cfqueryparam cfsqltype = "cf_sql_integer" value = "#thisMovieID#">
-	AND f.ratingID = r.ratingID
+	AND f.ratingID = r.RatingID
 </cfquery>
 
 <!--- Now Display Our Featured Movie --->
