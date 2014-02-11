@@ -1,34 +1,30 @@
 <cfcomponent output = "false">
-	<cfset This.name = "ows19">
-	<cferror type = "request" template = "ErrorRequest.cfm" mailto = "baba_dro@mail.ru">
-	<cferror type = "exception" template = "ErrorException.cfm" mailto = "baba_dro@mail.ru">
+	<cfset this.name = "ows19">
 	
-	<cffunction name = "onApplicationStart" returnType = "boolean" output = "false">
-		<cfset Application.appStarted = now()>
-		<cfreturn True>		
+	<cffunction name="onApplicationStart" returnType= "boolean" output="false">
+		<cfset appStarted = now()>
+		<return True>
 	</cffunction>
 	
-	<cffunction name = "onApplicationEnd" returnType = "boid" output = "false">
-		<cfargument name = "appScope" required = "true">
-		<cflog file = "#This.name#" text = 
+	<cffunction name="onApplicationEnd" returnType="void" output="false">
+		<cfargument name="appScope" required="true">
+		<cflog file=#this.name# text=
 		"Application ended after #dateDiff('n', arguments.appScope.appStarted, now())# minutes.">
 	</cffunction>
 	
-	<cffunction name = "onRequestStart" returnType = "boolean" output = "true">
-		<cfset REQUEST.companyName = "OWS Orange Studios">
-		<cfset REQUEST.dataSource = "ows">
-		
+	<cffunction name="onRequestStart" returnType="boolean" output="True">
+		<cfset REQUEST.companyName="OWS Orange Whip Studios">
+		<cfset REQUEST.dataSource="ows">
 		<cfif not isDefined("URL.print")>
-			<cfinclude template = "SiteHeader.cfm">
+			<cfinclude template="SiteHeader.cfm">
 		</cfif>
 		<cfreturn True>
 	</cffunction>
 	
-	<cffunction name = "onRequestEnd" returnType = "void" output = "True">
+	<cffunction name="onRequestEnd" returnType="void" output="True">
 		<cfif not isDefined("URL.print")>
-			<cfinclude template = "SiteFooter.cfm">
+			<cfinclude template="SiteFooter.cfm">
 		</cfif>
-		
 	</cffunction>
 	
 	<cffunction name = "onRequest" returnType = "void" output = "true">
@@ -46,26 +42,24 @@
 		</cfif>
 	</cffunction>
 	
-	<cffunction name = "onError" returnType = "void" output = "false">
-		<cfargument name = "exception" required = "true">
-		<cfargument name = "eventName" type = "string" required = "true">
-	
+	<cffunction name="onError" returnType="void" output="false">
+		<cfargument name="Exception" required="true">
+		<cfargument name="eventName" type="string" required="true">
 		<cfif arguments.eventName is "">
-			<cflog file = "#THIS.name#" type = "error"
-			text = "#arguments.exception.message#">
+			<cflog file="#this.name#" type="error" text=
+			"#arguments.exception.message#">
 		<cfelse>
-			<cflog file = "#THIS.name#" type = "error"
-			text = "Error in Method [#arguments.eventName#] #arguments.exception.message#">
+			<cflog file="#this.name#" type="error" text=
+			"Error in method [#arguments.eventName#] #arguments.exception.message#">
 		</cfif>
 		<cfthrow object = "#arguments.exception#">
 	</cffunction>
 	
-	<cffunction name = "onMissingTemplate" returnType = "boolean" output = "false">
-		<cfargument name = "targetPage" type = "string" required = "true">
-		<cflog file = "#This.name#" text =
-		"Missing Template: #argumets.targetPage#">
-		<cflocation url = "404.cfm?missingtemplate=#urlEncodedFormat(arguments.targetpage)#"
-		addToken = "False">		
+	<cffunction name="onMissingTemplate" returnType="boolean" output="false">
+		<cfargument name="targetPage" type="string" required="true">
+		<cflog file="#this.name#" text="Missing Template: #arguments.targetPage#">
+		<cflocation url="404.cfm?missingtemplate=#urlEncodedFormat(arguments.targePage)#"
+		addToken="False">
 	</cffunction>
-		
+
 </cfcomponent>
