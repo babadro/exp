@@ -1,7 +1,7 @@
 <!--- 
  Filename: Application.cfc
  Created by: Raymond Camden (ray@camdenfamily.com)
- Please Note: Executes for every page request
+ Please Note Executes for every page request
 --->
 
 <cfcomponent output="false">
@@ -21,8 +21,18 @@
 
   <cffunction name="onRequestStart" output="false" returnType="void">
   
-    <cfinclude template="ForceUserLogin.cfm">
-    
+    <!--- If user isnÕt logged in, force them to now ---> 
+    <cfif not isDefined("SESSION.auth.isLoggedIn")>
+      <!--- If the user is now submitting "Login" form, --->
+      <!--- Include "Login Check" code to validate user --->
+      <cfif isDefined("FORM.UserLogin")> 
+        <cfinclude template="loginCheck.cfm">
+      </cfif>
+
+      <cfinclude template="loginForm.cfm">
+      <cfabort>
+    </cfif> 
+
   </cffunction>
   
 </cfcomponent>
