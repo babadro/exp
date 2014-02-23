@@ -3,7 +3,7 @@
 	
 	<cffunction name="onApplicationStart" returnType= "boolean" output="false">
 		<cfset appStarted = now()>
-		<return True>
+		<cfreturn True>
 	</cffunction>
 	
 	<cffunction name="onApplicationEnd" returnType="void" output="false">
