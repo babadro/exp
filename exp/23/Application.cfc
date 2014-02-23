@@ -1,15 +1,15 @@
 <cfcomponent output="false">
+	
 	<cfset this.name="OrangeWhipSite">
-	<cfset this.sessionManagement=true>
+	<cfset this.sessionmanagement=true>
 	
-	
-	<cffunction name="onApplicationStart" output="false" returnType="boolean">
-		<cfset APPLICATION.dataSource = "ows">
-		<cfset APPLICATION.companyName = "Orange Whip Studios">
-		<cfreturn True>
+	<cffunction name="onApplicationStart" returnType="void" output="false">
+		<cfset APPLICATION.companyName="Orange Whip Studios">
+		<cfset APPLICATION.dataSource="ows">
 	</cffunction>
 	
-	<cffunction name="onRequestStart" output="false" returnType="void">
+	<cffunction name="onRequestStart" returnType="void" output="false">
 		<cfinclude template="ForceUserLogin.cfm">
 	</cffunction>
+	
 </cfcomponent>
