@@ -3,7 +3,7 @@
  Created by: Raymond Camden (ray@camdenfamily.com)
  Purpose: Uses <cfNTAuthenticate>
 --->
-
+<!---
 <!--- Change this username! --->
 <cfset username="changeme">
 
@@ -18,3 +18,4 @@
  domain="#domain#" listGroups="yes">
 
 <cfdump var="#result#" label="Result of NT authentication.">
+--->
