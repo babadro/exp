@@ -1,0 +1,46 @@
+<cfcomponent output="false">
+
+	<cffunction name="count" output="no" returntype="Numeric" access="remote">
+		// These are the same params you would pass into the fill() method.
+		<cfargument name="param" type="string" required="no">
+		
+		// 1. Run a query to get all of the items that match the parameters that are passed in. 
+
+		// 2. return the #query.recordCount# variable.
+	</cffunction>
+
+	<cffunction name="fill" output="no" returntype="ACTORS[]" access="remote">
+		// The parameters passed into the param attribute are defined by the client application. 
+		// These are usually the search parameters needed for a result set. 
+		<cfargument name="param" type="string" required="no">		
+		// 1. Run a query to get all of the items that match the parameters that are passed in. 
+
+		// 2. Loop over the results and create a CFC for each item in the result set.
+		
+		// 3. Add each new CFC to an array
+		
+		// return the new Array full of CFCs
+	</cffunction>
+	
+	<cffunction name="get" output="no" returnType="ACTORS" access="remote">
+		<cfargument name="obj" type="struct" required="yes">
+		// 1. Pull the primary key out of the obj argument.
+		
+		// 2. query the database for the item matching the id
+		
+		// 3. create a CFC instance for it.
+		
+		// 4. return the CFC
+	</cffunction>
+	
+	<cffunction name="sync" output="no" returnType="array" access="remote">
+		<cfargument name="changes" type="array" required="yes">
+		// 1. loop over the array of CFC instances
+		
+		// 2. Check the primary key property of each CFC. If it's empty insert a new row into the database 
+		// and update the item with the new id from the database insert.
+		// If it's not empty update the database instead.
+		
+		// 3. return the array with the updated objects.			
+	</cffunction>
+</cfcomponent>

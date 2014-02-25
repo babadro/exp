@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!--
+   Name:        listing69_3.mxml
+   Author:      Josh Adams
+   Description: Makes a call to the ColdFusion 9 Exposed Services Layer
+                Image Service
+   Created:     May 27, 2010
+-->
+
+<!--
+Use typical attributes for Flex 4 projects + the
+creationComplete attribute to call the init method.
+-->
+<s:Application xmlns:fx="http://ns.adobe.com/mxml/2009"
+   xmlns:s="library://ns.adobe.com/flex/spark"
+   xmlns:mx="library://ns.adobe.com/flex/mx"
+   creationComplete="init(event)">
+   
+   <fx:Script>
+      <![CDATA[
+         // Import the required MXML libraries.
+         import mx.events.FlexEvent;
+         import mx.rpc.events.ResultEvent;
+         import mx.messaging.channels.AMFChannel;
+         import mx.messaging.ChannelSet;
+         
+         /*
+         Create an instance of ChannelSet; it is used with RemoteObject
+         and needs to be Bindable so that RemoteObject picks up the
+         changes to this object.
+         */
+         [Bindable] private var amfChannelSet:ChannelSet = new ChannelSet();
+         
+         // Perform initialization.
+         protected function init(event:FlexEvent):void
+         {
+            // Set up the AMFChannel and add it to the ChannelSet.
+            // This is the standard AMF channel for ColdFusion 9.
+            amfChannelSet.addChannel(new AMFChannel("my-cfamf",
+               "http://localhost/flex2gateway/"));
+            
+            // Call the GetHeight operation of the CF9 ESL Image Service.
+            cfESLImage.GetHeight("remoteuser", "remoteuserpassword",
+               "http://www.adobe.com/ubi/globalnav/include/adobe-lq.png");
+         }
+         
+         // When the call to GetHeight returns, make the value visible.
+         protected function getHeightHandler(event:ResultEvent):void
+         {
+            // Set the Label control to display the returned value.
+            lblImageHeight.text = event.result as String; 
+         }
+      ]]>
+   </fx:Script>
+   
+   <fx:Declarations>
+      <!--
+      Create an instance of RemoteObject. Direct it to use the dynamically
+      created ChannelSet. Direct it to use ColdFusion as its destination.
+      The source attribute value indicates that the CFC to call is Image
+      in the CFIDE\Services directory under the web root.
+      -->
+      <mx:RemoteObject id="cfESLImage" channelSet="{amfChannelSet}"
+         destination="ColdFusion" source="cfide.services.image"
+         showBusyCursor="true">
+         
+         <!--
+         Indicate that when a response is received to a call to the
+         GetHeight operation that getHeightHandler should be called.
+         -->
+         <mx:method name="GetHeight" result="getHeightHandler(event)"/>
+      </mx:RemoteObject>
+   </fx:Declarations>
+   
+   <!--Create an instance of Label in order to display the returned value.-->
+   <mx:Label id="lblImageHeight" y="10" horizontalCenter="0"/>
+</s:Application>

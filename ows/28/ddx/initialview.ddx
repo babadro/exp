@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<DDX xmlns="http://ns.adobe.com/DDX/1.0/" 
+   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+   xsi:schemaLocation="http://ns.adobe.com/DDX/1.0/ coldfusion_ddx.xsd">
+	<PDF result="Output1" initialView="globalView">
+		<PDF source="TitlePage" />
+		<PDF source="SamplePage"/>
+		<PDF source="Comps" />
+	</PDF>
+	<InitialViewProfile name="globalView" pageLayout="Continuous"
+	                    show="PagesPanel" windowOptions="CenterOnScreen"
+	                    magnification="50%" />
+</DDX>

@@ -1,0 +1,36 @@
+Microsoft Visual Studio Solution File, Format Version 9.00
+# Visual Studio 2005
+Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "http://localhost/WebServices1/", "http://localhost/WebServices1", "{91AB62DC-520E-4E15-BBAA-64F8B173B880}"
+	ProjectSection(WebsiteProperties) = preProject
+		Debug.AspNetCompiler.VirtualPath = "/WebServices1"
+		Debug.AspNetCompiler.PhysicalPath = "..\WebServices1\"
+		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\WebServices1\"
+		Debug.AspNetCompiler.Updateable = "true"
+		Debug.AspNetCompiler.ForceOverwrite = "true"
+		Debug.AspNetCompiler.FixedNames = "false"
+		Debug.AspNetCompiler.Debug = "True"
+		Release.AspNetCompiler.VirtualPath = "/WebServices1"
+		Release.AspNetCompiler.PhysicalPath = "..\WebServices1\"
+		Release.AspNetCompiler.TargetPath = "PrecompiledWeb\WebServices1\"
+		Release.AspNetCompiler.Updateable = "true"
+		Release.AspNetCompiler.ForceOverwrite = "true"
+		Release.AspNetCompiler.FixedNames = "false"
+		Release.AspNetCompiler.Debug = "False"
+		SlnRelativePath = "..\WebServices1\"
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|.NET = Debug|.NET
+		Release|.NET = Release|.NET
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{91AB62DC-520E-4E15-BBAA-64F8B173B880}.Debug|.NET.ActiveCfg = Debug|.NET
+		{91AB62DC-520E-4E15-BBAA-64F8B173B880}.Debug|.NET.Build.0 = Debug|.NET
+		{91AB62DC-520E-4E15-BBAA-64F8B173B880}.Release|.NET.ActiveCfg = Release|.NET
+		{91AB62DC-520E-4E15-BBAA-64F8B173B880}.Release|.NET.Build.0 = Release|.NET
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

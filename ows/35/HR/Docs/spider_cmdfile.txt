@@ -1,0 +1,4 @@
+-style C:\CFusionMX\lib\common\style\
+-collection c:\cfusionmx\verity\collections\spidertest
+-start c:\cfusionmx\wwwroot\ows\29\hr\docs\Hiring_Guidelines.htm
+-indinclude *

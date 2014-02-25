@@ -1,0 +1,1 @@
+<cfapplication name="DotNetIntegration" clientmanagement="no" sessionmanagement="no" setclientcookies="no" setdomaincookies="no">

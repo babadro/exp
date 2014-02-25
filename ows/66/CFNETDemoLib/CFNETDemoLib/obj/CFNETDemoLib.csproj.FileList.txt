@@ -1,0 +1,10 @@
+obj\Debug\ResolveAssemblyReference.cache
+bin\Debug\CFNETDemoLib.dll
+bin\Debug\CFNETDemoLib.pdb
+obj\Debug\CFNETDemoLib.dll
+obj\Debug\CFNETDemoLib.pdb
+bin\Release\CFNETDemoLib.dll
+bin\Release\CFNETDemoLib.pdb
+obj\Release\ResolveAssemblyReference.cache
+obj\Release\CFNETDemoLib.dll
+obj\Release\CFNETDemoLib.pdb

@@ -1,0 +1,11 @@
+<!--- 
+Name:          OWS_SOLR_Update.cfm
+Author:        Matt Tatam
+Description:   Indexes a SOLR Collection
+--->
+<cfindex collection="ows_solr_collection" action ="update" type="Path"
+Key="C:\ColdFusion9\wwwroot\ows" >
+<!--- creates debugging display --->
+<cfoutput>
+OWS SOLR Collection last Updated: #DateFormat(now())# #TimeFormat(now(), "h:mm:ss tt")#
+</cfoutput> 

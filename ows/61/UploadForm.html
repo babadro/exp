@@ -1,0 +1,24 @@
+<!--- 
+ Filename: UploadForm.html
+ Edited By: Nate Weiss (NMW)
+ Purpose:  Simple file uploading example
+--->
+
+<html>
+<head>
+ <title>&lt;cffile&gt; Upload Demonstration - Example 1</title>
+</head>
+
+<body>
+<h3>&lt;cffile&gt; Upload Demonstration - Example 1</h3>
+<!--- Create HTML form to upload a file --->
+<form action="UploadAction.cfm" enctype="multipart/form-data" method="post">
+ <!--- File field for user to select or specify a filename --->
+ <p>File to upload:<br>
+ <input type="file" name="fileName" size="50"><br>
+ 
+ <!--- Submit button to submit the form (and upload the file) --->
+ <input type="submit" value="Upload the File">
+</form>
+</body>
+</html>

@@ -1,0 +1,18 @@
+<document-metadata version="1.0">
+    <document-info>
+        <title>First Presentation</title>
+        <summary/>
+        <keywords/>
+        <view-link href="/Viewer.swf?slide={position}"/>
+    </document-info>
+    <section position="1" type="slide">
+        <title>Welcome to CFPRESENTATION</title>
+        <content>Welcome to CFPRESENTATION This is content for the first slide. I can include HTML and it will be rendered by the presentation. </content>
+        <related-content>These are some notes.</related-content>
+    </section>
+    <section position="2" type="slide">
+        <title>Sales Figures</title>
+        <content>Sales Figures Some fake data. Product Price Apples $0.99 Bananas $1.99 Nukes $2.99 </content>
+        <related-content>These are some notes for slide two.</related-content>
+    </section>
+</document-metadata>

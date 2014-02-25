@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Application 
+	xmlns:fx="http://ns.adobe.com/mxml/2009" 
+   	xmlns:s="library://ns.adobe.com/flex/spark" 
+	xmlns:mx="library://ns.adobe.com/flex/mx" >
+	<s:layout>
+		<s:VerticalLayout/>
+	</s:layout>
+	
+	<fx:Declarations>
+		<!-- define a connection to our CFC -->
+		<s:RemoteObject
+			id="ro"
+			destination="ColdFusion"
+			fault="cfFaultHandler(event)"
+			source="ows.32.example1.components.exampleService"/>
+	</fx:Declarations>
+		
+	<fx:Script>
+		<![CDATA[
+			import mx.controls.Alert;
+			import mx.rpc.events.FaultEvent;
+			
+			public function cfFaultHandler(event:FaultEvent):void
+			{
+				Alert.show(event.fault.message, "error");
+			}
+		]]>
+	</fx:Script>
+	
+	<s:Group width="100%" height="100%">
+		<s:layout>
+			<s:VerticalLayout/>
+		</s:layout>
+		
+		<!--	using the RemoteObject we defined we'll call our CFC method	-->
+		<s:Button 
+			label="Load Actors"
+			click="ro.getData()"/>
+		
+		<!-- Display the query that is returned from our CFC -->
+
+		<mx:DataGrid 
+			width="100%"
+			height="100%"
+			dataProvider="{ro.getData.lastResult}">
+			<mx:columns>
+				<mx:DataGridColumn dataField="ACTORID" headerText="id" width="50"/>
+				<mx:DataGridColumn dataField="AGE" headerText="age" width="50"/>
+				<mx:DataGridColumn dataField="NAMEFIRST" headerText="First Name"/>
+				<mx:DataGridColumn dataField="NAMELAST" headerText="Last Name"/>
+			</mx:columns>
+		</mx:DataGrid>
+	</s:Group>		
+	
+</s:Application>

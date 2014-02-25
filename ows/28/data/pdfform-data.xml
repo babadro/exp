@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form1>
+	<EmployeeName>John C. Bland II</EmployeeName>
+	<EmployeeID>32</EmployeeID>
+	<DepartmentManager>Ben Forta</DepartmentManager>
+	<Date>08/27/2007</Date>
+	<Monday>5</Monday>
+	<Monday>10</Monday>
+	<Tuesday>7</Tuesday>
+	<Tuesday>18</Tuesday>
+	<Activity>Project "A"</Activity>
+</form1>

@@ -1,0 +1,1254 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+
+<head>
+  <style type="text/css">
+   @import "/custom/css/style.css";
+   @import "/custom/css/options/header-green.css";
+   @import "/custom/css/options/content-grunge.css";
+   @import "/custom/css/options/side-green.css";
+   
+   .code {
+   		background-color: white;
+		overflow:auto;
+		padding:5px;
+		margin-top:5px;
+		margin-bottom:5px;
+		border-style: solid;
+		border-width: thin;
+		white-space: nowrap;
+   }
+  </style>
+
+  <!--[if lte IE 6]>
+   <style type="text/css" media="all">@import "/custom/css/ie6.css";</style>
+  <![endif]-->
+
+ <script src="/custom/js/jquery.js" type="text/javascript"></script>
+ <script src="/custom/js/arclite.js" type="text/javascript"></script>
+ <script src="/js/thickbox/thickbox.js" type="text/javascript"></script>
+ <link rel="stylesheet" href="http://www.coldfusionjedi.com/js/thickbox/thickbox.css" type="text/css" media="screen" />
+ <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+
+	<title>Raymond Camden's ColdFusion Blog</title>
+	
+	
+	
+	<meta name="robots" content="noindex,follow" />	  
+	
+	<meta name="title" content="Raymond Camden's ColdFusion Blog" />
+	<meta content="text/html; charset=UTF-8" http-equiv="content-type" />
+	<meta name="description" content="A blog for ColdFusion, AJAX, Web Development and other topics." />
+	<meta name="keywords" content="coldfusion,flex,ajax,spry,lost,star wars,web development,raymond camden" />
+	<link rel="alternate" type="application/rss+xml" title="RSS" href="http://feedproxy.google.com/RaymondCamdensColdfusionBlog" />
+	<script src="/custom/js/AC_OETags.js"></script>	
+	<script type="text/javascript">
+	function launchComment(id) {
+		cWin = window.open("http://www.coldfusionjedi.com/addcomment.cfm?id="+id,"cWin","width=550,height=568,menubar=yes,personalbar=no,dependent=true,directories=no,status=yes,toolbar=no,scrollbars=yes,resizable=yes");
+	}
+	function launchCommentSub(id) {
+		cWin = window.open("http://www.coldfusionjedi.com/addsub.cfm?id="+id,"cWin","width=550,height=350,menubar=yes,personalbar=no,dependent=true,directories=no,status=yes,toolbar=no,scrollbars=yes,resizable=yes");
+	}
+	function launchTrackback(id) {
+		cWin = window.open("http://www.coldfusionjedi.com/trackbacks.cfm?id="+id,"cWin","width=550,height=500,menubar=yes,personalbar=no,dependent=true,directories=no,status=yes,toolbar=no,scrollbars=yes,resizable=yes");
+	}
+	</script>
+	
+	
+
+</head>
+
+<body>
+ <!-- page -->
+ <div id="page" class="with-sidebar">
+  <div id="header-wrap">
+   <div id="header" class="block-content">
+     <div id="pagetitle">
+      <h1 class="logo"><a href="/">coldfusionJedi</a></h1>
+      <h4>coldfusion, flex, ajax, and stuff</h4>
+      <div class="clear"></div>
+
+      <!-- search form -->
+      <div class="search-block">
+        <div class="searchform-wrap">
+          <form id="searchform" action="http://www.coldfusionjedi.com/search.cfm" method="post" onsubmit="return(this.search.value.length != 0 && this.search.valuevalue != 'Search')">
+           <fieldset>
+            <input type="text" name="search" id="searchbox" class="searchfield" value="Search" onfocus="if(this.value == 'Search') {this.value = '';}" onblur="if (this.value == '') {this.value = 'Search';}" />
+            <input type="submit" value="Go" class="go" />
+           </fieldset>
+          </form>
+        </div>
+      </div>
+      <!-- /search form -->
+
+     </div>
+     <!-- main navigation -->
+     <div id="nav-wrap1">
+      <div id="nav-wrap2">
+        <ul id="nav">
+         <li><a href="/" class="fadeThis"><span>Home</span></a></li>
+         <li><a href="/page.cfm/About-Me" class="fadeThis"><span>About Me</span></a></li>
+         <li><a href="/contact.cfm" class="fadeThis"><span>Contact Me</span></a></li>
+         <li><a href="/" class="fadeThis"><span>Guides</span></a>
+           <ul>
+<li><a href="http://www.coldfusionjedi.com/downloads/application.cfc.txt" class="fadeThis"><span>App.cfc Reference</span></a></li>
+<li><a href="http://www.coldfusionjedi.com/page.cfm/Guide-to-ColdFusion-Administrator-Extensions" class="fadeThis"><span>Guide to CF Admin Extensions</span></a></li>
+<li><a href="http://www.coldfusionjedi.com/index.cfm/2007/12/5/The-Complete-Guide-to-Adding-Error-Handling-to-Your-ColdFusion-Application" class="fadeThis"><span>Complete Guide to Adding Error Handling to your CF Application</span></a></li>
+<li><a href="http://www.coldfusionjedi.com/page.cfm/Cross-Operating-System-ColdFusion-Development-Guid" class="fadeThis"><span>Cross Operating System ColdFusion Dev Guide</span></a></li>
+<li><a href="http://www.coldfusionjedi.com/page.cfm/CFC-Resources" class="fadeThis"><span>CFC Resources</span></a></li>
+<li><a href="http://www.coldfusionjedi.com/page.cfm/ColdFusion-Resources" class="fadeThis"><span>CF Resources</span></a></li>
+<li><a href="http://www.coldfusionjedi.com/index.cfm/2006/8/17/ColdFusion-Custom-Tag-Tips" class="fadeThis"><span>Custom Tag Tips</span></a></li>
+<li><a href="/coldfusionsecuritychecklist.cfm" class="fadeThis"><span>CF Security Checklist</span></a></li>
+<li><a href="/downloads/cfcscopes.pdf" class="fadeThis"><span>CFC Scopes Reference</span></a></li>
+           </ul>
+         </li>
+         <li><a href="/forums" class="fadeThis"><span>Forums</span></a></li>
+        </ul>
+      </div>
+     </div>
+     <!-- /main navigation -->
+
+   </div>
+
+
+
+   <div id="main-wrap1">
+    <div id="main-wrap2">
+     <div id="main" class="block-content">
+      <div class="mask-main rightdiv">
+       <div class="mask-left">
+        <div class="col1">
+          <div id="main-content">
+		  <a name="wrapper"></a>
+
+
+	<script src="http://www.coldfusionjedi.com/includes/swfobject_modified.js" type="text/javascript"></script>
+	
+            <div class="post">
+             <div class="post-header">
+              <h3 class="post-title"><a href="http://www.coldfusionjedi.com/index.cfm/2010/2/8/ORM-Entity-not-available-Check-your-logs">ORM Entity not available? Check your logs</a></h3>
+	  		
+
+              <p class="post-date">
+               <span class="month">Feb</span>
+               <span class="day">8</span>
+              </p>
+              <p class="post-author">
+               <span class="info">posted by <a href="#">Raymond Camden</a> in 
+			   	
+				
+				
+					<a href="http://www.coldfusionjedi.com/index.cfm/ColdFusion">ColdFusion</a>
+				
+
+				| <a href="http://www.coldfusionjedi.com/index.cfm/2010/2/8/ORM-Entity-not-available-Check-your-logs#comments" class="comments">2 Comments</a></span>
+              </p>
+			
+             </div>
+             <div class="post-content clearfix">
+             
+				This afternoon I was working on a set of persistent entities called event, eventtype, eventstatus, and eventpriority. Event is the "core" entity with hooks to status, type, and priority. When everything was done I whipped up a quick test:
+
+<p>
+
+<div class='code'><iframe name='print_frame_41B7C202AF9507A5D07442D9A32355A3' style='display:inline;height:0px;width:0px;' frameborder=0></iframe><div style='width:100%;color:#FFF;background-color:#ccc;text-decoration:none;border: 1px solid #99a;vertical-align: middle;'><span style='width:3em'>&nbsp;&nbsp;&nbsp</span><script>function toggle_view_41B7C202AF9507A5D07442D9A32355A3() {var temp = document.getElementById('htmlencoded_plain_41B7C202AF9507A5D07442D9A32355A3').style.display;document.getElementById('htmlencoded_plain_41B7C202AF9507A5D07442D9A32355A3').style.display=document.getElementById('formatted_code_41B7C202AF9507A5D07442D9A32355A3').style.display;document.getElementById('formatted_code_41B7C202AF9507A5D07442D9A32355A3').style.display=temp;if (temp=='none') {document.getElementById('view_41B7C202AF9507A5D07442D9A32355A3').innerHTML='view formatted';} else {document.getElementById('view_41B7C202AF9507A5D07442D9A32355A3').innerHTML='view plain';}}</script><a href='javascript:toggle_view_41B7C202AF9507A5D07442D9A32355A3()' style='width:6em;color:#FFF;text-decoration:none;margin:0 1em 0 .5em;' id='view_41B7C202AF9507A5D07442D9A32355A3'>view plain</a><script>function copy_to_clipboard_41B7C202AF9507A5D07442D9A32355A3() {var code=unescape(document.getElementById('htmlencoded_plain_41B7C202AF9507A5D07442D9A32355A3').innerHTML).replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&amp;/g, '&');code=code.substring(5,code.length-6);window.clipboardData.setData('text',code);}</script><a href='javascript:copy_to_clipboard_41B7C202AF9507A5D07442D9A32355A3()' style='width:9em;display:none;color:#FFF;text-decoration:none;margin:0 1em 0 .5em;' id='view_copy_to_clipboard_link_41B7C202AF9507A5D07442D9A32355A3'>copy to clipboard</a><script>if(window.clipboardData) { document.getElementById('view_copy_to_clipboard_link_41B7C202AF9507A5D07442D9A32355A3').style.display='inline';}</script><script>function print_41B7C202AF9507A5D07442D9A32355A3() {window.frames['print_frame_41B7C202AF9507A5D07442D9A32355A3'].document.body.innerHTML = document.getElementById('formatted_code_41B7C202AF9507A5D07442D9A32355A3').innerHTML;window.frames['print_frame_41B7C202AF9507A5D07442D9A32355A3'].focus();window.frames['print_frame_41B7C202AF9507A5D07442D9A32355A3'].print();}</script><a href='javascript:print_41B7C202AF9507A5D07442D9A32355A3()' style='width:4em;color:#FFF;text-decoration:none;margin:0 1em 0 .5em;'>print</a><script>function show_about_41B7C202AF9507A5D07442D9A32355A3() {document.getElementById('about_41B7C202AF9507A5D07442D9A32355A3').style.display='inline';window.setTimeout('hide_about_41B7C202AF9507A5D07442D9A32355A3();', 4000);}function hide_about_41B7C202AF9507A5D07442D9A32355A3() {document.getElementById('about_41B7C202AF9507A5D07442D9A32355A3').style.display='none';}</script><a href='javascript:show_about_41B7C202AF9507A5D07442D9A32355A3()' style='width:4em;color:#FFF;text-decoration:none;margin:0 1em 0 .5em;'>about</a></div><span id='about_41B7C202AF9507A5D07442D9A32355A3' style='display:none;border:color:#000'><span style='display:block;float:left;clear:left;width:2em;color:#999;background-color:#fffff6;text-align:right;border-width:0 1px 0 1px;border-color:#faf0e6;border-style:solid;'>&nbsp;</span>&nbsp;ColdFISH is developed by Jason Delmore.  Source code and license information available at <a href='http://coldfish.riaforge.org/'>coldfish.riaforge.org</a><br/></span><span id='htmlencoded_plain_41B7C202AF9507A5D07442D9A32355A3' style='display:none;color:#000'><PRE>&lt;cfset o = entityLoadByPk(&quot;event&quot;, 597878)&gt;</PRE></span><span id='formatted_code_41B7C202AF9507A5D07442D9A32355A3' style='color:#000'><span style='display:block;float:left;clear:left;width:2em;color:#999;background-color:#fffff6;text-align:right;border-width:0 1px 0 1px;border-color:#faf0e6;border-style:solid;'>1&nbsp;</span>&nbsp;<span id='CFTAG_DEBUG' style='color:#990033'>&lt;cfset<span id='CFSET_DEBUG' style='color:#000000'>&#32;o&#32;=&#32;<span id='keyword_DEBUG' style='color:blue'>entityLoadByPk</span>(<span id='CFSCRIPTVALUE_DEBUG' style='color:#006600'>"event"</span>,&#32;597878)</span>&gt;</span><br /></span></div>
+
+I assumed this would work - or throw an error about one of the properties perhaps. What I did <i>not</i> expect was this:
+
+<h2>Mapping for component event not found.</h2>
+		
+				
+						
+
+				
+				<p align="right"><small><a href="http://www.coldfusionjedi.com/index.cfm/2010/2/8/ORM-Entity-not-available-Check-your-logs#more">[More]</a></small></p>
+				
+				
+               
+             </div>
+            </div>
+		
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-1736437642005360";
+/* My Blog - Inner */
+google_ad_slot = "3459606027";
+google_ad_width = 468;
+google_ad_height = 60;
+//-->
+</script>
+<script type="text/javascript"
+src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script>
+		
+            <div class="post">
+             <div class="post-header">
+              <h3 class="post-title"><a href="http://www.coldfusionjedi.com/index.cfm/2010/2/8/Repeat--ColdFusion-9-does-NOT-remove-the-need-to-var-scope">Repeat - ColdFusion 9 does NOT remove the need to var scope!</a></h3>
+	  		
+
+              <p class="post-date">
+               <span class="month">Feb</span>
+               <span class="day">8</span>
+              </p>
+              <p class="post-author">
+               <span class="info">posted by <a href="#">Raymond Camden</a> in 
+			   	
+				
+				
+					<a href="http://www.coldfusionjedi.com/index.cfm/ColdFusion">ColdFusion</a>
+				
+
+				| <a href="http://www.coldfusionjedi.com/index.cfm/2010/2/8/Repeat--ColdFusion-9-does-NOT-remove-the-need-to-var-scope#comments" class="comments">3 Comments</a></span>
+              </p>
+			
+             </div>
+             <div class="post-content clearfix">
+             
+				<p>Sorry to yell (well, we don't have to assume all exclamation marks are equivalent to yelling) but this email came in to me this morning and it is very troubling for me:</p><p><blockquote>
+I have a question for you about varScoper and CF9. As I understand it, in CF9 all unscoped variables in a function are placed into a protected local scope, thereby killing the need to use the var x = "" line to scope them.</p><p>If that understanding is correct, does this make varScoper obsolete in CF9? Our team in upgrading to CF9 in the near future, and trying to identify if running code through varScoper needs to continue to be a part of our code review processes or not.
+</blockquote></p><p>The answer is an unequivocal <b>no</b>. You <b>must</b> still continue to var scope your variables in UDFs and CFC methods. There is no change in this respect. ColdFusion 9 only makes two <i>related</i> changes:</p><p><ul>
+<li>The var scope previous was an "unnamed" scope. ColdFusion 9 fixes this by creating a scope called local. Like other ColdFusion scopes you can treat this as a structure.
+<li>Because there is an implicit local scope, you can now skip the var keyword and use "local." instead. So given the line used in the quote above, you could var scope X by rewriting it as local.x="". To me, this is still "var scoping", it just gets there via a different path.
+</ul></p><p>So long story short - yes - you still need to var scope in CF9. The <a href="http://varscoper.riaforge.org/">varScoper</a> tool is still an important and necessary part of your testing/deployment strategy.</p>
+		
+				
+						
+
+				
+				
+               
+             </div>
+            </div>
+		
+            <div class="post">
+             <div class="post-header">
+              <h3 class="post-title"><a href="http://www.coldfusionjedi.com/index.cfm/2010/2/8/AIR-20-and-Flash-101-Betas">AIR 2.0 and Flash 10.1 Betas</a></h3>
+	  		
+
+              <p class="post-date">
+               <span class="month">Feb</span>
+               <span class="day">8</span>
+              </p>
+              <p class="post-author">
+               <span class="info">posted by <a href="#">Raymond Camden</a> in 
+			   	
+				
+				
+					<a href="http://www.coldfusionjedi.com/index.cfm/Adobe">Adobe</a>, 
+				
+					<a href="http://www.coldfusionjedi.com/index.cfm/AIR">AIR</a>, 
+				
+					<a href="http://www.coldfusionjedi.com/index.cfm/Flex">Flex</a>, 
+				
+					<a href="http://www.coldfusionjedi.com/index.cfm/Flash">Flash</a>
+				
+
+				| <a href="http://www.coldfusionjedi.com/index.cfm/2010/2/8/AIR-20-and-Flash-101-Betas#comments" class="comments">1 Comments</a></span>
+              </p>
+			
+             </div>
+             <div class="post-content clearfix">
+             
+				<p><img src="http://www.coldfusionjedi.com/images/air_icon_special.gif" style="align:left;margin-right:5px" align="left" /> As I (slowly) try to recover from yesterday, I thought I'd send out a quick reminder to folks that the latest betas of both AIR 2.0 and Flash 10.1 are available. </p><p><a href="http://labs.adobe.com/technologies/air2/">AIR 2.0</a> should be an amazing release. I highly recommend catching up on <a href="http://blogs.adobe.com/cantrell/">Christian Cantrell's blog</a> as he has quite a few entries on the new release.</p><p><a href="http://labs.adobe.com/technologies/flashplayer10/">Flash 10.1</a> is also now at beta 2. I've not followed the news much on this but from what I can see this will be an important update for mobile devices. </p><p>I hate to sound like a broken record, but, I'll say it again. For my readers who only know ColdFusion, now is the time to expand your skills and pick up AIR. Even if you don't want to learn Flex (which I recommend as well), you can simply build upon your existing HTML and JavaScript knowledge by adding the power of AIR.</p><p><br clear="all"></p>
+		
+				
+						
+
+				
+				
+               
+             </div>
+            </div>
+		
+            <div class="post">
+             <div class="post-header">
+              <h3 class="post-title"><a href="http://www.coldfusionjedi.com/index.cfm/2010/2/5/Looking-for-ideas-on-ORM-Optimization-Post-Launch">Looking for ideas on ORM Optimization (Post Launch)</a></h3>
+	  		
+
+              <p class="post-date">
+               <span class="month">Feb</span>
+               <span class="day">5</span>
+              </p>
+              <p class="post-author">
+               <span class="info">posted by <a href="#">Raymond Camden</a> in 
+			   	
+				
+				
+					<a href="http://www.coldfusionjedi.com/index.cfm/ColdFusion">ColdFusion</a>
+				
+
+				| <a href="http://www.coldfusionjedi.com/index.cfm/2010/2/5/Looking-for-ideas-on-ORM-Optimization-Post-Launch#comments" class="comments">6 Comments</a></span>
+              </p>
+			
+             </div>
+             <div class="post-content clearfix">
+             
+				<p>There are some really good blog entries out there on ColdFusion 9 and optimization (I suggest reading <b>everything</b> at Rupesh's <a href="http://www.rupeshk.org/blog/">blog</a>). As a developer, you have multiple options for how your entities are configured, and how related data is loaded. I'm still coming to grips with those options and learning how to best use them. But here is my question. Are there tools out there that can monitor your ORM usage and report back suggestions for optimization? As an example, consider a Department object that has many Employees. You may decide to make that relationship lazy="extra" since you figure you will almost never need to get employees from a department. But imagine now it's three years down the road - your front end code has changed - and now you are almost always requesting that data. It would make sense to change that relationship (and maybe change fetch to select as well) - but how would you know that? Is there some tool out there that can notice how you are using your entities and then provide some guidance? Certainly you can log the SQL, but it may not be simple to go from that logged SQL to your business logic.</p><p>Are there any tools/suggestions/etc in this area?</p>
+		
+				
+						
+
+				
+				
+               
+             </div>
+            </div>
+		
+            <div class="post">
+             <div class="post-header">
+              <h3 class="post-title"><a href="http://www.coldfusionjedi.com/index.cfm/2010/2/4/Googles-Static-Map-API">Google's Static Map API</a></h3>
+	  		
+
+              <p class="post-date">
+               <span class="month">Feb</span>
+               <span class="day">4</span>
+              </p>
+              <p class="post-author">
+               <span class="info">posted by <a href="#">Raymond Camden</a> in 
+			   	
+				
+				
+					<a href="http://www.coldfusionjedi.com/index.cfm/ColdFusion">ColdFusion</a>
+				
+
+				| <a href="http://www.coldfusionjedi.com/index.cfm/2010/2/4/Googles-Static-Map-API#comments" class="comments">11 Comments</a></span>
+              </p>
+			
+             </div>
+             <div class="post-content clearfix">
+             
+				<p>I discovered something cool today - Google has a <a href="http://code.google.com/apis/maps/documentation/staticmaps/">"Static" Maps API</a>. What is that exactly? While Google Maps is <i>very</i> powerful, it requires the use of JavaScript. For simple maps, or for embedding maps into PDFs, you can't use regular Google Maps. This gets around it. The API is a simple URL based service that returns the image in binary form. So for example, to create a map for my area, I'd use this URL:</p>
+		
+				
+						
+
+				
+				<p align="right"><small><a href="http://www.coldfusionjedi.com/index.cfm/2010/2/4/Googles-Static-Map-API#more">[More]</a></small></p>
+				
+				
+               
+             </div>
+            </div>
+		
+            <div class="post">
+             <div class="post-header">
+              <h3 class="post-title"><a href="http://www.coldfusionjedi.com/index.cfm/2010/2/3/Cropping-to-the-center-of-an-image">Cropping to the center of an image</a></h3>
+	  		
+
+              <p class="post-date">
+               <span class="month">Feb</span>
+               <span class="day">3</span>
+              </p>
+              <p class="post-author">
+               <span class="info">posted by <a href="#">Raymond Camden</a> in 
+			   	
+				
+				
+					<a href="http://www.coldfusionjedi.com/index.cfm/ColdFusion">ColdFusion</a>
+				
+
+				| <a href="http://www.coldfusionjedi.com/index.cfm/2010/2/3/Cropping-to-the-center-of-an-image#comments" class="comments">6 Comments</a></span>
+              </p>
+			
+             </div>
+             <div class="post-content clearfix">
+             
+				<p>This week a user sent in what I thought was a rather simple request. He needed to find the center of an image. That's pretty trivial math, so I fired back with the following:</p>
+		
+				
+						
+
+				
+				<p align="right"><small><a href="http://www.coldfusionjedi.com/index.cfm/2010/2/3/Cropping-to-the-center-of-an-image#more">[More]</a></small></p>
+				
+				
+               
+             </div>
+            </div>
+		
+            <div class="post">
+             <div class="post-header">
+              <h3 class="post-title"><a href="http://www.coldfusionjedi.com/index.cfm/2010/2/2/Translating-from-Roman-to-Decimal-Numbers-with-ColdFusion">Translating from Roman to Decimal Numbers with ColdFusion</a></h3>
+	  		
+
+              <p class="post-date">
+               <span class="month">Feb</span>
+               <span class="day">2</span>
+              </p>
+              <p class="post-author">
+               <span class="info">posted by <a href="#">Raymond Camden</a> in 
+			   	
+				
+				
+					<a href="http://www.coldfusionjedi.com/index.cfm/ColdFusion">ColdFusion</a>
+				
+
+				| <a href="http://www.coldfusionjedi.com/index.cfm/2010/2/2/Translating-from-Roman-to-Decimal-Numbers-with-ColdFusion#comments" class="comments">33 Comments</a></span>
+              </p>
+			
+             </div>
+             <div class="post-content clearfix">
+             
+				A few days ago I saw on Twitter a request for code that would convert roman numerals to decimal. <a href="http://www.cflib.org">CFLib</a> has a UDF for going from decimal to Roman, but not the other way. I did a bit of searching and while I found a bunch of code libraries, I didn't find one that explained the <i>logic</i> behind the translation. Finally I came across this page: <a href="http://www.mathematische-basteleien.de/romannumerals.htm">Roman Numerals</a>, which I thought explained the issue very nicely. The basic process to convert from Roman to decimal is:
+
+<p>
+
+1) Read the numbers from left to right.<br/>
+
+2) Each number is added to the next... <br/>
+
+3) Except when the next number is larger than the current number. Then you take the pair and do a subtraction.<br/>
+
+<p>
+
+So with this logic in mind, I came up with the following UDF. It assumes valid Roman numerals for input. But it seems to work ok.
+
+<p>
+
+<div class='code'><iframe name='print_frame_38828C35903D487EE0A9F0F8402D9601' style='display:inline;height:0px;width:0px;' frameborder=0></iframe><div style='width:100%;color:#FFF;background-color:#ccc;text-decoration:none;border: 1px solid #99a;vertical-align: middle;'><span style='width:3em'>&nbsp;&nbsp;&nbsp</span><script>function toggle_view_38828C35903D487EE0A9F0F8402D9601() {var temp = document.getElementById('htmlencoded_plain_38828C35903D487EE0A9F0F8402D9601').style.display;document.getElementById('htmlencoded_plain_38828C35903D487EE0A9F0F8402D9601').style.display=document.getElementById('formatted_code_38828C35903D487EE0A9F0F8402D9601').style.display;document.getElementById('formatted_code_38828C35903D487EE0A9F0F8402D9601').style.display=temp;if (temp=='none') {document.getElementById('view_38828C35903D487EE0A9F0F8402D9601').innerHTML='view formatted';} else {document.getElementById('view_38828C35903D487EE0A9F0F8402D9601').innerHTML='view plain';}}</script><a href='javascript:toggle_view_38828C35903D487EE0A9F0F8402D9601()' style='width:6em;color:#FFF;text-decoration:none;margin:0 1em 0 .5em;' id='view_38828C35903D487EE0A9F0F8402D9601'>view plain</a><script>function copy_to_clipboard_38828C35903D487EE0A9F0F8402D9601() {var code=unescape(document.getElementById('htmlencoded_plain_38828C35903D487EE0A9F0F8402D9601').innerHTML).replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&amp;/g, '&');code=code.substring(5,code.length-6);window.clipboardData.setData('text',code);}</script><a href='javascript:copy_to_clipboard_38828C35903D487EE0A9F0F8402D9601()' style='width:9em;display:none;color:#FFF;text-decoration:none;margin:0 1em 0 .5em;' id='view_copy_to_clipboard_link_38828C35903D487EE0A9F0F8402D9601'>copy to clipboard</a><script>if(window.clipboardData) { document.getElementById('view_copy_to_clipboard_link_38828C35903D487EE0A9F0F8402D9601').style.display='inline';}</script><script>function print_38828C35903D487EE0A9F0F8402D9601() {window.frames['print_frame_38828C35903D487EE0A9F0F8402D9601'].document.body.innerHTML = document.getElementById('formatted_code_38828C35903D487EE0A9F0F8402D9601').innerHTML;window.frames['print_frame_38828C35903D487EE0A9F0F8402D9601'].focus();window.frames['print_frame_38828C35903D487EE0A9F0F8402D9601'].print();}</script><a href='javascript:print_38828C35903D487EE0A9F0F8402D9601()' style='width:4em;color:#FFF;text-decoration:none;margin:0 1em 0 .5em;'>print</a><script>function show_about_38828C35903D487EE0A9F0F8402D9601() {document.getElementById('about_38828C35903D487EE0A9F0F8402D9601').style.display='inline';window.setTimeout('hide_about_38828C35903D487EE0A9F0F8402D9601();', 4000);}function hide_about_38828C35903D487EE0A9F0F8402D9601() {document.getElementById('about_38828C35903D487EE0A9F0F8402D9601').style.display='none';}</script><a href='javascript:show_about_38828C35903D487EE0A9F0F8402D9601()' style='width:4em;color:#FFF;text-decoration:none;margin:0 1em 0 .5em;'>about</a></div><span id='about_38828C35903D487EE0A9F0F8402D9601' style='display:none;border:color:#000'><span style='display:block;float:left;clear:left;width:2em;color:#999;background-color:#fffff6;text-align:right;border-width:0 1px 0 1px;border-color:#faf0e6;border-style:solid;'>&nbsp;</span>&nbsp;ColdFISH is developed by Jason Delmore.  Source code and license information available at <a href='http://coldfish.riaforge.org/'>coldfish.riaforge.org</a><br/></span><span id='htmlencoded_plain_38828C35903D487EE0A9F0F8402D9601' style='display:none;color:#000'><PRE>function romantodec(input) {
+	var romans = {};
+	var result = 0;
+	var pos = 1;
+	var char = &quot;&quot;;
+	var thisSum = &quot;&quot;;
+	var nextchar = &quot;&quot;;
+		
+	romans[&quot;I&quot;] = 1;
+	romans[&quot;V&quot;] = 5;
+	romans[&quot;X&quot;] = 10;
+	romans[&quot;L&quot;] = 50;
+	romans[&quot;C&quot;] = 100;
+	romans[&quot;D&quot;] = 500;
+	romans[&quot;M&quot;] = 1000;
+
+	while(pos lte len(input)) {
+		char = mid(input, pos, 1);
+		//are we NOT at the end?
+		if(pos != len(input)) {
+			//check my next character - if bigger, replace with a sub
+			nextchar = mid(input, pos+1, 1);
+			if(romans[char] &lt; romans[nextchar]) {
+				thisSum = romans[nextchar] - romans[char];
+				result += thisSum;
+				pos+=2;
+			} else {
+				result += romans[char];
+				pos++;
+			} 
+		} else {
+			result += romans[char];
+			pos++;
+		}
+	}
+	
+	return result;
+}</PRE></span><span id='formatted_code_38828C35903D487EE0A9F0F8402D9601' style='color:#000'><span style='display:block;float:left;clear:left;width:2em;color:#999;background-color:#fffff6;text-align:right;border-width:0 1px 0 1px;border-color:#faf0e6;border-style:solid;'>1&nbsp;</span>&nbsp;function&#32;romantodec(input)&#32;<span id='BIND_DEBUG' style='color:#000099'>{</span><br /><span style='display:block;float:left;clear:left;width:2em;color:#999;background-color:#fffff6;text-align:right;border-width:0 1px 0 1px;border-color:#faf0e6;border-style:solid;'>2&nbsp;</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;var&#32;romans&#32;=&#32;<span id='BIND_DEBUG' style='color:#000099'>{</span><span id='BIND_DEBUG' style='color:#000099'>}</span>;<br /><span style='display:block;float:left;clear:left;width:2em;color:#999;background-color:#fffff6;text-align:right;border-width:0 1px 0 1px;border-color:#faf0e6;border-style:solid;'>3&nbsp;</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;var&#32;result&#32;=&#32;0;<br /><span style='display:block;float:left;clear:left;width:2em;color:#999;background-color:#fffff6;text-align:right;border-width:0 1px 0 1px;border-color:#faf0e6;border-style:solid;'>4&nbsp;</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;var&#32;pos&#32;=&#32;1;<br /><span style='display:block;float:left;clear:left;width:2em;color:#999;background-color:#fffff6;text-align:right;border-width:0 1px 0 1px;border-color:#faf0e6;border-style:solid;'>5&nbsp;</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;var&#32;char&#32;=&#32;"";<br /><span style='display:block;float:left;clear:left;width:2em;color:#999;background-color:#fffff6;text-align:right;border-width:0 1px 0 1px;border-color:#faf0e6;border-style:solid;'>6&nbsp;</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;var&#32;thisSum&#32;=&#32;"";<br /><span style='display:block;float:left;clear:left;width:2em;color:#999;background-color:#fffff6;text-align:right;border-width:0 1px 0 1px;border-color:#faf0e6;border-style:solid;'>7&nbsp;</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;var&#32;nextchar&#32;=&#32;"";<br /><span style='display:block;float:left;clear:left;width:2em;color:#999;background-color:#fffff6;text-align:right;border-width:0 1px 0 1px;border-color:#faf0e6;border-style:solid;'>8&nbsp;</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br /><span style='display:block;float:left;clear:left;width:2em;color:#999;background-color:#fffff6;text-align:right;border-width:0 1px 0 1px;border-color:#faf0e6;border-style:solid;'>9&nbsp;</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;romans["I"]&#32;=&#32;1;<br /><span style='display:block;float:left;clear:left;width:2em;color:#999;background-color:#fffff6;text-align:right;border-width:0 1px 0 1px;border-color:#faf0e6;border-style:solid;'>10&nbsp;</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;romans["V"]&#32;=&#32;5;<br /><span style='display:block;float:left;clear:left;width:2em;color:#999;background-color:#fffff6;text-align:right;border-width:0 1px 0 1px;border-color:#faf0e6;border-style:solid;'>11&nbsp;</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;romans["X"]&#32;=&#32;10;<br /><span style='display:block;float:left;clear:left;width:2em;color:#999;background-color:#fffff6;text-align:right;border-width:0 1px 0 1px;border-color:#faf0e6;border-style:solid;'>12&nbsp;</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;romans["L"]&#32;=&#32;50;<br /><span style='display:block;float:left;clear:left;width:2em;color:#999;background-color:#fffff6;text-align:right;border-width:0 1px 0 1px;border-color:#faf0e6;border-style:solid;'>13&nbsp;</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;romans["C"]&#32;=&#32;100;<br /><span style='display:block;float:left;clear:left;width:2em;color:#999;background-color:#fffff6;text-align:right;border-width:0 1px 0 1px;border-color:#faf0e6;border-style:solid;'>14&nbsp;</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;romans["D"]&#32;=&#32;500;<br /><span style='display:block;float:left;clear:left;width:2em;color:#999;background-color:#fffff6;text-align:right;border-width:0 1px 0 1px;border-color:#faf0e6;border-style:solid;'>15&nbsp;</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;romans["M"]&#32;=&#32;1000;<br /><span style='display:block;float:left;clear:left;width:2em;color:#999;background-color:#fffff6;text-align:right;border-width:0 1px 0 1px;border-color:#faf0e6;border-style:solid;'>16&nbsp;</span>&nbsp;<br /><span style='display:block;float:left;clear:left;width:2em;color:#999;background-color:#fffff6;text-align:right;border-width:0 1px 0 1px;border-color:#faf0e6;border-style:solid;'>17&nbsp;</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;while(pos&#32;lte&#32;len(input))&#32;<span id='BIND_DEBUG' style='color:#000099'>{</span><br /><span style='display:block;float:left;clear:left;width:2em;color:#999;background-color:#fffff6;text-align:right;border-width:0 1px 0 1px;border-color:#faf0e6;border-style:solid;'>18&nbsp;</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;char&#32;=&#32;mid(input,&#32;pos,&#32;1);<br /><span style='display:block;float:left;clear:left;width:2em;color:#999;background-color:#fffff6;text-align:right;border-width:0 1px 0 1px;border-color:#faf0e6;border-style:solid;'>19&nbsp;</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//are&#32;we&#32;NOT&#32;at&#32;the&#32;end?<br /><span style='display:block;float:left;clear:left;width:2em;color:#999;background-color:#fffff6;text-align:right;border-width:0 1px 0 1px;border-color:#faf0e6;border-style:solid;'>20&nbsp;</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if(pos&#32;!=&#32;len(input))&#32;<span id='BIND_DEBUG' style='color:#000099'>{</span><br /><span style='display:block;float:left;clear:left;width:2em;color:#999;background-color:#fffff6;text-align:right;border-width:0 1px 0 1px;border-color:#faf0e6;border-style:solid;'>21&nbsp;</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//check&#32;my&#32;next&#32;character&#32;-&#32;if&#32;bigger,&#32;replace&#32;with&#32;a&#32;sub<br /><span style='display:block;float:left;clear:left;width:2em;color:#999;background-color:#fffff6;text-align:right;border-width:0 1px 0 1px;border-color:#faf0e6;border-style:solid;'>22&nbsp;</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;nextchar&#32;=&#32;mid(input,&#32;pos+1,&#32;1);<br /><span style='display:block;float:left;clear:left;width:2em;color:#999;background-color:#fffff6;text-align:right;border-width:0 1px 0 1px;border-color:#faf0e6;border-style:solid;'>23&nbsp;</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if(romans[char]&#32;<span id='HTML_DEBUG' style='color:#000099'>&lt;&#32;romans[nextchar])&#32;<span id='BIND_DEBUG' style='color:#000099'>{</span><br /><span style='display:block;float:left;clear:left;width:2em;color:#999;background-color:#fffff6;text-align:right;border-width:0 1px 0 1px;border-color:#faf0e6;border-style:solid;'>24&nbsp;</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;thisSum&#32;=&#32;romans[nextchar]&#32;-&#32;romans[char];<br /><span style='display:block;float:left;clear:left;width:2em;color:#999;background-color:#fffff6;text-align:right;border-width:0 1px 0 1px;border-color:#faf0e6;border-style:solid;'>25&nbsp;</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;result&#32;+=&#32;thisSum;<br /><span style='display:block;float:left;clear:left;width:2em;color:#999;background-color:#fffff6;text-align:right;border-width:0 1px 0 1px;border-color:#faf0e6;border-style:solid;'>26&nbsp;</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;pos+=2;<br /><span style='display:block;float:left;clear:left;width:2em;color:#999;background-color:#fffff6;text-align:right;border-width:0 1px 0 1px;border-color:#faf0e6;border-style:solid;'>27&nbsp;</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span id='BIND_DEBUG' style='color:#000099'>}</span>&#32;else&#32;<span id='BIND_DEBUG' style='color:#000099'>{</span><br /><span style='display:block;float:left;clear:left;width:2em;color:#999;background-color:#fffff6;text-align:right;border-width:0 1px 0 1px;border-color:#faf0e6;border-style:solid;'>28&nbsp;</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;result&#32;+=&#32;romans[char];<br /><span style='display:block;float:left;clear:left;width:2em;color:#999;background-color:#fffff6;text-align:right;border-width:0 1px 0 1px;border-color:#faf0e6;border-style:solid;'>29&nbsp;</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;pos++;<br /><span style='display:block;float:left;clear:left;width:2em;color:#999;background-color:#fffff6;text-align:right;border-width:0 1px 0 1px;border-color:#faf0e6;border-style:solid;'>30&nbsp;</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span id='BIND_DEBUG' style='color:#000099'>}</span>&#32;<br /><span style='display:block;float:left;clear:left;width:2em;color:#999;background-color:#fffff6;text-align:right;border-width:0 1px 0 1px;border-color:#faf0e6;border-style:solid;'>31&nbsp;</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span id='BIND_DEBUG' style='color:#000099'>}</span>&#32;else&#32;<span id='BIND_DEBUG' style='color:#000099'>{</span><br /><span style='display:block;float:left;clear:left;width:2em;color:#999;background-color:#fffff6;text-align:right;border-width:0 1px 0 1px;border-color:#faf0e6;border-style:solid;'>32&nbsp;</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;result&#32;+=&#32;romans[char];<br /><span style='display:block;float:left;clear:left;width:2em;color:#999;background-color:#fffff6;text-align:right;border-width:0 1px 0 1px;border-color:#faf0e6;border-style:solid;'>33&nbsp;</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;pos++;<br /><span style='display:block;float:left;clear:left;width:2em;color:#999;background-color:#fffff6;text-align:right;border-width:0 1px 0 1px;border-color:#faf0e6;border-style:solid;'>34&nbsp;</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span id='BIND_DEBUG' style='color:#000099'>}</span><br /><span style='display:block;float:left;clear:left;width:2em;color:#999;background-color:#fffff6;text-align:right;border-width:0 1px 0 1px;border-color:#faf0e6;border-style:solid;'>35&nbsp;</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span id='BIND_DEBUG' style='color:#000099'>}</span><br /><span style='display:block;float:left;clear:left;width:2em;color:#999;background-color:#fffff6;text-align:right;border-width:0 1px 0 1px;border-color:#faf0e6;border-style:solid;'>36&nbsp;</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br /><span style='display:block;float:left;clear:left;width:2em;color:#999;background-color:#fffff6;text-align:right;border-width:0 1px 0 1px;border-color:#faf0e6;border-style:solid;'>37&nbsp;</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&#32;result;<br /><span style='display:block;float:left;clear:left;width:2em;color:#999;background-color:#fffff6;text-align:right;border-width:0 1px 0 1px;border-color:#faf0e6;border-style:solid;'>38&nbsp;</span>&nbsp;<span id='BIND_DEBUG' style='color:#000099'>}</span><br /></span></span></div>
+
+<p>
+
+You can see how it follows the basic, 'left to right, add the numbers together' process, and how it notices when the current character has a higher number to the right of it. I wrote up a quick test script for it like so:
+
+<p>
+
+<div class='code'><iframe name='print_frame_542E5F476DEE036DF95096C02FA0536E' style='display:inline;height:0px;width:0px;' frameborder=0></iframe><div style='width:100%;color:#FFF;background-color:#ccc;text-decoration:none;border: 1px solid #99a;vertical-align: middle;'><span style='width:3em'>&nbsp;&nbsp;&nbsp</span><script>function toggle_view_542E5F476DEE036DF95096C02FA0536E() {var temp = document.getElementById('htmlencoded_plain_542E5F476DEE036DF95096C02FA0536E').style.display;document.getElementById('htmlencoded_plain_542E5F476DEE036DF95096C02FA0536E').style.display=document.getElementById('formatted_code_542E5F476DEE036DF95096C02FA0536E').style.display;document.getElementById('formatted_code_542E5F476DEE036DF95096C02FA0536E').style.display=temp;if (temp=='none') {document.getElementById('view_542E5F476DEE036DF95096C02FA0536E').innerHTML='view formatted';} else {document.getElementById('view_542E5F476DEE036DF95096C02FA0536E').innerHTML='view plain';}}</script><a href='javascript:toggle_view_542E5F476DEE036DF95096C02FA0536E()' style='width:6em;color:#FFF;text-decoration:none;margin:0 1em 0 .5em;' id='view_542E5F476DEE036DF95096C02FA0536E'>view plain</a><script>function copy_to_clipboard_542E5F476DEE036DF95096C02FA0536E() {var code=unescape(document.getElementById('htmlencoded_plain_542E5F476DEE036DF95096C02FA0536E').innerHTML).replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&amp;/g, '&');code=code.substring(5,code.length-6);window.clipboardData.setData('text',code);}</script><a href='javascript:copy_to_clipboard_542E5F476DEE036DF95096C02FA0536E()' style='width:9em;display:none;color:#FFF;text-decoration:none;margin:0 1em 0 .5em;' id='view_copy_to_clipboard_link_542E5F476DEE036DF95096C02FA0536E'>copy to clipboard</a><script>if(window.clipboardData) { document.getElementById('view_copy_to_clipboard_link_542E5F476DEE036DF95096C02FA0536E').style.display='inline';}</script><script>function print_542E5F476DEE036DF95096C02FA0536E() {window.frames['print_frame_542E5F476DEE036DF95096C02FA0536E'].document.body.innerHTML = document.getElementById('formatted_code_542E5F476DEE036DF95096C02FA0536E').innerHTML;window.frames['print_frame_542E5F476DEE036DF95096C02FA0536E'].focus();window.frames['print_frame_542E5F476DEE036DF95096C02FA0536E'].print();}</script><a href='javascript:print_542E5F476DEE036DF95096C02FA0536E()' style='width:4em;color:#FFF;text-decoration:none;margin:0 1em 0 .5em;'>print</a><script>function show_about_542E5F476DEE036DF95096C02FA0536E() {document.getElementById('about_542E5F476DEE036DF95096C02FA0536E').style.display='inline';window.setTimeout('hide_about_542E5F476DEE036DF95096C02FA0536E();', 4000);}function hide_about_542E5F476DEE036DF95096C02FA0536E() {document.getElementById('about_542E5F476DEE036DF95096C02FA0536E').style.display='none';}</script><a href='javascript:show_about_542E5F476DEE036DF95096C02FA0536E()' style='width:4em;color:#FFF;text-decoration:none;margin:0 1em 0 .5em;'>about</a></div><span id='about_542E5F476DEE036DF95096C02FA0536E' style='display:none;border:color:#000'><span style='display:block;float:left;clear:left;width:2em;color:#999;background-color:#fffff6;text-align:right;border-width:0 1px 0 1px;border-color:#faf0e6;border-style:solid;'>&nbsp;</span>&nbsp;ColdFISH is developed by Jason Delmore.  Source code and license information available at <a href='http://coldfish.riaforge.org/'>coldfish.riaforge.org</a><br/></span><span id='htmlencoded_plain_542E5F476DEE036DF95096C02FA0536E' style='display:none;color:#000'><PRE>&lt;cfset inputs = &quot;XX,XI,IV,VIII,MC,DL,XL&quot;&gt;
+&lt;cfloop index=&quot;input&quot; list=&quot;#inputs#&quot;&gt;
+	&lt;cfoutput&gt;
+	#input#=#romantodec(input)#&lt;br/&gt;
+	&lt;/cfoutput&gt;
+&lt;/cfloop&gt;</PRE></span><span id='formatted_code_542E5F476DEE036DF95096C02FA0536E' style='color:#000'><span style='display:block;float:left;clear:left;width:2em;color:#999;background-color:#fffff6;text-align:right;border-width:0 1px 0 1px;border-color:#faf0e6;border-style:solid;'>1&nbsp;</span>&nbsp;<span id='CFTAG_DEBUG' style='color:#990033'>&lt;cfset<span id='CFSET_DEBUG' style='color:#000000'>&#32;inputs&#32;=&#32;<span id='CFSCRIPTVALUE_DEBUG' style='color:#006600'>"XX,XI,IV,VIII,MC,DL,XL"</span></span>&gt;</span><br /><span style='display:block;float:left;clear:left;width:2em;color:#999;background-color:#fffff6;text-align:right;border-width:0 1px 0 1px;border-color:#faf0e6;border-style:solid;'>2&nbsp;</span>&nbsp;<span id='CFTAG_DEBUG' style='color:#990033'>&lt;cfloop&#32;index=<span id='VALUE_DEBUG' style='color:#0000CC'>"input"</span>&#32;list=<span id='VALUE_DEBUG' style='color:#0000CC'>"#inputs#"</span>&gt;</span><br /><span style='display:block;float:left;clear:left;width:2em;color:#999;background-color:#fffff6;text-align:right;border-width:0 1px 0 1px;border-color:#faf0e6;border-style:solid;'>3&nbsp;</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span id='CFTAG_DEBUG' style='color:#990033'>&lt;cfoutput&gt;</span><br /><span style='display:block;float:left;clear:left;width:2em;color:#999;background-color:#fffff6;text-align:right;border-width:0 1px 0 1px;border-color:#faf0e6;border-style:solid;'>4&nbsp;</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;#input#=#romantodec(input)#<span id='HTML_DEBUG' style='color:#000099'>&lt;br/&gt;</span><br /><span style='display:block;float:left;clear:left;width:2em;color:#999;background-color:#fffff6;text-align:right;border-width:0 1px 0 1px;border-color:#faf0e6;border-style:solid;'>5&nbsp;</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span id='CFTAG_DEBUG' style='color:#990033'>&lt;/cfoutput&gt;</span><br /><span style='display:block;float:left;clear:left;width:2em;color:#999;background-color:#fffff6;text-align:right;border-width:0 1px 0 1px;border-color:#faf0e6;border-style:solid;'>6&nbsp;</span>&nbsp;<span id='CFTAG_DEBUG' style='color:#990033'>&lt;/cfloop&gt;</span><br /></span></div>
+
+<p>
+
+Which produced:
+<p>
+
+XX=20<br/>
+XI=11<br/>
+IV=4<br/>
+VIII=8<br/>
+MC=1100<br/>
+DL=550<br/>
+XL=40<br/>
+
+You can download this UDF at CFLib now: <a href="http://www.cflib.org/udf/romanToDecimal">romanToDecimal</a> 
+
+p.s. Sorry for those still waiting for UDF approval at CFLib. It is a volunteer process (myself, Scott Pinkston, Todd Sharp) so be patient!
+		
+				
+						
+
+				
+				
+               
+             </div>
+            </div>
+		
+            <div class="post">
+             <div class="post-header">
+              <h3 class="post-title"><a href="http://www.coldfusionjedi.com/index.cfm/2010/2/1/Example-of-pagination-with-jQuery-and-ColdFusion-with-External-Buttons">Example of pagination with jQuery and ColdFusion with "External Buttons"</a></h3>
+	  		
+
+              <p class="post-date">
+               <span class="month">Feb</span>
+               <span class="day">1</span>
+              </p>
+              <p class="post-author">
+               <span class="info">posted by <a href="#">Raymond Camden</a> in 
+			   	
+				
+				
+					<a href="http://www.coldfusionjedi.com/index.cfm/jQuery">jQuery</a>, 
+				
+					<a href="http://www.coldfusionjedi.com/index.cfm/ColdFusion">ColdFusion</a>, 
+				
+					<a href="http://www.coldfusionjedi.com/index.cfm/AJAX">AJAX</a>
+				
+
+				| <a href="http://www.coldfusionjedi.com/index.cfm/2010/2/1/Example-of-pagination-with-jQuery-and-ColdFusion-with-External-Buttons#comments" class="comments">5 Comments</a></span>
+              </p>
+			
+             </div>
+             <div class="post-content clearfix">
+             
+				<p>That title really isn't very clear, so let me explain a bit more about what this blog entry is about. A reader asked if it was possible to do pagination via Ajax (ie, each page of content is loaded via Ajax), but have the controls (the previous and next buttons) exist <i>outside</i> of the Ajax-loaded content. This is an interesting question. It is <b>incredibly</b> trivial to load content via Ajax with jQuery. My seven year old could do it in his sleep. But we need to find a way to handle showing, and hiding, the navigation controls. We also need to ensure those controls can correctly "drive" the content to handle paging. Like ColdFusion, jQuery provides many ways to solve a problem. This is just one example.</p>
+		
+				
+						
+
+				
+				<p align="right"><small><a href="http://www.coldfusionjedi.com/index.cfm/2010/2/1/Example-of-pagination-with-jQuery-and-ColdFusion-with-External-Buttons#more">[More]</a></small></p>
+				
+				
+               
+             </div>
+            </div>
+		
+            <div class="post">
+             <div class="post-header">
+              <h3 class="post-title"><a href="http://www.coldfusionjedi.com/index.cfm/2010/1/29/Best-of-ColdFusion-9-Contest-And-the-winners-are">Best of ColdFusion 9 Contest: And the winners are...</a></h3>
+	  		
+
+              <p class="post-date">
+               <span class="month">Jan</span>
+               <span class="day">29</span>
+              </p>
+              <p class="post-author">
+               <span class="info">posted by <a href="#">Raymond Camden</a> in 
+			   	
+				
+				
+					<a href="http://www.coldfusionjedi.com/index.cfm/ColdFusion">ColdFusion</a>
+				
+
+				| <a href="http://www.coldfusionjedi.com/index.cfm/2010/1/29/Best-of-ColdFusion-9-Contest-And-the-winners-are#comments" class="comments">10 Comments</a></span>
+              </p>
+			
+             </div>
+             <div class="post-content clearfix">
+             
+				<p><img src="http://www.coldfusionjedi.com/images/bestcfcontest1.jpg" title="Best of ColdFusion 9" a style="float:left;margin-right:5px;margin-bottom:5px"/> So only 4-5 weeks after I said I would wrap things up, it is finally time to announce the winners of the "Best of ColdFusion 9" contest. Before I do so, I have a few things I want to say. </p><p>First - I know that showing other people your code can be a nerve-wracking experience. It takes a bit of bravery to put your code out there for the world to see (and pick apart), and I, and my readers (if I may be so bold to speak for them), appreciate it. I <b>love</b> talking about code, and I think sharing code for review is one of the more fun ways to learn. So no matter what, I'm appreciative and I thank you all for your submissions. This year I had submissions from:</p><p>Dale Severin<br/>
+Sam Farmer<br/>
+Budd Wright<br/>
+Russ Spivey<br/>
+Dan Vega<br/>
+Andrew Duval<br/>
+Adam Tuttle<br/>
+Simon Romanski<br/>
+Marko Simic<br/>
+Guust Nieuwenhuis<br/>
+Ben Nadel (I don't know this guy, but something tells me he is an up and comer in the CF world...)<br/>
+Corey Butler<br/>
+Chris Martinez<br/>
+Ben Riordan<br/>
+Nathan Struz</p><p>We had 15 entries in total. There is <b>no</b> way in heck I would have been able to judge all of these. Luckily I had a great group of guest judges who helped out. Big thanks to</p><p>Brian Rinaldi<br/>
+Paul Hasting (Paul, I promise my code will be globalized... one day)<br/>
+Todd Sharp<br/>
+Francisco Pualino<br/>
+Daniel Short<br/>
+Brian Kotek<br/>
+Charlie Arehart</p><p>And finally, huge thanks to Adobe - specifically Adam Lehman and Allison Hueslid for supporting me and the contest with some killer prizes and Liz Frederick for creating the logo. </p><p>So I'm sure you're tired of all this blather and just want me to get to the winners. The judging process worked like this:</p><p>Every judge gave me a numeric ranking (from 1-10) on how well they thought the entry they reviewed best met the goals of showcasing ColdFusion 9. I looked over these reviews, and the ones I reviewed, and made a judgement call. <b>This was, by necessity, somewhat arbitrary.</b> I expect people to disagree with this decision. To me though the prizes are the least important part. Looking at all the entries and the <b>stellar</b> examples of ColdFusion 9, I think the job is done. But there has to be a winner... and that winner is...</p><p><b>Ben Riordan and <a href="http://www.coldfusionjedi.com/index.cfm/2010/1/21/Best-of-CF9-MuralBuilder">MuralBuilder</a></b> This entry blew me away for something I normally care little about - practicality. Folks know I like to write a lot of CFML, and not much of it is actually useful, so to see an entry that was both cool <i>and</i> useful - well - it just felt like the right choice to make.</p><p>As for the three runner ups, they are:</p><p><b>
+Marko Simic and <a href="http://www.coldfusionjedi.com/index.cfm/2010/1/12/Best-of-CF9-Collyba">Collya</a><br/>
+Sam Farmer and <a href="http://www.coldfusionjedi.com/index.cfm/2009/12/7/Best-of-CF9-spreadEdit">spreadEdit</a><br/>
+Budd Wright and - my personal favorite - <a href="http://www.coldfusionjedi.com/index.cfm/2009/12/10/Best-of-CF9-CFDungeon">CFDungeon</a>
+</b></p><p>All in all - I was pretty happy with all the entries (and thanks to Adobe, everyone is getting a little something something), so everyone please give yourself a big pat on the back.</p>
+		
+				
+						
+
+				
+				
+               
+             </div>
+            </div>
+		
+            <div class="post">
+             <div class="post-header">
+              <h3 class="post-title"><a href="http://www.coldfusionjedi.com/index.cfm/2010/1/29/ColdFusion-9-Security-Bulletin">ColdFusion 9 Security Bulletin</a></h3>
+	  		
+
+              <p class="post-date">
+               <span class="month">Jan</span>
+               <span class="day">29</span>
+              </p>
+              <p class="post-author">
+               <span class="info">posted by <a href="#">Raymond Camden</a> in 
+			   	
+				
+				
+					<a href="http://www.coldfusionjedi.com/index.cfm/ColdFusion">ColdFusion</a>
+				
+
+				| <a href="http://www.coldfusionjedi.com/index.cfm/2010/1/29/ColdFusion-9-Security-Bulletin#comments" class="comments">1 Comments</a></span>
+              </p>
+			
+             </div>
+             <div class="post-content clearfix">
+             
+				<p>The first (I think?) ColdFusion 9 Security bulletin has been released: <a href="http://www.adobe.com/support/security/bulletins/apsb10-04.html">Solution available for potential ColdFusion information disclosure issue</a> This relates to Solr and it's built in web service.</p>
+		
+				
+						
+
+				
+				
+               
+             </div>
+            </div>
+		
+		<p align="right">
+		
+			<a href="http://www.coldfusionjedi.com/index.cfm?&startRow=11">More Entries</a>
+			
+		</p>
+		
+
+         </div>
+
+         </div>
+    	<div class="col2">
+
+          <ul id="sidebar">
+          
+           <li class="block">
+            <!-- box -->
+            <div class="box">
+             <div class="titlewrap"><h4><span>Sponsors</span></h4></div>
+             <div class="wrapleft">
+              <div class="wrapright">
+               <div class="tr">
+                <div class="bl">
+                 <div class="tl">
+                  <div class="br the-content">
+            <div style="margin-left:42px;margin-bottom;5px">      
+			<script>
+			AC_FL_RunContent("movie","http://www.fusion-reactor.com/images/externalsites/coldfusionjedi","width","200","height","140","align","center","wmode","transparent");
+			</script>		  
+					</div>
+                  </div>
+                 </div>
+                </div>
+               </div>
+              </div>
+             </div>
+
+            </div>
+            <!-- /box -->
+           </li>
+		  
+           <li class="block">
+            <!-- categories -->
+            <ul class="menu">
+			 <li class="cat-item trigger"><a href="http://www.twitter.com/cfjedimaster">Follow me on Twitter</a></li>
+			 <li><a href="http://feedproxy.google.com/RaymondCamdensColdfusionBlog">Subscribe to RSS</a></li>
+			 <li class="cat-item trigger"><a href="http://www.coldfusionbloggers.org">ColdFusion Bloggers.org</a></li>
+			 <li class="cat-item trigger"><a href="http://www.amazon.com/o/registry/2TCL1D08EZEYE">My Wishlist</a></li>
+            </ul>
+            <!-- /categories -->
+           </li>
+
+
+           <li class="block">
+            <!-- box -->
+            <div class="box">
+             <div class="titlewrap"><h4><span>Subscribe</span></h4></div>
+             <div class="wrapleft">
+              <div class="wrapright">
+               <div class="tr">
+                <div class="bl">
+                 <div class="tl">
+                  <div class="br the-content">
+				
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	
+	
+	
+
+	
+	Enter your email address to subscribe to this blog.
+	<form action="http://www.coldfusionjedi.com/index.cfm?" method="post" onsubmit="return(this.user_register.value.length != 0)">
+	<p><input type="text" name="user_register" size="15"> <input type="submit" value="Subscribe"></p>
+	</form>
+	
+	
+			
+	
+				
+                  </div>
+                 </div>
+                </div>
+               </div>
+              </div>
+             </div>
+
+            </div>
+            <!-- /box -->
+           </li>
+
+		  <li class="block">
+		  	<div style="margin-left:50px;margin-bottom:20px">
+			<script>
+			AC_FL_RunContent("movie","http://www.coldfusionjedi.com/images/sozo","width","122","height","600","align","middle","wmode","transparent");
+			</script>		  
+			</div>
+		  </li>
+
+		   
+           <li class="block">
+            <!-- box -->
+            <div class="box">
+             <div class="titlewrap"><h4><span>Categories</span></h4></div>
+             <div class="wrapleft">
+              <div class="wrapright">
+               <div class="tr">
+                <div class="bl">
+                 <div class="tl">
+                  <div class="br the-content">
+                  <ul>
+				
+
+
+
+
+
+
+
+	
+
+
+
+
+
+
+
+
+
+
+
+
+	
+	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	
+		
+		
+			
+				
+					  
+			 	
+				
+					<li class="cat-item trigger"><a class="fadeThis" href="http://www.coldfusionjedi.com/index.cfm/Adobe">Adobe (99)</a> <a href="http://www.coldfusionjedi.com/rss.cfm?mode=full&mode2=cat&catid=B67FAEE7-E1CD-66D7-CB380D104B597570" rel="noindex,nofollow" class="rss tip"></a></li>
+				
+					<li class="cat-item trigger"><a class="fadeThis" href="http://www.coldfusionjedi.com/index.cfm/Adoption">Adoption (8)</a> <a href="http://www.coldfusionjedi.com/rss.cfm?mode=full&mode2=cat&catid=3AF6D34A-C1DB-DFB8-A5F065F5655ABA4E" rel="noindex,nofollow" class="rss tip"></a></li>
+				
+					<li class="cat-item trigger"><a class="fadeThis" href="http://www.coldfusionjedi.com/index.cfm/AIR">AIR (67)</a> <a href="http://www.coldfusionjedi.com/rss.cfm?mode=full&mode2=cat&catid=5FD16624-93BF-8806-17578BAAD10C0BD4" rel="noindex,nofollow" class="rss tip"></a></li>
+				
+					<li class="cat-item trigger"><a class="fadeThis" href="http://www.coldfusionjedi.com/index.cfm/AJAX">AJAX (329)</a> <a href="http://www.coldfusionjedi.com/rss.cfm?mode=full&mode2=cat&catid=9668F8B2-A28C-AF68-F3514881276F2D81" rel="noindex,nofollow" class="rss tip"></a></li>
+				
+					<li class="cat-item trigger"><a class="fadeThis" href="http://www.coldfusionjedi.com/index.cfm/ASP">ASP (4)</a> <a href="http://www.coldfusionjedi.com/rss.cfm?mode=full&mode2=cat&catid=395FA21C-D64B-48AA-760F0E1C0CB76858" rel="noindex,nofollow" class="rss tip"></a></li>
+				
+					<li class="cat-item trigger"><a class="fadeThis" href="http://www.coldfusionjedi.com/index.cfm/BlogCFC">BlogCFC (137)</a> <a href="http://www.coldfusionjedi.com/rss.cfm?mode=full&mode2=cat&catid=290DDAC3-01AD-2248-6E94E230C3C33F6E" rel="noindex,nofollow" class="rss tip"></a></li>
+				
+					<li class="cat-item trigger"><a class="fadeThis" href="http://www.coldfusionjedi.com/index.cfm/Books">Books (21)</a> <a href="http://www.coldfusionjedi.com/rss.cfm?mode=full&mode2=cat&catid=0B6C189E-FB1A-A968-50BC6904B10D8649" rel="noindex,nofollow" class="rss tip"></a></li>
+				
+					<li class="cat-item trigger"><a class="fadeThis" href="http://www.coldfusionjedi.com/index.cfm/Canvas-Wiki">Canvas Wiki (21)</a> <a href="http://www.coldfusionjedi.com/rss.cfm?mode=full&mode2=cat&catid=5328F177-EFD0-B233-FE332C51045F5E08" rel="noindex,nofollow" class="rss tip"></a></li>
+				
+					<li class="cat-item trigger"><a class="fadeThis" href="http://www.coldfusionjedi.com/index.cfm/CFEclipse">CFEclipse (24)</a> <a href="http://www.coldfusionjedi.com/rss.cfm?mode=full&mode2=cat&catid=01CDEB00-037D-0D10-5BE5719308108AF3" rel="noindex,nofollow" class="rss tip"></a></li>
+				
+					<li class="cat-item trigger"><a class="fadeThis" href="http://www.coldfusionjedi.com/index.cfm/cfObjective">cfObjective (1)</a> <a href="http://www.coldfusionjedi.com/rss.cfm?mode=full&mode2=cat&catid=3493226B-CF0E-FCA3-584714EB8BA909C7" rel="noindex,nofollow" class="rss tip"></a></li>
+				
+					<li class="cat-item trigger"><a class="fadeThis" href="http://www.coldfusionjedi.com/index.cfm/CFUNITED">CFUNITED (9)</a> <a href="http://www.coldfusionjedi.com/rss.cfm?mode=full&mode2=cat&catid=D3B05A30-19B9-E658-9D0FCBA4418C8DF0" rel="noindex,nofollow" class="rss tip"></a></li>
+				
+					<li class="cat-item trigger"><a class="fadeThis" href="http://www.coldfusionjedi.com/index.cfm/ColdFusion">ColdFusion (2357)</a> <a href="http://www.coldfusionjedi.com/rss.cfm?mode=full&mode2=cat&catid=395FA1CE-D93A-60DF-CBD9B942C80F06B0" rel="noindex,nofollow" class="rss tip"></a></li>
+				
+					<li class="cat-item trigger"><a class="fadeThis" href="http://www.coldfusionjedi.com/index.cfm/Development">Development (209)</a> <a href="http://www.coldfusionjedi.com/rss.cfm?mode=full&mode2=cat&catid=395FA20D-9613-ED0E-F2557307B78BD915" rel="noindex,nofollow" class="rss tip"></a></li>
+				
+					<li class="cat-item trigger"><a class="fadeThis" href="http://www.coldfusionjedi.com/index.cfm/Flash">Flash (18)</a> <a href="http://www.coldfusionjedi.com/rss.cfm?mode=full&mode2=cat&catid=09385E11-CFF2-7976-1B28FCB8822ED440" rel="noindex,nofollow" class="rss tip"></a></li>
+				
+					<li class="cat-item trigger"><a class="fadeThis" href="http://www.coldfusionjedi.com/index.cfm/Flex">Flex (138)</a> <a href="http://www.coldfusionjedi.com/rss.cfm?mode=full&mode2=cat&catid=DC478C4E-E957-B215-1B0EC88C1486E0FE" rel="noindex,nofollow" class="rss tip"></a></li>
+				
+					<li class="cat-item trigger"><a class="fadeThis" href="http://www.coldfusionjedi.com/index.cfm/Fusebox">Fusebox (5)</a> <a href="http://www.coldfusionjedi.com/rss.cfm?mode=full&mode2=cat&catid=8A7558AE-073C-6EE2-976B3252D056EB09" rel="noindex,nofollow" class="rss tip"></a></li>
+				
+					<li class="cat-item trigger"><a class="fadeThis" href="http://www.coldfusionjedi.com/index.cfm/Galleon-Forums">Galleon Forums (50)</a> <a href="http://www.coldfusionjedi.com/rss.cfm?mode=full&mode2=cat&catid=18197738-A5C8-A002-3F58027D6043D8E4" rel="noindex,nofollow" class="rss tip"></a></li>
+				
+					<li class="cat-item trigger"><a class="fadeThis" href="http://www.coldfusionjedi.com/index.cfm/Groovy">Groovy (1)</a> <a href="http://www.coldfusionjedi.com/rss.cfm?mode=full&mode2=cat&catid=CD16E4A9-19B9-E658-9DBF3592C9540170" rel="noindex,nofollow" class="rss tip"></a></li>
+				
+					<li class="cat-item trigger"><a class="fadeThis" href="http://www.coldfusionjedi.com/index.cfm/Hardware">Hardware (11)</a> <a href="http://www.coldfusionjedi.com/rss.cfm?mode=full&mode2=cat&catid=147EFD8C-072D-4180-3C2FF20970341977" rel="noindex,nofollow" class="rss tip"></a></li>
+				
+					<li class="cat-item trigger"><a class="fadeThis" href="http://www.coldfusionjedi.com/index.cfm/Harlan-Ad-Server">Harlan Ad Server (7)</a> <a href="http://www.coldfusionjedi.com/rss.cfm?mode=full&mode2=cat&catid=3C091A18-F2E4-B38F-CC4B29324346E510" rel="noindex,nofollow" class="rss tip"></a></li>
+				
+					<li class="cat-item trigger"><a class="fadeThis" href="http://www.coldfusionjedi.com/index.cfm/Java">Java (10)</a> <a href="http://www.coldfusionjedi.com/rss.cfm?mode=full&mode2=cat&catid=395FA1ED-E0EC-303B-10029D0B2D12ED53" rel="noindex,nofollow" class="rss tip"></a></li>
+				
+					<li class="cat-item trigger"><a class="fadeThis" href="http://www.coldfusionjedi.com/index.cfm/JavaScript">JavaScript (32)</a> <a href="http://www.coldfusionjedi.com/rss.cfm?mode=full&mode2=cat&catid=CCF101A1-A4A6-FF75-E249A9E63F338BC6" rel="noindex,nofollow" class="rss tip"></a></li>
+				
+					<li class="cat-item trigger"><a class="fadeThis" href="http://www.coldfusionjedi.com/index.cfm/jQuery">jQuery (81)</a> <a href="http://www.coldfusionjedi.com/rss.cfm?mode=full&mode2=cat&catid=BDF5ED6A-19B9-E658-9D5AB2B5C94A6A95" rel="noindex,nofollow" class="rss tip"></a></li>
+				
+					<li class="cat-item trigger"><a class="fadeThis" href="http://www.coldfusionjedi.com/index.cfm/Lighthouse-Pro-CF-Bugtracker">Lighthouse Pro CF Bugtracker (41)</a> <a href="http://www.coldfusionjedi.com/rss.cfm?mode=full&mode2=cat&catid=8ACE6749-BC45-053C-DFE9F8FADD14ABA2" rel="noindex,nofollow" class="rss tip"></a></li>
+				
+					<li class="cat-item trigger"><a class="fadeThis" href="http://www.coldfusionjedi.com/index.cfm/Lost">Lost (39)</a> <a href="http://www.coldfusionjedi.com/rss.cfm?mode=full&mode2=cat&catid=CDB5F908-CE14-BD8D-61688A45748E6547" rel="noindex,nofollow" class="rss tip"></a></li>
+				
+					<li class="cat-item trigger"><a class="fadeThis" href="http://www.coldfusionjedi.com/index.cfm/MAX">MAX (94)</a> <a href="http://www.coldfusionjedi.com/rss.cfm?mode=full&mode2=cat&catid=D57993AE-B33E-C858-701BA772F66D6C97" rel="noindex,nofollow" class="rss tip"></a></li>
+				
+					<li class="cat-item trigger"><a class="fadeThis" href="http://www.coldfusionjedi.com/index.cfm/Misc">Misc (524)</a> <a href="http://www.coldfusionjedi.com/rss.cfm?mode=full&mode2=cat&catid=395FA1FD-EF2F-BE02-A92A5EA0B72D0425" rel="noindex,nofollow" class="rss tip"></a></li>
+				
+					<li class="cat-item trigger"><a class="fadeThis" href="http://www.coldfusionjedi.com/index.cfm/ModelGlue">Model-Glue (92)</a> <a href="http://www.coldfusionjedi.com/rss.cfm?mode=full&mode2=cat&catid=3930C29E-0603-96B1-C6170334047352FF" rel="noindex,nofollow" class="rss tip"></a></li>
+				
+					<li class="cat-item trigger"><a class="fadeThis" href="http://www.coldfusionjedi.com/index.cfm/Movies">Movies (22)</a> <a href="http://www.coldfusionjedi.com/rss.cfm?mode=full&mode2=cat&catid=0B941F04-04A3-12F7-75136A9865B2DB21" rel="noindex,nofollow" class="rss tip"></a></li>
+				
+					<li class="cat-item trigger"><a class="fadeThis" href="http://www.coldfusionjedi.com/index.cfm/Music">Music (10)</a> <a href="http://www.coldfusionjedi.com/rss.cfm?mode=full&mode2=cat&catid=3BEB7715-9AD0-B137-4CD9E3C8B5D26F26" rel="noindex,nofollow" class="rss tip"></a></li>
+				
+					<li class="cat-item trigger"><a class="fadeThis" href="http://www.coldfusionjedi.com/index.cfm/ORM">ORM (1)</a> <a href="http://www.coldfusionjedi.com/rss.cfm?mode=full&mode2=cat&catid=C34826E3-9586-6C9E-2A268C70C919E297" rel="noindex,nofollow" class="rss tip"></a></li>
+				
+					<li class="cat-item trigger"><a class="fadeThis" href="http://www.coldfusionjedi.com/index.cfm/Politics">Politics (18)</a> <a href="http://www.coldfusionjedi.com/rss.cfm?mode=full&mode2=cat&catid=6E071A75-C5BC-7885-7FDA4C96F5817E29" rel="noindex,nofollow" class="rss tip"></a></li>
+				
+					<li class="cat-item trigger"><a class="fadeThis" href="http://www.coldfusionjedi.com/index.cfm/QuickPoll-CFC">QuickPoll CFC (2)</a> <a href="http://www.coldfusionjedi.com/rss.cfm?mode=full&mode2=cat&catid=8C93E033-A20F-FF76-414F06341A0552A0" rel="noindex,nofollow" class="rss tip"></a></li>
+				
+					<li class="cat-item trigger"><a class="fadeThis" href="http://www.coldfusionjedi.com/index.cfm/Soundings-Survey">Soundings Survey (24)</a> <a href="http://www.coldfusionjedi.com/rss.cfm?mode=full&mode2=cat&catid=F0048A21-08D3-751D-07E5EEEE101094E6" rel="noindex,nofollow" class="rss tip"></a></li>
+				
+					<li class="cat-item trigger"><a class="fadeThis" href="http://www.coldfusionjedi.com/index.cfm/SpoolMail-CF-Mail-Reader">SpoolMail CF Mail Reader (8)</a> <a href="http://www.coldfusionjedi.com/rss.cfm?mode=full&mode2=cat&catid=D56EBA00-9609-2C7F-C93ADB94A129D04D" rel="noindex,nofollow" class="rss tip"></a></li>
+				
+					<li class="cat-item trigger"><a class="fadeThis" href="http://www.coldfusionjedi.com/index.cfm/Starfish-CF-Profiler">Starfish CF Profiler (4)</a> <a href="http://www.coldfusionjedi.com/rss.cfm?mode=full&mode2=cat&catid=2494B528-E818-17F9-16D4C96CD3C5E992" rel="noindex,nofollow" class="rss tip"></a></li>
+				
+					<li class="cat-item trigger"><a class="fadeThis" href="http://www.coldfusionjedi.com/index.cfm/Television">Television (24)</a> <a href="http://www.coldfusionjedi.com/rss.cfm?mode=full&mode2=cat&catid=49E1417F-09B1-B1AB-F178D89EECEE49AB" rel="noindex,nofollow" class="rss tip"></a></li>
+				
+					<li class="cat-item trigger"><a class="fadeThis" href="http://www.coldfusionjedi.com/index.cfm/Transfer">Transfer (15)</a> <a href="http://www.coldfusionjedi.com/rss.cfm?mode=full&mode2=cat&catid=81A2255E-19B9-E658-9D424F141993BAAB" rel="noindex,nofollow" class="rss tip"></a></li>
+				
+					<li class="cat-item trigger"><a class="fadeThis" href="http://www.coldfusionjedi.com/index.cfm/Video-Games">Video Games (51)</a> <a href="http://www.coldfusionjedi.com/rss.cfm?mode=full&mode2=cat&catid=E5D7A905-D056-2E82-CD3FF0B3AC38C86E" rel="noindex,nofollow" class="rss tip"></a></li>
+				
+				
+				
+				
+				 </ul>
+                  </div>
+                 </div>
+                </div>
+               </div>
+              </div>
+             </div>
+            </div>
+            <!-- /box -->
+           </li>
+		   
+		
+
+
+
+
+
+
+
+
+
+
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	   
+	   
+	
+	
+	
+	
+		
+		<style>
+		.testUL {
+			margin-left:42px; 
+			border: 0px solid #000000; 
+			border-spacing: 0px; 
+			margin: 0px; list-style: none; width: 75%; overflow: hidden; padding: 0;
+		}
+		.testLI {
+			float: left; clear: none; margin: 0; display: inline; padding: 0; width: 100%;
+		}
+		.testSPAN {
+			display: block; padding: 3px; width: 100%; color: #000000; margin-left: 42px; font-size: 12px;
+		}
+		.testA {
+			font-size: 12px; color: #000000;
+		}
+		</style>
+		
+		
+		
+	
+		
+			
+			
+			
+			
+		
+			
+			
+			
+			
+		
+			
+			
+			
+			
+		
+	
+		
+		<ul class="testUL">
+		
+	
+		
+		<li class="testLI"><span class="testSPAN">  <a class="testA" href="http://www.topsurgeons.com">Lap Band Surgery</a>  </span></li>
+		
+		<li class="testLI"><span class="testSPAN">  <a class="testA" href="http://www.hostdone.com">cheap web hosting</a>  </span></li>
+		
+		<li class="testLI"><span class="testSPAN">  <a class="testA" href=""></a>  </span></li>
+		
+	
+		
+		</ul>
+		
+	
+	
+	
+	
+
+
+
+          </ul>
+
+        </div>
+       </div>
+      </div>
+      <div class="clear-content"></div>
+     </div>
+
+
+    </div>
+   </div>
+
+  </div>
+
+ <!-- footer -->
+ <div id="footer">
+  <div class="block-content">
+  
+ <!-- footer widgets -->
+<ul id="footer-widgets" class="widgetcount-4">
+ <li class="block widget widget_text" id="text-420756181"><div class="the-content">
+ <h6 class="title">Who am I?</h6>			
+ <div class="textwidget">
+ <br />
+ I'm Raymond Camden, a ColdFusion, Flex, Ajax developer with a intense addiction to Star
+ Wars, books, and video games. For more detail, visit my <a href="/page.cfm/About-Me">bio</a>
+ or drop me a line at my <a href="/contact.cfm">contact</a> form.
+</div>
+		</div></li>		
+
+		
+<li class="block widget widget_recent_entries" id="recent-posts-2"><div class="the-content">		
+<h6 class="title">Recent Posts</h6>		
+<ul>
+
+
+
+
+
+
+
+
+
+
+
+
+	
+
+
+
+
+
+
+
+
+
+
+
+
+	
+	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	
+		
+		
+			
+				
+					
+
+
+	
+	
+	
+	
+	
+	
+		
+		<li><a href="http://www.coldfusionjedi.com/index.cfm/2010/2/8/ORM-Entity-not-available-Check-your-logs">ORM Entity not available? Check your logs</a></li>
+		
+	
+		
+		<li><a href="http://www.coldfusionjedi.com/index.cfm/2010/2/8/Repeat--ColdFusion-9-does-NOT-remove-the-need-to-var-scope">Repeat - ColdFusion 9 does NOT remove the need to var scope!</a></li>
+		
+	
+		
+		<li><a href="http://www.coldfusionjedi.com/index.cfm/2010/2/8/AIR-20-and-Flash-101-Betas">AIR 2.0 and Flash 10.1 Betas</a></li>
+		
+	
+		
+		<li><a href="http://www.coldfusionjedi.com/index.cfm/2010/2/5/Looking-for-ideas-on-ORM-Optimization-Post-Launch">Looking for ideas on ORM Optimization (Post Launch)</a></li>
+		
+	
+		
+		<li><a href="http://www.coldfusionjedi.com/index.cfm/2010/2/4/Googles-Static-Map-API">Google's Static Map API</a></li>
+		
+	
+	
+	
+
+
+				
+				
+	
+
+
+		</ul>
+</div></li>		
+		
+			<li class="block widget widget_recent_comments" id="recent-comments-2"><div class="the-content">			
+			<h6 class="title">Recent Comments</h6>			
+			<ul id="recentcomments">
+			
+
+
+
+
+
+
+
+
+
+
+
+	
+
+
+
+
+
+
+
+
+
+
+
+
+	
+	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	
+		
+		
+			
+				
+					
+
+
+
+
+	
+	
+		
+		
+			
+		
+		
+    
+    
+		<li class="recentcomments">Raymond Camden on <a href="http://www.coldfusionjedi.com/index.cfm/2010/2/8/ORM-Entity-not-available-Check-your-logs">ORM Entity not available? Check your logs</a></li>
+		
+	
+		
+		
+			
+		
+		
+    
+    
+		<li class="recentcomments">Devin on <a href="http://www.coldfusionjedi.com/index.cfm/2010/2/8/ORM-Entity-not-available-Check-your-logs">ORM Entity not available? Check your logs</a></li>
+		
+	
+		
+		
+			
+		
+		
+    
+    
+		<li class="recentcomments">Bill Downs on <a href="http://www.coldfusionjedi.com/index.cfm/2010/2/4/Googles-Static-Map-API">Google's Static Map API</a></li>
+		
+	
+		
+		
+			
+		
+		
+    
+    
+		<li class="recentcomments">Raymond Camden on <a href="http://www.coldfusionjedi.com/index.cfm/2010/2/8/Repeat--ColdFusion-9-does-NOT-remove-the-need-to-var-scope">Repeat - ColdFusion 9 does NOT remove the need to var scope!</a></li>
+		
+	
+		
+		
+			
+		
+		
+    
+    
+		<li class="recentcomments">Seth Johnson on <a href="http://www.coldfusionjedi.com/index.cfm/2010/2/8/Repeat--ColdFusion-9-does-NOT-remove-the-need-to-var-scope">Repeat - ColdFusion 9 does NOT remove the need to var scope!</a></li>
+		
+	
+	
+
+
+				
+				
+
+
+	
+		</div></li>
+		<li class="block widget widget_archive" id="archives-2"><div class="the-content">
+		<h6 class="title">BlogCFC</h6>		
+		<div class="textwidget">
+		<br/>
+This blog makes use of <a href="http://blogcfc.riaforge.org">BlogCFC</a>, a free, open source, ColdFusion-based blog. 
+You can download a copy yourself!
+		</div>
+		
+</div></li></ul>
+<div class="clear"></div>
+ 
+     <div class="copyright">
+       Arclite theme by <a href="http://digitalnature.ro/projects/arclite">digitalnature</a> | Validate <a href="http://validator.w3.org/check/referer">XHTML 1.1</a>
+     </div>
+  </div>
+ </div>
+ <!-- /footer -->
+
+ </div>
+ <!-- /page -->
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+try {
+var pageTracker = _gat._getTracker("UA-70863-1");
+pageTracker._trackPageview();
+} catch(err) {}</script></body>
+
+</html>

@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!--
+   Name:        listing69_4.mxml
+   Author:      Josh Adams
+   Description: Makes a call to the ColdFusion 9 Exposed Services Layer
+                Image Service
+   Created:     May 27, 2010
+-->
+
+<!--
+Use typical attributes for Flex 4 projects + the
+creationComplete attribute to call the init method +
+the cf namespace for the classes in the cfservices.swc file.
+-->
+<s:Application xmlns:fx="http://ns.adobe.com/mxml/2009"
+   xmlns:s="library://ns.adobe.com/flex/spark"
+   xmlns:mx="library://ns.adobe.com/flex/mx"
+   xmlns:cf="coldfusion.service.mxml.*"
+   creationComplete="init()">
+   
+   <fx:Script>
+      <![CDATA[
+         // Import the required MXML libraries.
+         import mx.events.FlexEvent;
+         import coldfusion.service.events.*;
+         
+         // Perform initialization.
+         protected function init():void
+         {
+            /*
+               Call the execute method of the Image proxy class instance.
+               This causes a call to the operation of the Image Web Service
+               that is specified in the action attribute of the Image proxy
+               class instance (which, in this case, is GetHeight).
+            */
+            cfESLImage.execute();
+         }
+         
+         // When the call to GetHeight returns, make the value visible.
+         protected function getHeightHandler(
+            event:ColdFusionServiceResultEvent):void
+         {
+            // Set the Label control to display the returned value.
+            lblImageHeight.text = event.result as String; 
+         }
+      ]]>
+   </fx:Script>
+   
+   <fx:Declarations>
+      <!--
+         Create an instance of the Config proxy class and give it the
+         location of the ColdFusion 9 Server and the serviceusername
+         and servicepassword values.
+      -->
+      <cf:Config id="cfESLConfig" cfServer="localhost"
+         serviceUserName="remoteuser" servicePassword="remoteuserpassword"/>
+      
+      <!--
+         Create an instance of the Image proxy class and give it the
+         the method of the ImageService to call (which, in this case,
+         is GetHeight) and the other information required to call that
+         method (which, in this case, is only the image source URL).
+         Also indicate that when a response is received to a call
+         that getHeightHandler should be called.
+      -->
+      <cf:Image id="cfESLImage" action="GetHeight"
+         source="http://www.adobe.com/ubi/globalnav/include/adobe-lq.png"
+         result="getHeightHandler(event)"/>
+   </fx:Declarations>
+   
+   <!--Create an instance of Label in order to display the returned value.-->
+   <mx:Label id="lblImageHeight" y="10" horizontalCenter="0"/>
+</s:Application>

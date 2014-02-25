@@ -1,0 +1,26 @@
+Welcome to ftp.mozilla.org!
+
+This is the main distribution point of software and developer tools
+related to the Mozilla project.  For more information, see our home
+page (http://www.mozilla.org/) Go here to download Netscape Communicator:
+	http://home.netscape.com/download/
+
+A list of ftp.mozilla.org's mirror sites can be found at:
+
+	http://www.mozilla.org/mirrors.html
+
+This site contains source code that is subject to the U.S. Export 
+Administration Regulations and other U.S. law, and may not be exported 
+or re-exported to certain countries (currently Afghanistan (Taliban
+controlled areas), Cuba, Iran, Iraq, Libya, North Korea, Sudan and 
+Syria) or to persons or entities prohibited from receiving U.S. 
+exports (including Denied Parties, entities on the Bureau of Export 
+Administration Entity List, and Specially Designated Nationals).
+
+If you plan to mirror our site read our crypto FAQ. Send mail to 
+mirrors@mozilla.org to be added to our mirrors list.
+
+         http://www.mozilla.org/crypto-faq.html#2-1
+
+We do not guarantee that any source code or executable code 
+available from the mozilla.org domain is Year 2000 compliant.

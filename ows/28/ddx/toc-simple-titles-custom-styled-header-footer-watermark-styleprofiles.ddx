@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<DDX xmlns="http://ns.adobe.com/DDX/1.0/" 
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://ns.adobe.com/DDX/1.0/ coldfusion_ddx.xsd">
+	<PDF result="Output1">
+		<PageLabel format="Decimal"/> 
+		<PDF source="TitlePage" bookmarkTitle="Cover Page">
+			<Watermark styleReference="MyWatermark" />
+		</PDF>
+		<TableOfContents bookmarkTitle="Table of Contents">
+			<Header>
+				<Center>
+					<StyledText>
+						<p font="Arial,18pt">Table of Contents</p>
+					</StyledText>
+				</Center>
+			</Header>
+			<TableOfContentsEntryPattern> 
+				<StyledText>
+					<p font="Arial,10pt">
+						<_BookmarkTitle/>
+						<leader leader-pattern="solid" /> 
+						Page <_BookmarkPageCitation/>
+					</p>
+				</StyledText>
+			</TableOfContentsEntryPattern> 
+		</TableOfContents>
+		<PDF source="SamplePage" bookmarkTitle="Sample Page" />
+		<PDF source="Comps" bookmarkTitle="Site Designs">
+			<Footer styleReference="CompsFooter" />
+			<Watermark styleReference="MyWatermark" />
+		</PDF>
+	</PDF>
+	<StyleProfile name="CompsFooter">
+		<Footer>
+			<Left>
+				<StyledText>
+					<p font="Arial,10pt">Page <_PageNumber/> / <_LastPageNumber/></p>
+				</StyledText>
+			</Left>
+			<Right>
+				<StyledText>
+					<p font="Arial,10pt">Last Modified: <_Modified/></p>
+				</StyledText>
+			</Right>
+		</Footer>
+	</StyleProfile>
+	<StyleProfile name="MyWatermark">
+		<Watermark opacity="25%" rotation="30" fitToPage="true">
+			<StyledText>
+				<p>Copyright My Company</p>
+			</StyledText>
+		</Watermark>
+	</StyleProfile>
+</DDX>

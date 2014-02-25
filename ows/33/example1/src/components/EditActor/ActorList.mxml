@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Group 
+	preinitialize="init()"
+	xmlns:fx="http://ns.adobe.com/mxml/2009" 
+	xmlns:s="library://ns.adobe.com/flex/spark" 
+	xmlns:mx="library://ns.adobe.com/flex/mx">
+	
+	
+	<fx:Script>
+		<![CDATA[
+			import flash.display.DisplayObject;
+			import mx.utils.StringUtil;
+			import model.Actors;
+			import mx.rpc.AsyncToken;
+			import mx.rpc.Responder;
+			import coldfusion.air.events.ConflictEvent;
+			import coldfusion.air.SessionToken;
+			import flash.events.Event;
+			import coldfusion.air.SyncManager;
+			import mx.managers.PopUpManager;
+			import components.EditActor.EditActor;
+			import mx.collections.ArrayCollection;
+			import mx.rpc.events.FaultEvent;
+			import mx.controls.Alert;
+			import mx.rpc.events.ResultEvent;
+			
+			[Bindable]
+			private var results:ArrayCollection;
+			
+			public var syncmanager:SyncManager;
+			
+			public function init():void
+			{				
+				syncmanager = new SyncManager(); 
+				//The ColdFusion server and port. Port without double quotes as it is 
+				
+				//expected to be integer and IP is taken as String. 
+				syncmanager.cfPort = 8500; // depending on your install. you might need to change this
+				syncmanager.cfServer = "127.0.0.1"; 
+				
+				//The CFC that implements the ColdFusion sync manager. Here 
+				//AIRIntegration is the user defined folder under webroot. 
+				syncmanager.syncCFC = "ows.33.example1.components.ActorService"; 
+				
+				//Specify a user-defined CF destination,if not specified, default destination 
+				//'ColdFusion' will be used 
+				syncmanager.destination = 'ColdFusion' 
+				
+				//The local database file 
+				var dbFile:File = File.userDirectory.resolvePath("example1-" +this.id +".db"); 
+				
+				
+				//Create a session object, which handles all interactions between the 
+				//AIR application and the SQLite database. 
+				var sessiontoken:SessionToken = syncmanager.openSession(dbFile, 999); 
+				
+				//The event listener for conflict events returned byt the CFC 
+				syncmanager.addEventListener(ConflictEvent.CONFLICT, conflictHandler); 
+				
+				//Add a responder for handling session connection results. 
+				sessiontoken.addResponder(new mx.rpc.Responder(connectSuccess, connectFault)); 
+				
+			}
+			
+			// default the event to null so tihs can be called directly or as an event handler
+			public function refresh(event:Event=null):void
+			{
+				// fetch the data. 
+				var token:AsyncToken = syncmanager.fetch("fetch"); 
+				//Specify the methods to handle the fetch results. 
+				token.addResponder(new mx.rpc.Responder(fetchSuccess, fetchFault));
+			}
+			
+			
+			public function commitChanges():void
+			{
+				syncmanager.getCurrentSession().commit();
+			}
+			
+			
+			private function doEditActor(event:Event):void
+			{
+				// get the selected row item that we want to edit.
+				var selectedGridItem:Actors = actorsGrid.selectedItem as Actors;
+				
+				var popup:EditActor = new EditActor();
+				popup.syncManager = this.syncmanager;
+				popup.title = "Edit: " +StringUtil.trim(selectedGridItem.NAMEFIRST) +" " +StringUtil.trim(selectedGridItem.NAMELAST);
+				popup.actor = selectedGridItem;
+				popup.width = 300;
+				popup.height = 250;
+				popup.addEventListener("close", refresh, false, 0, true);
+				
+				
+				PopUpManager.addPopUp( popup, this, true );
+				PopUpManager.centerPopUp(popup);
+			}
+			
+			
+			public function conflictHandler(event:ConflictEvent):void
+			{
+				//trace(event);
+				Alert.show("conflict detected, updating local copy");
+				
+				// Automatically overwrite the local version with the newer version on the server
+				var token:SessionToken = syncmanager.getCurrentSession().keepAllServerObjects(event.result as ArrayCollection);
+				token.addResponder(new mx.rpc.Responder(conflictSuccess, conflictFault));
+				
+			}
+			
+			
+			public function conflictSuccess(event:Event):void
+			{
+				//trace(event);
+				// do the first initial load
+				refresh();
+			}
+			
+			
+			public function conflictFault(event:Event):void
+			{
+				trace(event);	
+			}
+			
+			public function connectSuccess(event:Event):void
+			{
+				// do the first initial load
+				refresh();
+			}
+			
+			
+			public function connectFault(event:Event):void
+			{
+				trace(event);	
+			}
+			
+			
+			public function fetchSuccess(event:ResultEvent):void
+			{
+				results = new ArrayCollection(event.result as Array);
+				syncmanager.getCurrentSession().saveCache(results);
+			}
+			
+			
+			public function fetchFault(event:FaultEvent):void
+			{
+				trace(event);	
+			}
+			
+		]]>
+	</fx:Script>
+	
+	
+	<s:Group width="100%" height="100%">
+		<s:layout>
+			<s:VerticalLayout/>
+		</s:layout>
+		
+		<!-- Display the query that is returned from our CFC -->
+		<mx:DataGrid 
+			id="actorsGrid"
+			width="100%"
+			height="100%"
+			dataProvider="{this.results}"
+			doubleClickEnabled="true"
+			doubleClick="doEditActor(event)">
+			<mx:columns>
+				<mx:DataGridColumn dataField="ACTORID" headerText="id" width="50"/>
+				<mx:DataGridColumn dataField="AGE" headerText="age" width="50"/>
+				<mx:DataGridColumn dataField="NAMEFIRST" headerText="First Name"/>
+				<mx:DataGridColumn dataField="NAMELAST" headerText="Last Name"/>
+			</mx:columns>
+		</mx:DataGrid>
+		
+		<s:Group>
+			<s:layout>
+				<s:HorizontalLayout/>
+			</s:layout>
+			
+			<s:Button 
+				label="refresh"
+				click="refresh()"/>
+			
+			<s:Button 
+				label="commit to server"
+				click="commitChanges()"/>
+		</s:Group>	
+	</s:Group>
+	
+</s:Group>

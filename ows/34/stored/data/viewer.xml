@@ -1,0 +1,21 @@
+<presentation height="540" loop="false" start="paused" width="720">
+    <presentationTitle>First Presentation</presentationTitle>
+    <backgrounds>
+        <background url="Master80000000.swf"/>
+    </backgrounds>
+    <search url="srchdata.xml"/>
+    <slides>
+        <slide advance="never" frameRate="30" id="1" totalFrames="301" type="normal">
+            <slideTitle>Welcome to CFPRESENTATION</slideTitle>
+            <content url="slide1_1.swf"/>
+            <notes>These are some notes.</notes>
+            <slideBackground duration="2" frameToPlay="1" index="0"/>
+        </slide>
+        <slide advance="never" frameRate="30" id="2" totalFrames="301" type="normal">
+            <slideTitle>Sales Figures</slideTitle>
+            <content url="slide2_1.swf"/>
+            <notes>These are some notes for slide two.</notes>
+            <slideBackground duration="2" frameToPlay="1" index="0"/>
+        </slide>
+    </slides>
+</presentation>
