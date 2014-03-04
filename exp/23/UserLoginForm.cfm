@@ -4,7 +4,7 @@
 <head><title>Please Log In</title></head>
 <body onLoad="document.loginForm.userLogin.focus();">
 
-<cfform action="#CGI.script_namme#?#PassUrlVars()#" name="loginForm" method="post" preservedata="yes">
+<cfform action="#CGI.script_name#?#PassUrlVars()#" name="loginForm" method="post" preservedata="yes">
 	<cfoutput>#passFormVars("UserLogin,UserPassword")#</cfoutput>
 	<input type="hidden" name="userLogin_required">
 	<input type="hidden" name="userPassword_required">
