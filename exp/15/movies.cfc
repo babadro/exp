@@ -23,13 +23,18 @@
 	<cffunction name="browse" access="remote" returntype="struct" hint="Browse methos for Ajax grid">
 		<cfargument name="page" type="numeric" required="yes">
 		<cfargument name="pageSize" type="numeric" required="yes">
-		<cfargument name="gridesortcolumn" type="string" default="">
+		<cfargument name="gridsortcolumn" type="string" default="">
 		<cfargument name="gridsortdir" type="string" required="no" default="">
 		
 		<cfset var movies="">
 		
 		<cfquery datasource="#ds#" name="movies">
-		SELECT FilmID, MovieTitle, Summary, Rating FROM	
+			SELECT FilmID, MovieTitle, Summary, Rating FROM	Films, FilmsRatings WHERE Films.RatingID=FilmsRatings.RatingID
+			<cfif ARGUMENTS.gridsortcolumn NEQ "" and ARGUMENTS.gridsortdir NEQ "">
+				ORDER BY #ARGUMENTS.gridsortcolumn# #ARGUMENTS.gridsortdir#
+			</cfif>
 		</cfquery>
+		
+		<cfreturn QueryConvertForGrid(movies, ARGUMENTS.page, ARGUMENTS.pageSize)>
 	</cffunction>
 </cfcomponent>
