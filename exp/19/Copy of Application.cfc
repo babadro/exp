@@ -1,9 +1,6 @@
 <cfcomponent output = "false">
 	<cfset THIS.name = "ows19">
-	<cferror type="request" template = "ErrorRequest.cfm"
-			mailto = "baba_dro@mail.ru">
-	<cferror type = "Exception" template = "ErrorException.cfm"
-			mailto = "baba_dro@mail.ru">
+
 	
 	<cffunction name = "onApplicationStart" returnType = "boolean" output = "false">
 		<cfset APPLICATION.appStarted = now()>

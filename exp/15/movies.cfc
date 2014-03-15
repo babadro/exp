@@ -37,4 +37,21 @@
 		
 		<cfreturn QueryConvertForGrid(movies, ARGUMENTS.page, ARGUMENTS.pageSize)>
 	</cffunction>
+	
+	<cffunction name="getRatings" access="remote" returnType="query" hint="Get Ratings for Ajax SELECT">
+		<cfset var data="">
+		<cfquery name="data" datasource="#ds#">SELECT RatingID, Rating FROM  FilmsRatings ORDER BY Rating</cfquery>
+		<cfreturn data>
+	</cffunction>
+	
+	<cffunction name="getFilms" access="remote" returnType="Query" hint="Get films by rating for Ajax SELECT">
+		<cfargument name="RatingID" type="numeric" required="true">
+		<cfset var data = "">
+		
+		<cfquery name="data" datasource="#ds#">
+			SELECT FilmID, MovieTitle FROM Films Where RatingID = #ARGUMENTS.RatingID# ORDER BY MovieTitle
+		</cfquery>
+		
+		<cfreturn data>
+	</cffunction>
 </cfcomponent>
