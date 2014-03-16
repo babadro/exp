@@ -15,6 +15,7 @@
             .mst_zebra_table tr:nth-of-type(1) {
                 font-weight: bold;
             }
+            
         </style>
     </head>
         
@@ -97,24 +98,34 @@
           };
           
           var Trisport = {
-              Sub_10: {
-                  size45: 1
-              },
-              Riot_TR: {
-                  size45: 1,
-                  size46: 1
-              },
-              Riot: {
-                  size45: 1
-              }              
-          };
-       alert(Trisport.Riot_TR.size45);
+              shoes:
+                {
+                  "Sub 10": {
+                      "45": 1
+                  },
+                  "Riot TR": {
+                      size45: 1,
+                      size46: 1
+                  },
+                  "Riot": {
+                      "45": 1
+                  }              
+                },
+              name: "Триспорт"
+         };
+
+        var trisport = new Object();
+        trisport.name = "Триспорт";
+        trisport.shoes = {commuter};
         </script>
         
-        <table class="mst_zebra_table">
-            <th><td>Размеры</td><td>Модель</td></th>
-            <script>
-            </script>
-        </table>
+        <table id="store_table" class="mst_zebra_table"></table>
+        <script>
+            for (var shoe in store.shoes) {
+                var tr = document.createElement('tr');
+                document.getElementById('store_table').appendChild(tr);
+                
+            }
+        </script>
     </body>
 </html>
