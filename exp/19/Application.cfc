@@ -1,29 +1,34 @@
 <cfcomponent output="false">
-
-	<cfset THIS.name = "OWS19">
+	<cfset THIS.name="ows19">
 	
-	<cffunction name="onApplicationStart" returnType="boolean" output="false">
-		<cfset APPLICATION.appStarted = now()>
+	<cffunction name="onApplicationStart" returntype="boolean" output="false">
+		<cfset AppStarted=now()>
+		<cfreturn True>
 	</cffunction>
 	
-	<cffunction name="onApplicationEnd" returnType="void" output="false">
-		<cfargument name="appScope" required="true">
-		<cflog file="#THIS.name#" text="Application ended after #dateDiff('n', arguments.appScope.appStarted, now())# minutes.">
+	<cffunction name="onApplicationEnd" returntype="void" output="false">
+		<cfargument name="AppScope" required="true">
+		<cflog file="#this.name#" text="App ended after #dateDiff('n', arguments.AppScope.AppStarted, now())# minutes.">
 	</cffunction>
 	
-	<cffunction name="onRequestStart" returnType="boolean" output="true">
+	<cffunction name="onRequrestStart" returntype="boolean" output="true">
 		
 	</cffunction>
 	
-	<cffunction name="onRequestEnd" returnType="void" output="true">
+	<cffunction name=>
 	
 	</cffunction>
 	
-	<cffunction name="onRequest" returnType="void" output="true">
+	<cffunction name=>
 	
 	</cffunction>
 	
-	<cffunction name="onMissionTemplate" returnType="boolean" output="false">
-		
+	<cffunction name=>
+	
 	</cffunction>
+	
+	<cffunction name=>
+	
+	</cffunction>
+	
 </cfcomponent>
