@@ -1,25 +1,23 @@
 <cfif (not isDefined("Application.movieRotation")) or (dateCompare(Application.movieRotation.currentUntil, now()) eq -1)>
 	<cflock scope="Application" type="Exclusive" timeout="10">
 		<cfif not isDefined("Application.movieRotation")>
-			<cfquery name="getFilmIDs">
+			<cfquery name="GetFilmIDs" dataSource="#Request.dataSource#">
 				SELECT FilmID From Films ORDER BY MovieTitle
 			</cfquery>
 			<cfset st = structNew()>
-			<cfset st.movieList = valueList(getFilmIDs.FilmID)>
-			<cfset st.currentPos = 1>
-			
-			<cfset Application.movieRotation = st>
+			<cfset st.movieList = valueList(gGetFilmIDs)>
+			<cfset st.currentPos =1>
 		<cfelse>
 			<cfset st = Application.movieRotation>
-			<cfif st.currentPos lt listLen(st.MovieList)>
+			<cfif st.currentPos LT listLen(st.movieList)>
 				<cfset st.currentPos = st.currentPos + 1>
 			<cfelse>
 				<cfset currentPos = 1>
 			</cfif>
 		</cfif>
 		
-		<cfset st.currentMovie = listGetat(st.movieList, st.currentPos)>
-		<cfset st.currentUntil = dateAdd("s", 5, now())>
+		<cfset st.currentMovie = listGetAt(st.movieList, st.currentPos)>
+		<cfset st.currentUntil = dateAdd("s", 5 , now())>
 	</cflock>
 </cfif>
 
@@ -27,10 +25,10 @@
 	<cfset thisMovieID = Application.movieRotation.currentMovie>
 </cflock>
 
-<cfquery name="GetFilm" datasource="#REQUEST.dataSource#">
-	SELECT MovieTitle, Summary, Rating, AmountBudgeted, DateInTheaters FROM Films f, FilmsRatings r 
+<cfquery name="GetFilm" dataSource="#Request.dataSource#">
+	SELECT MovieTitle, Summary, Rating, AmountBudgeted, DateInTheaters FROM Films f, FilmsRatings r
 	WHERE FilmID = <cfqueryparam cfsqltype="cf_sql_integer" value="#thisMovieID#">
-	AND f.ratingID = r.RatingID 
+	AND f.ratingID = r.RatingID
 </cfquery>
 
 <cfoutput>
