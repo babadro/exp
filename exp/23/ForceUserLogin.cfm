@@ -3,19 +3,19 @@
 		<cfinclude template="UserLoginForm.cfm">
 		<cfabort>
 	<cfelse>
-		<cfquery name="getUser" dataSource="#APPLICATION.dataSource#">
-			SELECT COntactID, FirstName, rTrim(UserRoleName) as UserRoleName
-			FROM Contacts LEFT OUTER JOIN UserRoles
-			ON Contacts.UserRoleID = UserROles.UserRoleID
-			WHERE UserLogin= '#FORM.UserLogin#'
-			AND UserPassword = '#FORM.UserPassword#'
+		<cfquery name="getUser" datasource="#APPLICATION.dataSource#">
+			SELECT ContactID, FirstName, rTrim(UserRoleName) as UserRoleName FROM Contacts LEFT OUTER JOIN UserRoles ON Contacts.UserRoleID = UserRoles.UserRoleID
+			WHERE UserLogin = '#FORM.UserLogin#' AND UserPassword = '#FORM.UserPassword#'
 		</cfquery>
+		
 		<cfif getUser.recordCount eq 1>
-			<cfloginuser name = "#getUser.ContactID#,#getUser.FirstName#" password="#Form.userPassword#" roles="#getUser.userRoleName#">
+			<cfloginuser name="#getUser.ContactID#,#getUser.FirstName#" password="#FORM.userPassword#" roles="#getUser.userRoleName#">
 		<cfelse>
-			Password and username are invalid.
+			Password and username are not recognized. Try again.
 			<cfinclude template="UserLoginForm.cfm">
 			<cfabort>
 		</cfif>
 	</cfif>
+	
+
 </cflogin>
