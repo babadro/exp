@@ -29,7 +29,7 @@
 	<cfloop list="#structKeyList(FORM)#" index="v">
 		<cfif not listFindNoCase(exceptions, v)>
 			<cfset lastPartOfVarName = ListLast(v, "_")>
-			<cfif not listFindNoCase("required,date,integer,float", lastPartOfName)>
+			<cfif not listFindNoCase("required,date,integer,float", lastPartOfVarName)>
 				<cfset passVars = passVars & '<input type="hidden" name="#v#" value="#htmlEditFormat(FORM[v])#">'>
 			</cfif>
 		</cfif>
