@@ -1,6 +1,6 @@
 <cfcomponent output="false">
 	<cfset this.name = "OrangeWhipSite_20">
-	<cfset this.sessionmanagement = true>
-	<cfset this.dataSource = "ows">
+	<cfset this.sessionManagement = true>
 	<cfset this.clientManagement = true>
+	<cfset this.dataSource = "ows">
 </cfcomponent>
