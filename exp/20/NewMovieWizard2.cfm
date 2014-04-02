@@ -12,4 +12,5 @@
 	<cfset session.movWiz.miscExpense = "">
 	<cfset session.movWiz.actorSals = structNew()>	
 </cfif>
+ва
 
