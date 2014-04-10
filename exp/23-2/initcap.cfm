@@ -6,7 +6,9 @@
 
 <cfif thisTag.executionMode is "start">
     <style>
-	p:first-line { text-transform: uppercase; }
+	p:first-line {
+	color: red;
+	  }
 	</style>
 	<p>
 <cfelse>

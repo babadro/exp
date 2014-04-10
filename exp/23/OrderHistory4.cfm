@@ -39,7 +39,7 @@
 	<cfset showHistoryForContactID = contactID>
 	<cfoutput>
 		<h2>YourOrder History</h2>
-		<p><strong>Welcome back, #contacnName#!</strong></p>
+		<p><strong>Welcome back, #contactName#!</strong></p>
 	</cfoutput>
 </cfif>
 

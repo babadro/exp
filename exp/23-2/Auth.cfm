@@ -15,7 +15,7 @@
     <cfelse>
       <!--- If this tag is not called as a paired tag and the user is not logged
       in, redirect to the login form. --->
-      <cflocation url="#Application.urlRoot#/login/LoginForm.cfm" addtoken="No">
+      <cflocation url="login/ForceUserLogin.cfm" addtoken="No">
     </cfif>
   </cflogin>
   

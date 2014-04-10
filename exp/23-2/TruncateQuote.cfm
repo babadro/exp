@@ -9,6 +9,6 @@
   ...
   </div>
   
-  <cfset thisTag.generatedContent = left(TtisTag.GeneratedContent, 
+  <cfset thisTag.generatedContent = left(ThisTag.GeneratedContent, 
     attributes.numberOfCharacters)>
 </cfif>
