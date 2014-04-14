@@ -9,7 +9,7 @@
 		</cfquery>
 		
 		<cfif getUser.recordCount eq 1>
-			<cfloginuser name="#getUser.ContactID#,#getUser.FirstName#" password="#FORM.userPassword#" roles="#getUserRoleName#">
+			<cfloginuser name="#getUser.ContactID#,#getUser.FirstName#" password="#FORM.userPassword#" roles="#getUser.UserRoleName#">
 		<cfelse>
 			Sorry, login and password are not correct. Try again.
 			<cfinclude template="UserLoginForm.cfm">
