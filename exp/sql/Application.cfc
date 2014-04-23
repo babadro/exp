@@ -1,5 +1,5 @@
 <cfcomponent>
-
+	
 	<cfset THIS.name="OWS_SQL">
 	<!--- To restrict access by IP address specify the allowed client IP address here --->
 	<cfset THIS.restrict_ip="127.0.0.1,0:0:0:0:0:0:0:1">
@@ -9,7 +9,7 @@
 
 	<cffunction name="onApplicationStart">
 		<!--- To prompt for data source set this to "yes"> --->
-		<cfset APPLICATION.datasource_prompt="no">
+		<cfset APPLICATION.datasource_prompt="yes">
 		<!--- Specify a default data source --->
 		<cfset APPLICATION.datasource_default="ows">
 		<!--- Set SELECT ONLY flag --->

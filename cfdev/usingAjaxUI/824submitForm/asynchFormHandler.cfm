@@ -1,0 +1,1 @@
+<cfoutput>Echo: #form.mytext1# #form.mytext2#</cfoutput>

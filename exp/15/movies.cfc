@@ -1,7 +1,7 @@
 <cfcomponent hint="OWS movie database access">
 	<cfset ds = "ows">
 	
-	<cffunction name="list" retuurntype="query" hint="List All movies">
+	<cffunction name="list" returntype="query" hint="List All movies">
 		<cfset var movies="">
 		<cfquery datasource="#ds#" name="movies">
 			SELECT FilmID, MovieTitle, Summary, Rating FROM Films, FilmsRatings

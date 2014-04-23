@@ -1,0 +1,1 @@
+Partly Cloudy, 76 degrees

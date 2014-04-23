@@ -24,8 +24,8 @@ function startup()
 function collectSlides()
 {
 	var slides = new Array();
-	slides[0] = "htmlslide_1.html";
-	slides[1] = "htmlslide_2.html";
+	slides[0] = "htmlslide_1.htm";
+	slides[1] = "htmlslide_2.htm";
 
 	return slides;
 }
