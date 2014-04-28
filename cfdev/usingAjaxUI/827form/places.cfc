@@ -1,5 +1,5 @@
 <cfcomponent>
-<cffunction name="getData" access="remote" output="false">
+<cffunction name="getData" access="remote" output="false" returntype="query">
 <cfargument name="page">
 <cfargument name="pageSize">
 <cfargument name="gridsortcolumn">

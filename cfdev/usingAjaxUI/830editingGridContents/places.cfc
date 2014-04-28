@@ -7,7 +7,8 @@
 <cfquery name="team" datasource="cfdocexamples">
 SELECT Emp_ID, FirstName, EMail
 FROM Employees
-<cfif gridsortcolumn neq "" or gridsortdirection neq "">
+
+<cfif gridsortcolumn neq "" and gridsortdirection neq "">
 order by #gridsortcolumn# #gridsortdirection#
 </cfif>
 </cfquery>
@@ -18,6 +19,9 @@ order by #gridsortcolumn# #gridsortdirection#
 <cfargument name="gridaction">
 <cfargument name="gridrow">
 <cfargument name="gridchanged">
+<cfdump var="#gridrow#" format="html" output="C:/ColdFusion9/logs/bind.html">
+<cfdump var="#gridaction#" format="html" output="C:/ColdFusion9/logs/bind.html">
+<cfdump var="#gridchanged#" format="html" output="C:/ColdFusion9/logs/bind.html">
 <cfif isStruct(gridrow) and isStruct(gridchanged)>
 <cfif gridaction eq "U">
 <cfset colname=structkeylist(gridchanged)>

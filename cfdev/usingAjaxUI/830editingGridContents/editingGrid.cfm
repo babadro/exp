@@ -17,12 +17,7 @@ onchange="cfc:places.editData({cfgridaction},{cfgridrow},{cfgridchanged})">
 <cfgridcolumn name="Emp_ID" display=true header="Employee ID"/>
 <cfgridcolumn name="FirstName" display=true header="Name"/>
 <cfgridcolumn name="Email" display=true header="Email"/>
-<cfdump var="#cfgridaction#">
 </cfgrid>
-
-
 </cfform>
-
-
 </body>
 </html>

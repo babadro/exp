@@ -40,6 +40,9 @@
 <cfset querysetcell(emps,"department","CF",10)>
 <cfset querysetcell(emps,"salary","250000",10)>
 <cfset querysetcell(emps,"active","No",10)>
+
+<cfset myvar = "10rub,20rub">
+
 <cfform name="form01">
 <cfgrid format="html" insert="yes" insertButton="Add Row"
 name="grid01"
@@ -53,7 +56,7 @@ sort="yes"
 groupField="active">
 <cfgridcolumn name="FirstName" header="FirstName"/>
 <cfgridcolumn name="Department" header="Department" />
-<cfgridcolumn name="Salary" display=true header="Salary" type="numeric" values="1000000,1200000" valuesdisplay="1000000,1200000"/>
+<cfgridcolumn name="Salary" display=true header="Salary" type="numeric" values=#myvar# valuesdisplay=#myvar#/>
 <cfgridcolumn name="Active" display=true header="Contract" type="boolean" />
 </cfgrid>
 </cfform>

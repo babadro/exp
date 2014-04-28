@@ -33,7 +33,7 @@
 	<cfset SESSION.movWiz.stepNum = URL.stepNUm - 1>
 <cfelseif isDefined("FORM.goNext")>
 	<cfset SESSION.movWiz.stepNum = URL.stepNum + 1>
-<cfelse isDefined("FORM.goDone")>
+<cfelseif isDefined("FORM.goDone")>
 	<cflocation url="newMovieCommit2.cfm">
 </cfif>
 
