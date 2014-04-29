@@ -9,10 +9,18 @@ alert("Error while updating\n Error code: "+id+"\n Message: "+message);
 <body>
 <cffunction name="getCyclingShoeModelName">
 	<cfset var get_cycling_shoe_model = "">
-	<cfquery name="get_cycling_shoe_model" dataSource="bont">SELECT csm.name_eng AS model_name_eng, csm.note AS note FROM cycling_shoe_model csm ORDER BY model_name_eng</cfquery>
-	<cfreturn valueList(get_cycling_shoe_model.model_name_eng and get_cycling_shoe_model.note)>
+	<cfquery name="get_cycling_shoe_model" dataSource="bont">SELECT concat(csm.item_model_id, ' ', csm.name_eng, ' ', IF(!csm.note, csm.note, '')) AS model FROM cycling_shoe_model csm ORDER BY csm.name_eng</cfquery>
+	<cfreturn valueList(get_cycling_shoe_model.model)>
+	
 </cffunction>
-<cfoutput>#getCyclingShoeModelName()#</cfoutput>
+
+<cffunction name="getCSMid">
+	<cfset var getCSMid = "">
+	<cfquery name="get_csm_id" dataSource="bont">SELECT csm.item_model_id as model_id FROM cycling_shoe_model csm ORDER BY csm.name_eng</cfquery>
+	<cfreturn valueList(get_csm_id.model_id)>
+</cffunction>
+<cfoutput>#getCyclingShoeModelName()#<br></cfoutput>
+<cfoutput>#getCSMid()#</cfoutput>
 
 <cfform name="form01">
 <cfgrid format="html" name="grid01" pagesize=40
