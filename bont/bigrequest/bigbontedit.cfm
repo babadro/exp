@@ -30,15 +30,30 @@ delete="yes" selectmode="edit"
 onchange="cfc:places.editData({cfgridaction},{cfgridrow},{cfgridchanged})">
 	
 <cfgridcolumn name="id" display=true header="id"/>
-<cfgridcolumn name="model" display=true header="модель" values=#getCyclingShoeModelName()# valuesdisplay=#getCyclingShoeModelName()#/>
 <cfgridcolumn name="sold_for" display=true header="цена продажи"/>
-<cfgridcolumn name="retailer_company" display=true header="ћагазин"/>
-<cfgridcolumn name="retailer_fname" display=true header="»м€ продавца"/>
-<cfgridcolumn name="retailer_sname" display=true header="фамили€ продавца"/>
-<cfgridcolumn name="size" display=true header="размер"/>
-<cfgridcolumn name="color" display=true header="цвет"/>
-<cfgridcolumn name="last_width" display=true header="ширина"/>
-<cfgridcolumn name="status" display=true header="статус"/>
+<cfgridcolumn name="sale_date" display=true header="дата продажи"/>
+<cfgridcolumn name="i_note" display=true header="примечание к товару"/>
+<cfgridcolumn name="i_pubnote" display=true header="публичное примечание к товару"/>
+<cfgridcolumn name="brand" display=true header="бренд"/>
+<cfgridcolumn name="rub" display=true header="цена в рубл€х"/>
+<cfgridcolumn name="usd" display=true header="цена в долларах"/>
+<cfgridcolumn name="euro_size" display=true header="размер euro"/>
+<cfgridcolumn name="bont_size" display=true header="размер bont"/>
+<cfgridcolumn name="last_len" display=true header="длина"/>
+<cfgridcolumn name="width" display=true header="ширина"/>
+<cfgridcolumn name="encolor" display=true header="цвет англ"/>
+<cfgridcolumn name="ruscolor" display=true header="цвет"/>
+<cfgridcolumn name="model" display=true header="модель" values=#getCyclingShoeModelName()# valuesdisplay=#getCyclingShoeModelName()#/>
+<cfgridcolumn name="weight" display=true header="вес"/>
+<cfgridcolumn name="upper_material" display=true header="материал верха"/>
+<cfgridcolumn name="invoice" display=true header="инвойс поставки"/>
+<cfgridcolumn name="fact_arrival" display=true header="фактическое прибытие поставки"/>
+<cfgridcolumn name="expect_arrival" display=true header="ожидаемое прибытие поставки"/>
+<cfgridcolumn name="cons_note" display=true header="примечание к поставке"/>
+<cfgridcolumn name="cons_status" display=true header="статус поставки"/>
+<cfgridcolumn name="i_status" display=true header="статус товара"/>
+<cfgridcolumn name="retailer" display=true header="√де находитс€"/>
+<cfgridcolumn name="buyer" display=true header="покупатель"/>
 <!---
 <cfgridcolumn name="Email" display=true header="Email" values="a@mail.ru,b@mail.ru,c@yandex.ru" valuesdisplay="a,b,c"/>
 --->

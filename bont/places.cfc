@@ -35,9 +35,11 @@ SELECT
 	<cfdump var="#gridaction#" format="html" output="C:/ColdFusion9/logs/bind.html">
 	<cfdump var="#gridchanged#" format="html" output="C:/ColdFusion9/logs/bind.html">--->
 	
-	<!---
+	
 	<cfif isStruct(gridrow) and isStruct(gridchanged)>
 		<cfif gridaction eq "U">
+			<!---
+			
 			<cfset colname=structkeylist(gridchanged)>
 			<cfset value=structfind(gridchanged,#colname#)>
 			
@@ -46,22 +48,23 @@ SELECT
 				'<cfoutput>#value#</cfoutput>'
 				where Emp_ID = <cfoutput>#gridrow.Emp_ID#</cfoutput>
 			</cfquery>
-		<cfelse>
-			<cfquery name="team" datasource="cfdocexamples">
-				delete from employees where emp_id = <cfoutput>#gridrow.Emp_ID#</cfoutput>
+			--->
+			
+			<cfquery name="change_csm_id" datasource="bont">
+				UPDATE item i set i.model_id=<cfoutput>#RemoveChars((listLast(gridchanged.model, ' ')), 1, 1)#</cfoutput>
+				WHERE i.id=<cfoutput>#gridrow.id#</cfoutput>
 			</cfquery>
+		<cfelse><!---
+			<cfquery name="team" datasource="cfdocexamples">
+				delete from item i where id = <cfoutput>#gridrow.id#</cfoutput>
+			</cfquery>
+			--->
 		</cfif>
 	</cfif>
-	--->
 	
-	<!---
-	<cfquery name="change_csm_id" datasource="bont">
-				update item i set <cfoutput>#gridrow.id#</cfoutput> =
-				'<cfoutput>#value#</cfoutput>'
-				where Emp_ID = <cfoutput>#gridrow.Emp_ID#</cfoutput>
-			</cfquery>
-	UPDATE item
-	--->
+	
+	
+
 </cffunction>
 
 </cfcomponent>
