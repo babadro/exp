@@ -9,7 +9,7 @@ alert("Error while updating\n Error code: "+id+"\n Message: "+message);
 <body>
 <cffunction name="getCyclingShoeModelName">
 	<cfset var get_cycling_shoe_model = "">
-	<cfquery name="get_cycling_shoe_model" dataSource="bont">SELECT concat(csm.name_eng, ' ', IF(!csm.note, csm.note, ''), '¹', csm.item_model_id) AS model_name FROM cycling_shoe_model csm ORDER BY csm.name_eng</cfquery>
+	<cfquery name="get_cycling_shoe_model" dataSource="bont">SELECT concat(csm.name_eng, ' ', IF(!csm.note, csm.note, ''), 'â„–', csm.item_model_id) AS model_name FROM cycling_shoe_model csm ORDER BY csm.name_eng</cfquery>
 	<cfreturn valueList(get_cycling_shoe_model.model_name)>
 </cffunction>
 
@@ -20,7 +20,7 @@ alert("Error while updating\n Error code: "+id+"\n Message: "+message);
 </cffunction>
 <cfoutput>#getCyclingShoeModelName()#<br></cfoutput>
 <cfset gridchanged1 = structNew() >
-<cfset gridchanged1.model = "vaypor leather ¹6">
+<cfset gridchanged1.model = "vaypor leather â„–6">
 <cfoutput>#RemoveChars((listLast(gridchanged1.model, ' ')), 1, 1)#</cfoutput>
 <cfform name="form01">
 <cfgrid format="html" name="grid01" pagesize=40
@@ -30,30 +30,30 @@ delete="yes" selectmode="edit"
 onchange="cfc:places.editData({cfgridaction},{cfgridrow},{cfgridchanged})">
 	
 <cfgridcolumn name="id" display=true header="id"/>
-<cfgridcolumn name="sold_for" display=true header="öåíà ïðîäàæè"/>
-<cfgridcolumn name="sale_date" display=true header="äàòà ïðîäàæè"/>
-<cfgridcolumn name="i_note" display=true header="ïðèìå÷àíèå ê òîâàðó"/>
-<cfgridcolumn name="i_pubnote" display=true header="ïóáëè÷íîå ïðèìå÷àíèå ê òîâàðó"/>
-<cfgridcolumn name="brand" display=true header="áðåíä"/>
-<cfgridcolumn name="rub" display=true header="öåíà â ðóáëÿõ"/>
-<cfgridcolumn name="usd" display=true header="öåíà â äîëëàðàõ"/>
-<cfgridcolumn name="euro_size" display=true header="ðàçìåð euro"/>
-<cfgridcolumn name="bont_size" display=true header="ðàçìåð bont"/>
-<cfgridcolumn name="last_len" display=true header="äëèíà"/>
-<cfgridcolumn name="width" display=true header="øèðèíà"/>
-<cfgridcolumn name="encolor" display=true header="öâåò àíãë"/>
-<cfgridcolumn name="ruscolor" display=true header="öâåò"/>
-<cfgridcolumn name="model" display=true header="ìîäåëü" values=#getCyclingShoeModelName()# valuesdisplay=#getCyclingShoeModelName()#/>
-<cfgridcolumn name="weight" display=true header="âåñ"/>
-<cfgridcolumn name="upper_material" display=true header="ìàòåðèàë âåðõà"/>
-<cfgridcolumn name="invoice" display=true header="èíâîéñ ïîñòàâêè"/>
-<cfgridcolumn name="fact_arrival" display=true header="ôàêòè÷åñêîå ïðèáûòèå ïîñòàâêè"/>
-<cfgridcolumn name="expect_arrival" display=true header="îæèäàåìîå ïðèáûòèå ïîñòàâêè"/>
-<cfgridcolumn name="cons_note" display=true header="ïðèìå÷àíèå ê ïîñòàâêå"/>
-<cfgridcolumn name="cons_status" display=true header="ñòàòóñ ïîñòàâêè"/>
-<cfgridcolumn name="i_status" display=true header="ñòàòóñ òîâàðà"/>
-<cfgridcolumn name="retailer" display=true header="Ãäå íàõîäèòñÿ"/>
-<cfgridcolumn name="buyer" display=true header="ïîêóïàòåëü"/>
+<cfgridcolumn name="sold_for" display=true header="Ñ†ÐµÐ½Ð° Ð¿Ñ€Ð¾Ð´Ð°Ð¶Ð¸"/>
+<cfgridcolumn name="sale_date" display=true header="Ð´Ð°Ñ‚Ð° Ð¿Ñ€Ð¾Ð´Ð°Ð¶Ð¸"/>
+<cfgridcolumn name="i_note" display=true header="Ð¿Ñ€Ð¸Ð¼ÐµÑ‡Ð°Ð½Ð¸Ðµ Ðº Ñ‚Ð¾Ð²Ð°Ñ€Ñƒ"/>
+<cfgridcolumn name="i_pubnote" display=true header="Ð¿ÑƒÐ±Ð»Ð¸Ñ‡Ð½Ð¾Ðµ Ð¿Ñ€Ð¸Ð¼ÐµÑ‡Ð°Ð½Ð¸Ðµ Ðº Ñ‚Ð¾Ð²Ð°Ñ€Ñƒ"/>
+<cfgridcolumn name="brand" display=true header="Ð±Ñ€ÐµÐ½Ð´"/>
+<cfgridcolumn name="rub" display=true header="Ñ†ÐµÐ½Ð° Ð² Ñ€ÑƒÐ±Ð»ÑÑ…"/>
+<cfgridcolumn name="usd" display=true header="Ñ†ÐµÐ½Ð° Ð² Ð´Ð¾Ð»Ð»Ð°Ñ€Ð°Ñ…"/>
+<cfgridcolumn name="euro_size" display=true header="Ñ€Ð°Ð·Ð¼ÐµÑ€ euro"/>
+<cfgridcolumn name="bont_size" display=true header="Ñ€Ð°Ð·Ð¼ÐµÑ€ bont"/>
+<cfgridcolumn name="last_len" display=true header="Ð´Ð»Ð¸Ð½Ð°"/>
+<cfgridcolumn name="width" display=true header="ÑˆÐ¸Ñ€Ð¸Ð½Ð°"/>
+<cfgridcolumn name="encolor" display=true header="Ñ†Ð²ÐµÑ‚ Ð°Ð½Ð³Ð»"/>
+<cfgridcolumn name="ruscolor" display=true header="Ñ†Ð²ÐµÑ‚"/>
+<cfgridcolumn name="model" display=true header="Ð¼Ð¾Ð´ÐµÐ»ÑŒ" values=#getCyclingShoeModelName()# valuesdisplay=#getCyclingShoeModelName()#/>
+<cfgridcolumn name="weight" display=true header="Ð²ÐµÑ"/>
+<cfgridcolumn name="upper_material" display=true header="Ð¼Ð°Ñ‚ÐµÑ€Ð¸Ð°Ð» Ð²ÐµÑ€Ñ…Ð°"/>
+<cfgridcolumn name="invoice" display=true header="Ð¸Ð½Ð²Ð¾Ð¹Ñ Ð¿Ð¾ÑÑ‚Ð°Ð²ÐºÐ¸"/>
+<cfgridcolumn name="fact_arrival" display=true header="Ñ„Ð°ÐºÑ‚Ð¸Ñ‡ÐµÑÐºÐ¾Ðµ Ð¿Ñ€Ð¸Ð±Ñ‹Ñ‚Ð¸Ðµ Ð¿Ð¾ÑÑ‚Ð°Ð²ÐºÐ¸"/>
+<cfgridcolumn name="expect_arrival" display=true header="Ð¾Ð¶Ð¸Ð´Ð°ÐµÐ¼Ð¾Ðµ Ð¿Ñ€Ð¸Ð±Ñ‹Ñ‚Ð¸Ðµ Ð¿Ð¾ÑÑ‚Ð°Ð²ÐºÐ¸"/>
+<cfgridcolumn name="cons_note" display=true header="Ð¿Ñ€Ð¸Ð¼ÐµÑ‡Ð°Ð½Ð¸Ðµ Ðº Ð¿Ð¾ÑÑ‚Ð°Ð²ÐºÐµ"/>
+<cfgridcolumn name="cons_status" display=true header="ÑÑ‚Ð°Ñ‚ÑƒÑ Ð¿Ð¾ÑÑ‚Ð°Ð²ÐºÐ¸"/>
+<cfgridcolumn name="i_status" display=true header="ÑÑ‚Ð°Ñ‚ÑƒÑ Ñ‚Ð¾Ð²Ð°Ñ€Ð°"/>
+<cfgridcolumn name="retailer" display=true header="Ð“Ð´Ðµ Ð½Ð°Ñ…Ð¾Ð´Ð¸Ñ‚ÑÑ"/>
+<cfgridcolumn name="buyer" display=true header="Ð¿Ð¾ÐºÑƒÐ¿Ð°Ñ‚ÐµÐ»ÑŒ"/>
 <!---
 <cfgridcolumn name="Email" display=true header="Email" values="a@mail.ru,b@mail.ru,c@yandex.ru" valuesdisplay="a,b,c"/>
 --->
