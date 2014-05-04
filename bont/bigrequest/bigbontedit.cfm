@@ -23,15 +23,15 @@ alert("Error while updating\n Error code: "+id+"\n Message: "+message);
 <cfset gridchanged1.model = "vaypor leather №6">
 <cfoutput>#RemoveChars((listLast(gridchanged1.model, ' ')), 1, 1)#</cfoutput>
 <cfform name="form01">
-<cfgrid format="html" name="grid01" pagesize=40
+<cfgrid format="html" name="grid01" pagesize=40 
 stripeRows=true stripeRowColor="gray"
 bind="cfc:places.getData({cfgridpage},{cfgridpagesize},{cfgridsortcolumn},{cfgridsortdirection})"
 delete="yes" selectmode="edit"
 onchange="cfc:places.editData({cfgridaction},{cfgridrow},{cfgridchanged})">
 	
-<cfgridcolumn name="id" display=true header="id"/>
+<cfgridcolumn name="id" display=true header="id" select="no"/>
 <cfgridcolumn name="sold_for" display=true header="цена продажи"/>
-<cfgridcolumn name="sale_date" display=true header="дата продажи"/>
+<cfgridcolumn name="sale_date" display=true header="дата продажи" type="date"/>
 <cfgridcolumn name="i_note" display=true header="примечание к товару"/>
 <cfgridcolumn name="i_pubnote" display=true header="публичное примечание к товару"/>
 <cfgridcolumn name="brand" display=true header="бренд"/>

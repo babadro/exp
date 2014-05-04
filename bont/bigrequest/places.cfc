@@ -94,7 +94,18 @@
 					
 					<!---<cfquery name="drop_item2" datasource="bont">DROP TABLE IF EXISTS item2</cfquery>--->
 				</cfcase>
-				
+				<cfcase value="sold_for">
+					<cfquery name="change_item_sold_for" datasource="bont">
+						UPDATE item i set i.sold_for=<cfoutput>#gridchanged.sold_for#</cfoutput>
+						WHERE i.id=<cfoutput>#gridrow.id#</cfoutput>
+					</cfquery>
+				</cfcase>
+				<cfcase value="sale_date">
+					<cfquery name="change_item_sale_date" datasource="bont">
+						UPDATE item i set i.sale_date=<cfoutput>#gridchanged.sale_date#</cfoutput>
+						WHERE i.id=<cfoutput>#gridrow.id#</cfoutput>
+					</cfquery>
+				</cfcase>
 			</cfswitch>
 		<cfelse>
 		
