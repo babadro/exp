@@ -52,12 +52,14 @@
 	<cfargument name="gridsortdirection">
 	
 	<cfset createItemTemp()>
+	
 	<cfquery name="cyclingshoe" datasource="bont">
 		SELECT * FROM itemtemp 
 		<cfif gridsortcolumn neq "" and gridsortdirection neq "">
 			order by #gridsortcolumn# #gridsortdirection#
 		</cfif>
 	</cfquery>
+	
 	<cfreturn QueryConvertForGrid(cyclingshoe, page, pageSize)>
 </cffunction>
 
@@ -66,7 +68,7 @@
 	<cfargument name="gridrow">
 	<cfargument name="gridchanged">
 	
-	<!---
+	<!--- Если надо вывести содержимое "координат" (трех структур) ячейки во внешний файл
 	<cfdump var="#gridrow#" format="html" output="C:/ColdFusion9/logs/bind.html">
 	<cfdump var="#gridaction#" format="html" output="C:/ColdFusion9/logs/bind.html">
 	<cfdump var="#gridchanged#" format="html" output="C:/ColdFusion9/logs/bind.html">
@@ -78,21 +80,19 @@
 			<cfset createItemTemp()>
 			<cfset colname=structkeylist(gridchanged)>
 			<cfset value=structfind(gridchanged,#colname#)>
-			
+			<!--- Правим временнную таблицу --->
 			<cfquery name="update_temp_table" datasource="bont">
 				update itemtemp set <cfoutput>#colname#</cfoutput> =
 				'<cfoutput>#value#</cfoutput>'
 				where itemtemp.id = <cfoutput>#gridrow.id#</cfoutput>
 			</cfquery>
-			
+			<!--- Правим разные исходные (постоянные) таблицы, в зависимости от выбранного столбца во временной таблице --->
 			<cfswitch expression="#structkeylist(gridchanged)#">
 				<cfcase value="model">
 					<cfquery name="change_csm_id" datasource="bont">
 						UPDATE item i set i.model_id=<cfoutput>#RemoveChars((listLast(gridchanged.model, ' ')), 1, 1)#</cfoutput>
 						WHERE i.id=<cfoutput>#gridrow.id#</cfoutput>
 					</cfquery>
-					
-					<!---<cfquery name="drop_item2" datasource="bont">DROP TABLE IF EXISTS item2</cfquery>--->
 				</cfcase>
 				<cfcase value="sold_for">
 					<cfquery name="change_item_sold_for" datasource="bont">
@@ -102,9 +102,28 @@
 				</cfcase>
 				<cfcase value="sale_date">
 					<cfquery name="change_item_sale_date" datasource="bont">
-						UPDATE item i set i.sale_date=<cfoutput>#gridchanged.sale_date#</cfoutput>
+						UPDATE item i set i.sale_date='<cfoutput>#gridchanged.sale_date#</cfoutput>'
 						WHERE i.id=<cfoutput>#gridrow.id#</cfoutput>
 					</cfquery>
+				</cfcase>
+				<cfcase value="i_note">
+					<cfquery name="change_item_note" datasource="bont">
+						UPDATE item i set i.note='<cfoutput>#gridchanged.i_note#</cfoutput>'
+						WHERE i.id=<cfoutput>#gridrow.id#</cfoutput>
+					</cfquery>
+				</cfcase>
+				<cfcase value="i_pubnote">
+					<cfquery name="change_item_pubnote" datasource="bont">
+						UPDATE item i set i.pub_note='<cfoutput>#gridchanged.i_pubnote#</cfoutput>'
+						WHERE i.id=<cfoutput>#gridrow.id#</cfoutput>
+					</cfquery>
+				</cfcase>
+				<cfcase value="brand"><!--- запрос в разработке.
+					<cfquery name="change_brand_id" datasource="bont">
+						UPDATE item_model im set im.model_id=<cfoutput>#RemoveChars((listLast(gridchanged.model, ' ')), 1, 1)#</cfoutput>
+						WHERE i.id=<cfoutput>#gridrow.id#</cfoutput>
+					</cfquery>
+					---->
 				</cfcase>
 			</cfswitch>
 		<cfelse>

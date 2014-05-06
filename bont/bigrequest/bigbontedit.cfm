@@ -30,11 +30,11 @@ delete="yes" selectmode="edit"
 onchange="cfc:places.editData({cfgridaction},{cfgridrow},{cfgridchanged})">
 	
 <cfgridcolumn name="id" display=true header="id" select="no"/>
-<cfgridcolumn name="sold_for" display=true header="цена продажи"/>
+<cfgridcolumn name="sold_for" display=true header="цена продажи" type="numeric"/>
 <cfgridcolumn name="sale_date" display=true header="дата продажи" type="date"/>
 <cfgridcolumn name="i_note" display=true header="примечание к товару"/>
 <cfgridcolumn name="i_pubnote" display=true header="публичное примечание к товару"/>
-<cfgridcolumn name="brand" display=true header="бренд"/>
+<cfgridcolumn name="brand" display=true header="бренд" select="no"/>
 <cfgridcolumn name="rub" display=true header="цена в рублях"/>
 <cfgridcolumn name="usd" display=true header="цена в долларах"/>
 <cfgridcolumn name="euro_size" display=true header="размер euro"/>
