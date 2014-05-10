@@ -158,7 +158,7 @@
 			</cfswitch>
 		<cfelse>
 		
-		<!---
+		<!--- запрос для удаления. Пока не используется.
 			<cfquery name="team" datasource="cfdocexamples">
 				delete from item i where id = <cfoutput>#gridrow.id#</cfoutput>
 			</cfquery>

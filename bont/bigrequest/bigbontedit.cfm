@@ -33,6 +33,21 @@ alert("Error while updating\n Error code: "+id+"\n Message: "+message);
 	<cfreturn valueList(get_status_name.statusname)>
 </cffunction>
 
+<cffunction name="retailerNames">
+	<cfset var get_retailer_name = "">
+	<cfquery name="get_retailer_name" dataSource="bont">
+		<!---
+		
+		---->
+		SELECT CONCAT(IF(!p.fname_rus, concat(p.fname_rus, ' '), ''), IF(!p.sname_rus, concat(p.sname_rus, ' '), ''), IF(id=1, '', CONCAT('idp', id)))
+		 AS retailer
+    		FROM people p WHERE p.store=b'1'
+  		UNION
+  		SELECT CONCAT(IF(!c.name_rus, CONCAT(c.name_rus, ' '), ''), IF(id=1, '', CONCAT('idc', id))) from company c WHERE c.store=b'1'	
+	</cfquery>
+	<cfreturn valueList(get_retailer_name.retailer)>
+</cffunction>
+
 <cffunction name="newfunc"></cffunction>
 
 <!--- функция пока не нужна
@@ -63,7 +78,7 @@ alert("Error while updating\n Error code: "+id+"\n Message: "+message);
 		<cfgridcolumn name="brand" display=true header="бренд" select="no"/>
 		<cfgridcolumn name="rub" display=true header="цена в рублях" select="no"/>
 		<cfgridcolumn name="usd" display=true header="цена в долларах" select="no"/>
-		<cfgridcolumn name="euro_size" display=true header="размер euro"/>
+		<cfgridcolumn name="euro_size" display=true header="размер euro" type="numeric"/>
 		<cfgridcolumn name="bont_size" display=true header="размер bont"
 			values="36/3.5,37/4.5,38/5,39/6,40/6.5,40.5/7,41/7.5,42/8,43/9,44/10,44.5/10.5,45/10.75,46/11,46.5/11.5,47/12,48/12.5,49/13,50/14"
 			valuesdisplay="36/3.5,37/4.5,38/5,39/6,40/6.5,40.5/7,41/7.5,42/8,43/9,44/10,44.5/10.5,45/10.75,46/11,46.5/11.5,47/12,48/12.5,49/13,50/14"/>
@@ -78,8 +93,8 @@ alert("Error while updating\n Error code: "+id+"\n Message: "+message);
 		<cfgridcolumn name="expect_arrival" display=true header="ожидаемое прибытие поставки" select="no"/>
 		<cfgridcolumn name="cons_note" display=true header="примечание к поставке" select="no"/>
 		<cfgridcolumn name="cons_status" display=true header="статус поставки" select="no"/>
-		<cfgridcolumn name="i_status" display=true header="статус товара" values="#statusNames()#,' '" valuesdisplay="#statusNames()#,без статуса"/>
-		<cfgridcolumn name="retailer" display=true header="Где находится"/>
+		<cfgridcolumn name="i_status" display=true header="статус товара" values="#statusNames()#" valuesdisplay="#statusNames()#"/>
+		<cfgridcolumn name="retailer" display=true header="Где находится" values="#retailerNames()#"/>
 		<cfgridcolumn name="buyer" display=true header="покупатель"/>
 		<!---
 		<cfgridcolumn name="Email" display=true header="Email" values="a@mail.ru,b@mail.ru,c@yandex.ru" valuesdisplay="a,b,c"/>
