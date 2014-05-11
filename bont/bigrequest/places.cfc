@@ -79,8 +79,16 @@
 	<cfif isStruct(gridrow) and isStruct(gridchanged)>
 		<cfif gridaction eq "U">
 			<cfset createItemTemp()>
-			<cfset colname=structkeylist(gridchanged)>
-			<cfset newValue=structfind(gridchanged,#colname#)>
+			<cfset var colname=structkeylist(gridchanged)> 
+			<cfset var sentValue = structfind(gridchanged, #colname#)>
+			<cfset var lastPartSentValue = listLast(sentValue, ' ')>
+			<!---Если используется служебная информация вида "id11" или "idc34", то ее надо удалить--->
+			<cfif (Find('id', lastPartSentValue))>
+				<cfset var newValue=listDeleteAt(sentValue, listlen((sentValue), ' '), ' ')>
+			<cfelse>
+				<cfset var newValue = sentValue>
+			</cfif>
+			
 			<!--- Правим временнную таблицу --->
 			<cfquery name="update_temp_table" datasource="bont">
 				update itemtemp set <cfoutput>#colname#</cfoutput> =
@@ -113,6 +121,14 @@
 						WHERE i.id=<cfoutput>#gridrow.id#</cfoutput>
 					</cfquery>
 				</cfcase>
+				<cfcase value="euro_size">
+					<cfquery name="change_euro_and_bont_size" datasource="bont">
+						UPDATE cycling_shoe cs set cs.euro_size='<cfoutput>#gridchanged.euro_size#</cfoutput>'
+						<!---
+						<if gridrow.brand EQ 'BONT'>, cs.bont_size=select</if>
+						--->
+					</cfquery>
+				</cfcase>
 				<cfcase value="bont_size">
 					<cfquery name="change_bont_size" datasource="bont">
 						UPDATE cycling_shoe cs set cs.bont_size='<cfoutput>#gridchanged.bont_size#</cfoutput>'
@@ -130,7 +146,6 @@
 				</cfcase>
 				<cfcase value="width">
 					<cfquery name="change_last_width" datasource="bont">
-						<!---Напоминаю newValue=structfind(gridchanged,#colname#)--->
 						UPDATE cycling_shoe cs set cs.last_width_id=(SELECT id FROM last_width lw WHERE lw.name_eng='<cfoutput>#newValue#</cfoutput>')
 						WHERE cs.item_id=<cfoutput>#gridrow.id#</cfoutput>
 					</cfquery>
@@ -143,10 +158,14 @@
 					</cfquery>
 				</cfcase>
 				<cfcase value="model">
-					<cfset var new_model_id = RemoveChars((listLast(gridchanged.model, ' ')), 1, 2)>
+					<cfset var new_model_id = RemoveChars(lastPartSentValue, 1, 2)>
 					<cfquery name="change_csm_id" datasource="bont">
 						UPDATE item i set i.model_id=<cfoutput>#new_model_id#</cfoutput>
 						WHERE i.id=<cfoutput>#gridrow.id#</cfoutput>
+					</cfquery>
+					<cfquery name="change_brand_in_temptable" datasource="bont">
+						UPDATE itemtemp it set it.brand=(select b.name_eng from brand b WHERE b.id=(SELECT brand_id from item_model im WHERE im.id=#new_model_id#))
+						WHERE it.id=<cfoutput>#gridrow.id#</cfoutput>
 					</cfquery>
 				</cfcase>
 				<cfcase value="i_status">
@@ -154,6 +173,27 @@
 						UPDATE item i set i.status_id=(SELECT id FROM statuses WHERE statuses.name_rus='<cfoutput>#newValue#</cfoutput>')
 						WHERE i.id=<cfoutput>#gridrow.id#</cfoutput>
 					</cfquery>
+				</cfcase>
+				<cfcase value="retailer">
+					<cfset var retailerTable=left(lastPartSentValue, 3)>
+					<cfset var newRetailer_id=removeChars(lastPartSentValue, 1, 3)>
+					<cfswitch expression="#retailerTable#">
+						<!---Если таблица people---->
+						<cfcase value="idp">
+							<cfquery name="change_people_retailer" datasource="bont">
+								UPDATE item i set i.retailer_company_id=1, i.retailer_people_id=<cfoutput>#newRetailer_id#</cfoutput> WHERE i.id=<cfoutput>#gridrow.id#</cfoutput>
+							</cfquery>
+						</cfcase>
+						<!---Если таблица company---->
+						<cfcase value="idc">
+							<cfquery name="change_company_retailer" datasource="bont">
+								UPDATE item i set i.retailer_people_id=1, i.retailer_company_id=<cfoutput>#newRetailer_id#</cfoutput> WHERE i.id=<cfoutput>#gridrow.id#</cfoutput>
+							</cfquery>
+						</cfcase>						
+					</cfswitch>
+				</cfcase>
+				<cfcase value="buyer">
+					
 				</cfcase>
 			</cfswitch>
 		<cfelse>
@@ -169,6 +209,16 @@
 	
 	
 
+</cffunction>
+
+<cffunction name="lookupMovie" access="remote" returntype="string">
+	<cfargument name="search" type="any" required="false" default="">
+		<cfset var data = "">
+		<cfquery datasource="ows" name="data">
+			SELECT MovieTitle FROM Films WHERE Ucase(MovieTitle) LIKE Ucase('#ARGUMENTS.search#%') ORDER BY MovieTitle
+		</cfquery>
+		
+		<cfreturn ValueList(data.MovieTitle)>
 </cffunction>
 
 </cfcomponent>

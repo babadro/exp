@@ -5,7 +5,7 @@
 				SELECT FilmID From Films ORDER BY MovieTitle
 			</cfquery>
 			<cfset st = structNew()>
-			<cfset st.movieList = valueList(gGetFilmIDs)>
+			<cfset st.movieList = valueList(GetFilmIDs)>
 			<cfset st.currentPos =1>
 		<cfelse>
 			<cfset st = Application.movieRotation>

@@ -7,7 +7,7 @@ alert("Error while updating\n Error code: "+id+"\n Message: "+message);
 </script>
 </head>
 <body>
-	
+
 <cffunction name="getCyclingShoeModelName">
 	<cfset var get_cycling_shoe_model = "">
 	<cfquery name="get_cycling_shoe_model" dataSource="bont">SELECT concat(csm.name_eng, ' ', IF(!csm.note, concat(csm.note, ' '), ''), 'id', csm.item_model_id) AS model_name FROM cycling_shoe_model csm ORDER BY csm.name_eng</cfquery>
@@ -36,21 +36,32 @@ alert("Error while updating\n Error code: "+id+"\n Message: "+message);
 <cffunction name="retailerNames">
 	<cfset var get_retailer_name = "">
 	<cfquery name="get_retailer_name" dataSource="bont">
-		<!---
-		
-		---->
-		SELECT CONCAT(IF(!p.fname_rus, concat(p.fname_rus, ' '), ''), IF(!p.sname_rus, concat(p.sname_rus, ' '), ''), IF(id=1, '', CONCAT('idp', id)))
-		 AS retailer
-    		FROM people p WHERE p.store=b'1'
-  		UNION
-  		SELECT CONCAT(IF(!c.name_rus, CONCAT(c.name_rus, ' '), ''), IF(id=1, '', CONCAT('idc', id))) from company c WHERE c.store=b'1'	
+		SELECT CONCAT(
+		  IF((!p.fname_rus OR p.fname_rus!=''), concat(p.fname_rus, ' '), ''),
+		  IF((!p.sname_rus OR p.sname_rus!=''), concat(p.sname_rus, ' '), ''),
+		  CONCAT('idp', id)
+		  )
+		 	AS retailer
+  			FROM people p WHERE p.store=b'1' AND p.id!=1
+ 		UNION
+		SELECT CONCAT(
+		  IF((!c.name_rus OR c.name_rus!=''), CONCAT(c.name_rus, ' '), ''),
+		  CONCAT('idc', id)
+		  )
+			FROM company c WHERE c.store=b'1' AND c.id!=1;
 	</cfquery>
 	<cfreturn valueList(get_retailer_name.retailer)>
 </cffunction>
+<!---
+<cffunction name="buyerNames">
+	<cfset var get_buyer_name = "">
+	<cfquery name="get_buyer_name" datasource="bont">
+		SELECT CONCAT(IF(!c.name_rus, c.name_rus, ''))
+	
+</cffunction>
+---->
 
-<cffunction name="newfunc"></cffunction>
-
-<!--- функция пока не нужна
+<!---
 <cffunction name="getCSMid">
 	<cfset var get_csm_id = "">
 	<cfquery name="get_csm_id" dataSource="bont">SELECT concat(csm.item_model_id, ' ', csm.name_eng, ' ', IF(!csm.note, csm.note, '')) AS model_name FROM cycling_shoe_model csm ORDER BY csm.name_eng</cfquery>
@@ -61,9 +72,12 @@ alert("Error while updating\n Error code: "+id+"\n Message: "+message);
 <cfoutput>#getCyclingShoeModelName()#<br></cfoutput>
 <cfset gridchanged1 = structNew() >
 <cfset gridchanged1.model = "vaypor leather №6">
-<cfoutput>#RemoveChars((listLast(gridchanged1.model, ' ')), 1, 1)#</cfoutput>
+<cfoutput>#RemoveChars((listLast(gridchanged1.model, ' ')), 1, 1)#<br></cfoutput>
+<cfoutput>bontSizeRange = #APPLICATION.bontSizeRange#</cfoutput>
+
 
 <cfform name="form01">
+	
 	<cfgrid format="html" name="grid01" pagesize=40 
 	stripeRows=true stripeRowColor="gray"
 	bind="cfc:places.getData({cfgridpage},{cfgridpagesize},{cfgridsortcolumn},{cfgridsortdirection})"
@@ -79,9 +93,7 @@ alert("Error while updating\n Error code: "+id+"\n Message: "+message);
 		<cfgridcolumn name="rub" display=true header="цена в рублях" select="no"/>
 		<cfgridcolumn name="usd" display=true header="цена в долларах" select="no"/>
 		<cfgridcolumn name="euro_size" display=true header="размер euro" type="numeric"/>
-		<cfgridcolumn name="bont_size" display=true header="размер bont"
-			values="36/3.5,37/4.5,38/5,39/6,40/6.5,40.5/7,41/7.5,42/8,43/9,44/10,44.5/10.5,45/10.75,46/11,46.5/11.5,47/12,48/12.5,49/13,50/14"
-			valuesdisplay="36/3.5,37/4.5,38/5,39/6,40/6.5,40.5/7,41/7.5,42/8,43/9,44/10,44.5/10.5,45/10.75,46/11,46.5/11.5,47/12,48/12.5,49/13,50/14"/>
+		<cfgridcolumn name="bont_size" display=true header="размер bont" values=#APPLICATION.bontSizeRange# valuesdisplay=#APPLICATION.bontSizeRange#/>
 		<cfgridcolumn name="last_len" display=true header="длина" type="numeric"/>
 		<cfgridcolumn name="width" display=true header="ширина" type="combobox" values="#lastWidthNames()#" valuesdisplay="#lastWidthNames()#"/>
 		<cfgridcolumn name="color" display=true header="цвет" values=#colorNames()# valuesdisplay=#colorNames()# />
@@ -95,8 +107,10 @@ alert("Error while updating\n Error code: "+id+"\n Message: "+message);
 		<cfgridcolumn name="cons_status" display=true header="статус поставки" select="no"/>
 		<cfgridcolumn name="i_status" display=true header="статус товара" values="#statusNames()#" valuesdisplay="#statusNames()#"/>
 		<cfgridcolumn name="retailer" display=true header="Где находится" values="#retailerNames()#"/>
-		<cfgridcolumn name="buyer" display=true header="покупатель"/>
+		<cfgridcolumn name="buyer" display=true header="покупатель" />
+		
 		<!---
+		<cfinput name="buyer" type="text" bind="{grid01.buyer}">
 		<cfgridcolumn name="Email" display=true header="Email" values="a@mail.ru,b@mail.ru,c@yandex.ru" valuesdisplay="a,b,c"/>
 		--->
 	</cfgrid>
