@@ -82,7 +82,8 @@
 			<cfset var colname=structkeylist(gridchanged)> 
 			<cfset var sentValue = structfind(gridchanged, #colname#)>
 			<cfset var lastPartSentValue = listLast(sentValue, ' ')>
-			<!---Если используется служебная информация вида "id11" или "idc34", то ее надо удалить--->
+			<!---Если при изменении значения ячейки вместе с основной
+			посылается служебная информация вида "id11" или "idc34", то ее надо удалить.--->
 			<cfif (Find('id', lastPartSentValue))>
 				<cfset var newValue=listDeleteAt(sentValue, listlen((sentValue), ' '), ' ')>
 			<cfelse>
@@ -122,10 +123,13 @@
 					</cfquery>
 				</cfcase>
 				<cfcase value="euro_size">
+					<cfset newEuroSize = newValue>
+					<cfset posBontSizeRange = Find(newEuroSize, APPLICATION.bontSizeRange)>
+					<cfset newBontSize = 
 					<cfquery name="change_euro_and_bont_size" datasource="bont">
 						UPDATE cycling_shoe cs set cs.euro_size='<cfoutput>#gridchanged.euro_size#</cfoutput>'
 						<!---
-						<if gridrow.brand EQ 'BONT'>, cs.bont_size=select</if>
+						<if gridrow.brand EQ 'BONT'><cfoutput>, cs.bont_size=##</cfoutput></if>
 						--->
 					</cfquery>
 				</cfcase>
