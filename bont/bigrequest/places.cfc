@@ -1,5 +1,5 @@
 <cfcomponent>
-	
+<!--- new comment ---->	
 <cffunction name="createItemTemp">
 	<cfquery name="createtemptable" datasource="bont">
 		
