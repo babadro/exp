@@ -8,6 +8,22 @@ alert("Error while updating\n Error code: "+id+"\n Message: "+message);
 </head>
 <body>
 
+<cffunction name="StructStringToList" description="Convert struct (with key = string and value = string) to list look like 'key1/value1,key2/value2 and so on...'" returntype="String">
+	<cfargument name="originStruct" required="true">
+		
+	<cfset var arr = arrayNew(1)>
+	
+	<cfloop collection=#originStruct# item="i">
+		<cfset var element = i & "/" & originStruct[i]>
+		<cfset ArrayAppend(arr, element)>
+	</cfloop>
+	
+	<cfset arraySort(arr, "textnocase", "asc")>
+	<cfset var resultList = arrayToList(arr, ",")>
+	
+	<cfreturn resultList>
+</cffunction>
+
 <cffunction name="getCyclingShoeModelName">
 	<cfset var get_cycling_shoe_model = "">
 	<cfquery name="get_cycling_shoe_model" dataSource="bont">SELECT concat(csm.name_eng, ' ', IF(!csm.note, concat(csm.note, ' '), ''), 'id', csm.item_model_id) AS model_name FROM cycling_shoe_model csm ORDER BY csm.name_eng</cfquery>
@@ -52,14 +68,17 @@ alert("Error while updating\n Error code: "+id+"\n Message: "+message);
 	</cfquery>
 	<cfreturn valueList(get_retailer_name.retailer)>
 </cffunction>
-<!---
+
 <cffunction name="buyerNames">
 	<cfset var get_buyer_name = "">
 	<cfquery name="get_buyer_name" datasource="bont">
-		SELECT CONCAT(IF(!c.name_rus, c.name_rus, ''))
-	
+		SELECT CONCAT(
+		  IF(c.id=1, "другой", c.name_rus),' ', 'id', id
+		  ) AS buyer
+  		FROM company c ORDER BY c.name_rus;
+	</cfquery>
+	<cfreturn valueList(get_buyer_name.buyer)>
 </cffunction>
----->
 
 <!---
 <cffunction name="getCSMid">
@@ -73,7 +92,7 @@ alert("Error while updating\n Error code: "+id+"\n Message: "+message);
 <cfset gridchanged1 = structNew() >
 <cfset gridchanged1.model = "vaypor leather №6">
 <cfoutput>#RemoveChars((listLast(gridchanged1.model, ' ')), 1, 1)#<br></cfoutput>
-<cfoutput>bontSizeRange = #APPLICATION.bontSizeRange#</cfoutput>
+
 
 
 <cfform name="form01">
@@ -93,7 +112,7 @@ alert("Error while updating\n Error code: "+id+"\n Message: "+message);
 		<cfgridcolumn name="rub" display=true header="цена в рублях" select="no"/>
 		<cfgridcolumn name="usd" display=true header="цена в долларах" select="no"/>
 		<cfgridcolumn name="euro_size" display=true header="размер euro" type="numeric"/>
-		<cfgridcolumn name="bont_size" display=true header="размер bont" values=#APPLICATION.bontSizeRange# valuesdisplay=#APPLICATION.bontSizeRange#/>
+		<cfgridcolumn name="bont_size" display=true header="размер bont" values=#StructStringToList(APPLICATION.bontSizeRange)# valuesdisplay=#StructStringToList(APPLICATION.bontSizeRange)#/>
 		<cfgridcolumn name="last_len" display=true header="длина" type="numeric"/>
 		<cfgridcolumn name="width" display=true header="ширина" type="combobox" values="#lastWidthNames()#" valuesdisplay="#lastWidthNames()#"/>
 		<cfgridcolumn name="color" display=true header="цвет" values=#colorNames()# valuesdisplay=#colorNames()# />
@@ -107,12 +126,8 @@ alert("Error while updating\n Error code: "+id+"\n Message: "+message);
 		<cfgridcolumn name="cons_status" display=true header="статус поставки" select="no"/>
 		<cfgridcolumn name="i_status" display=true header="статус товара" values="#statusNames()#" valuesdisplay="#statusNames()#"/>
 		<cfgridcolumn name="retailer" display=true header="Где находится" values="#retailerNames()#"/>
-		<cfgridcolumn name="buyer" display=true header="покупатель" />
+		<cfgridcolumn name="buyer" display=true header="покупатель" values="#buyerNames()#" valuesdisplay="#buyerNames()#"/>
 		
-		<!---
-		<cfinput name="buyer" type="text" bind="{grid01.buyer}">
-		<cfgridcolumn name="Email" display=true header="Email" values="a@mail.ru,b@mail.ru,c@yandex.ru" valuesdisplay="a,b,c"/>
-		--->
 	</cfgrid>
 
 

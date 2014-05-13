@@ -122,17 +122,28 @@
 						WHERE i.id=<cfoutput>#gridrow.id#</cfoutput>
 					</cfquery>
 				</cfcase>
+				
 				<cfcase value="euro_size">
-					<cfset newEuroSize = newValue>
-					<cfset posBontSizeRange = Find(newEuroSize, APPLICATION.bontSizeRange)>
-					<cfset newBontSize = 
-					<cfquery name="change_euro_and_bont_size" datasource="bont">
-						UPDATE cycling_shoe cs set cs.euro_size='<cfoutput>#gridchanged.euro_size#</cfoutput>'
-						<!---
-						<if gridrow.brand EQ 'BONT'><cfoutput>, cs.bont_size=##</cfoutput></if>
-						--->
-					</cfquery>
+					<cfset var newEuroSize = newValue>
+					<cfif gridrow.brand EQ "BONT" AND structKeyExists(APPLICATION.bontSizeRange, newEuroSize)>
+						<cfset newBontSize = newEuroSize & "/" & structFind(APPLICATION.bontSizeRange, newEuroSize)>
+						<cfquery name="change_euro_and_bont_size" datasource="bont">
+							UPDATE cycling_shoe cs set cs.euro_size=<cfoutput>#gridchanged.euro_size#</cfoutput>
+							<cfoutput>, cs.bont_size='#newBontSize#'</cfoutput>
+							WHERE cs.item_id=<cfoutput>#gridrow.id#</cfoutput>
+						</cfquery>
+						<cfquery name="change_bont_size_in_temp_table" datasource="bont">
+							UPDATE itemtemp it SET it.bont_size='<cfoutput>#newBontSize#</cfoutput>'
+							WHERE it.id=<cfoutput>#gridrow.id#</cfoutput>
+						</cfquery>
+					<cfelse>
+						<cfquery name="change_euro_size" datasource="bont">
+							UPDATE cycling_shoe cs set cs.euro_size=<cfoutput>#gridchanged.euro_size#</cfoutput>
+							WHERE cs.item_id=<cfoutput>#gridrow.id#</cfoutput>
+						</cfquery>
+					</cfif>
 				</cfcase>
+				
 				<cfcase value="bont_size">
 					<cfquery name="change_bont_size" datasource="bont">
 						UPDATE cycling_shoe cs set cs.bont_size='<cfoutput>#gridchanged.bont_size#</cfoutput>'
@@ -197,7 +208,10 @@
 					</cfswitch>
 				</cfcase>
 				<cfcase value="buyer">
-					
+					<cfset var newBuyer_id=removeChars(lastPartSentValue, 1, 2)>
+					<cfquery name="change_company_buyer" datasource="bont">
+						UPDATE item i set i.buyer_company_id=<cfoutput>#newBuyer_id#</cfoutput> WHERE i.id=<cfoutput>#gridrow.id#</cfoutput>
+					</cfquery>
 				</cfcase>
 			</cfswitch>
 		<cfelse>
@@ -213,16 +227,6 @@
 	
 	
 
-</cffunction>
-
-<cffunction name="lookupMovie" access="remote" returntype="string">
-	<cfargument name="search" type="any" required="false" default="">
-		<cfset var data = "">
-		<cfquery datasource="ows" name="data">
-			SELECT MovieTitle FROM Films WHERE Ucase(MovieTitle) LIKE Ucase('#ARGUMENTS.search#%') ORDER BY MovieTitle
-		</cfquery>
-		
-		<cfreturn ValueList(data.MovieTitle)>
 </cffunction>
 
 </cfcomponent>
