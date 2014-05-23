@@ -50,3 +50,4 @@
 <cfset newBontSize = newEuroSize & "/" & structFind(APPLICATION.bontSizeRange, newEuroSize)>
 <cfoutput>#newBontSize#<br></cfoutput>
 <cfoutput>#structKeyExists(APPLICATION.bontSizeRange, "40.5")#</cfoutput>
+<cfoutput>Удаление</cfoutput>

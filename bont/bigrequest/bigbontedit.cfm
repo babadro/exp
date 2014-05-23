@@ -32,6 +32,7 @@ alert("Error while updating\n Error code: "+id+"\n Message: "+message);
 
 <cffunction name="lastWidthNames">
 	<cfset var get_last_width_name = "">
+	<cfset var get_last_width_name = "">
 	<cfquery name="get_last_width_name" dataSource="bont">SELECT lw.name_eng AS last_width_name FROM last_width lw ORDER BY lw.name_eng DESC</cfquery>
 	<cfreturn valueList(get_last_width_name.last_width_name)>
 </cffunction>
@@ -80,21 +81,33 @@ alert("Error while updating\n Error code: "+id+"\n Message: "+message);
 	<cfreturn valueList(get_buyer_name.buyer)>
 </cffunction>
 
-<!---
-<cffunction name="getCSMid">
+
+<cffunction name="getCSMid" description="get list of id's for each cycling shoe model">
 	<cfset var get_csm_id = "">
-	<cfquery name="get_csm_id" dataSource="bont">SELECT concat(csm.item_model_id, ' ', csm.name_eng, ' ', IF(!csm.note, csm.note, '')) AS model_name FROM cycling_shoe_model csm ORDER BY csm.name_eng</cfquery>
+	<cfquery name="get_csm_id" dataSource="bont">SELECT item_model_id as mod_id FROM cycling_shoe_model;</cfquery>
 	<cfreturn valueList(get_csm_id.mod_id)>
 </cffunction>
+
+<!---
+<cfquery name="getModel" datasource="bont">
+	SELECT concat(csm.name_eng, IF(!csm.note, concat(' ', csm.note), '')) AS model_name, item_model_id as mod_id FROM cycling_shoe_model csm ORDER BY csm.name_eng
+</cfquery>
+<cfquery name="getBrand" datasource="bont">SELECT brand.id, brand.name_eng as name_eng FROM brand</cfquery>
+<cfquery name="getEuroSizeRange" datasource="bont">SELECT sm.euro_size FROM size_map sm</cfquery>
+<cfquery name="getCleatType" datasource="bont">SELECT ct.id as id, name_eng from cleat_type ct where id!=1</cfquery>
 ---->
 
-<cfoutput>#getCyclingShoeModelName()#<br></cfoutput>
-<cfset gridchanged1 = structNew() >
-<cfset gridchanged1.model = "vaypor leather №6">
-<cfoutput>#RemoveChars((listLast(gridchanged1.model, ' ')), 1, 1)#<br></cfoutput>
-
-
-
+<!---
+<cfform style="float:left">
+	<table align="left">
+		<tr><td>Бренд</td><td><cfselect name="brand" query="getBrand"  value="id" display="name_eng" selected="2" multiple="yes" /></td></tr>
+		<tr><td>Модель</td><td><cfselect name="model" query="getModel"  value="mod_id" display="model_name" multiple="yes" selected="#getCSMid()#" /></td></tr>
+		<tr><td>Тип шипа</td><td><cfselect name="cleat_type" query="getCleatType" value="id" display="name_eng" multiple="yes" selected="2,3"/></td></tr>
+		<tr><td>Размер от</td><td><cfselect name="euroSizeMin" query="getEuroSizeRange"  value="euro_size" /></td></tr>
+		<tr><td>Размер до</td><td><cfselect name="euroSizeMin" query="getEuroSizeRange"  value="euro_size" selected="50.0" /></td></tr>
+	</table>
+</cfform>
+---->
 <cfform name="form01">
 	
 	<cfgrid format="html" name="grid01" pagesize=40 
@@ -112,7 +125,9 @@ alert("Error while updating\n Error code: "+id+"\n Message: "+message);
 		<cfgridcolumn name="rub" display=true header="цена в рублях" select="no"/>
 		<cfgridcolumn name="usd" display=true header="цена в долларах" select="no"/>
 		<cfgridcolumn name="euro_size" display=true header="размер euro" type="numeric"/>
+		<!---
 		<cfgridcolumn name="bont_size" display=true header="размер bont" values=#StructStringToList(APPLICATION.bontSizeRange)# valuesdisplay=#StructStringToList(APPLICATION.bontSizeRange)#/>
+		--->
 		<cfgridcolumn name="last_len" display=true header="длина" type="numeric"/>
 		<cfgridcolumn name="width" display=true header="ширина" type="combobox" values="#lastWidthNames()#" valuesdisplay="#lastWidthNames()#"/>
 		<cfgridcolumn name="color" display=true header="цвет" values=#colorNames()# valuesdisplay=#colorNames()# />
