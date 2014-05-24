@@ -93,45 +93,44 @@
 			<!--- Правим временнную таблицу --->
 			<cfset var update_temp_table = "">
 			<cfquery name="update_temp_table" datasource="bont">
-				update itemtemp set <cfoutput>#colname#</cfoutput> =
-				'<cfoutput>#newValue#</cfoutput>'
-				where itemtemp.id = <cfoutput>#gridrow.id#</cfoutput>
+				update itemtemp set #colname#='#newValue#'
+				where itemtemp.id=#gridrow.id#
 			</cfquery>
 			<!--- Правим разные исходные (постоянные) таблицы, в зависимости от выбранного столбца во временной таблице --->
 			<cfswitch expression="#colname#">
 				<cfcase value="sold_for">
 					<cfset var change_item_sold_for = "">
 					<cfquery name="change_item_sold_for" datasource="bont">
-						UPDATE item i set i.sold_for=<cfoutput>#gridchanged.sold_for#</cfoutput>
-						WHERE i.id=<cfoutput>#gridrow.id#</cfoutput>
+						UPDATE item i set i.sold_for=#gridchanged.sold_for#
+						WHERE i.id=#gridrow.id#
 					</cfquery>
 				</cfcase>
 				<cfcase value="sale_date">
 					<cfset var change_item_sale_date = "">
 					<cfquery name="change_item_sale_date" datasource="bont">
-						UPDATE item i set i.sale_date='<cfoutput>#gridchanged.sale_date#</cfoutput>'
-						WHERE i.id=<cfoutput>#gridrow.id#</cfoutput>
+						UPDATE item i set i.sale_date='#gridchanged.sale_date#'
+						WHERE i.id=#gridrow.id#
 					</cfquery>
 				</cfcase>
 				<cfcase value="i_note">
 					<cfset var change_item_note = "">
 					<cfquery name="change_item_note" datasource="bont">
-						UPDATE item i set i.note='<cfoutput>#gridchanged.i_note#</cfoutput>'
-						WHERE i.id=<cfoutput>#gridrow.id#</cfoutput>
+						UPDATE item i set i.note='#gridchanged.i_note#'
+						WHERE i.id=#gridrow.id#
 					</cfquery>
 				</cfcase>
 				<cfcase value="i_pubnote">
 					<cfset var change_item_pubnote = "">
 					<cfquery name="change_item_pubnote" datasource="bont">
-						UPDATE item i set i.pub_note='<cfoutput>#gridchanged.i_pubnote#</cfoutput>'
-						WHERE i.id=<cfoutput>#gridrow.id#</cfoutput>
+						UPDATE item i set i.pub_note='#gridchanged.i_pubnote#'
+						WHERE i.id=#gridrow.id#
 					</cfquery>
 				</cfcase>
 				
 				<cfcase value="euro_size">
 					<cfquery name="change_euro_size" datasource="bont">
-							UPDATE cycling_shoe cs set cs.euro_size=<cfoutput>#gridchanged.euro_size#</cfoutput>
-							WHERE cs.item_id=<cfoutput>#gridrow.id#</cfoutput>
+							UPDATE cycling_shoe cs set cs.euro_size=#gridchanged.euro_size#
+							WHERE cs.item_id=#gridrow.id#
 					</cfquery>
 					<!---
 					<cfset var newEuroSize = newValue>
@@ -180,36 +179,36 @@
 				<cfcase value="width">
 					<cfset var change_last_width = "">
 					<cfquery name="change_last_width" datasource="bont">
-						UPDATE cycling_shoe cs set cs.last_width_id=(SELECT id FROM last_width lw WHERE lw.name_eng='<cfoutput>#newValue#</cfoutput>')
-						WHERE cs.item_id=<cfoutput>#gridrow.id#</cfoutput>
+						UPDATE cycling_shoe cs set cs.last_width_id=(SELECT id FROM last_width lw WHERE lw.name_eng='#newValue#')
+						WHERE cs.item_id=#gridrow.id#
 					</cfquery>
 				</cfcase>
 				<cfcase value="color">
 					<cfset var newColorNameEng = listFirst(newValue, ' ')>
 					<cfset var change_color = "">
 					<cfquery name="change_color" datasource="bont">
-						UPDATE cycling_shoe cs set cs.color_id=(SELECT id FROM color clr WHERE clr.name_eng='<cfoutput>#newColorNameEng#</cfoutput>')
-						WHERE cs.item_id=<cfoutput>#gridrow.id#</cfoutput>
+						UPDATE cycling_shoe cs set cs.color_id=(SELECT id FROM color clr WHERE clr.name_eng='#newColorNameEng#')
+						WHERE cs.item_id=#gridrow.id#
 					</cfquery>
 				</cfcase>
 				<cfcase value="model">
 					<cfset var new_model_id = RemoveChars(lastPartSentValue, 1, 2)>
 					<cfset var change_csm_id = "">
 					<cfquery name="change_csm_id" datasource="bont">
-						UPDATE item i set i.model_id=<cfoutput>#new_model_id#</cfoutput>
-						WHERE i.id=<cfoutput>#gridrow.id#</cfoutput>
+						UPDATE item i set i.model_id=#new_model_id#
+						WHERE i.id=#gridrow.id#
 					</cfquery>
 					<cfset var change_brand_in_temptable = "">
 					<cfquery name="change_brand_in_temptable" datasource="bont">
 						UPDATE itemtemp it set it.brand=(select b.name_eng from brand b WHERE b.id=(SELECT brand_id from item_model im WHERE im.id=#new_model_id#))
-						WHERE it.id=<cfoutput>#gridrow.id#</cfoutput>
+						WHERE it.id=#gridrow.id#
 					</cfquery>
 				</cfcase>
 				<cfcase value="i_status">
 					<cfset var change_status = "">
 					<cfquery name="change_status" datasource="bont">
-						UPDATE item i set i.status_id=(SELECT id FROM statuses WHERE statuses.name_rus='<cfoutput>#newValue#</cfoutput>')
-						WHERE i.id=<cfoutput>#gridrow.id#</cfoutput>
+						UPDATE item i set i.status_id=(SELECT id FROM statuses WHERE statuses.name_rus='#newValue#')
+						WHERE i.id=#gridrow.id#
 					</cfquery>
 				</cfcase>
 				<cfcase value="retailer">
@@ -220,14 +219,14 @@
 						<cfcase value="idp">
 							<cfset var change_people_retailer = "">
 							<cfquery name="change_people_retailer" datasource="bont">
-								UPDATE item i set i.retailer_company_id=1, i.retailer_people_id=<cfoutput>#newRetailer_id#</cfoutput> WHERE i.id=<cfoutput>#gridrow.id#</cfoutput>
+								UPDATE item i set i.retailer_company_id=1, i.retailer_people_id=#newRetailer_id# WHERE i.id=#gridrow.id#
 							</cfquery>
 						</cfcase>
 						<!---Если таблица company---->
 						<cfcase value="idc">
 							<cfset var change_company_retailer = "">
 							<cfquery name="change_company_retailer" datasource="bont">
-								UPDATE item i set i.retailer_people_id=1, i.retailer_company_id=<cfoutput>#newRetailer_id#</cfoutput> WHERE i.id=<cfoutput>#gridrow.id#</cfoutput>
+								UPDATE item i set i.retailer_people_id=1, i.retailer_company_id=#newRetailer_id# WHERE i.id=#gridrow.id#
 							</cfquery>
 						</cfcase>						
 					</cfswitch>
@@ -236,7 +235,7 @@
 					<cfset var newBuyer_id=removeChars(lastPartSentValue, 1, 2)>
 					<cfset var change_company_buyer = "">
 					<cfquery name="change_company_buyer" datasource="bont">
-						UPDATE item i set i.buyer_company_id=<cfoutput>#newBuyer_id#</cfoutput> WHERE i.id=<cfoutput>#gridrow.id#</cfoutput>
+						UPDATE item i set i.buyer_company_id=#newBuyer_id# WHERE i.id=#gridrow.id#
 					</cfquery>
 				</cfcase>
 			</cfswitch>
@@ -244,25 +243,25 @@
 			<!--- Если задействована кнопка delete --->
 			<cfset var delete_row_from_temp_item = "">
 			<cfquery name="delete_row_from_itemtemp" datasource="bont">
-				DELETE FROM itemtemp where id=<cfoutput>#gridrow.id#</cfoutput>
+				DELETE FROM itemtemp where id=#gridrow.id#
 			</cfquery>
 			<!---Надо выяснить, из какой таблицы, кроме главной, надо удалить запись--->
 			<cfset var select_pattern = "">
 			<cfquery name="select_pattern" datasource="bont">
 				SELECT p.pattern as p FROM
 				item i JOIN item_model im ON i.model_id=im.id JOIN pattern p ON im.pattern_id=p.id
-				WHERE i.id = <cfoutput>#gridrow.id#</cfoutput>
+				WHERE i.id = #gridrow.id#
 			</cfquery>
 			<cfset var table = select_pattern.p>
 			
 			<cfset var delete_from_childe_table = "">
 			<cfquery name="delete_from_child_table" datasource="bont">
-				DELETE FROM <cfoutput>#table#</cfoutput> WHERE <cfoutput>#table#</cfoutput>.item_id=<cfoutput>#gridrow.id#</cfoutput>
+				DELETE FROM #table# WHERE #table#.item_id=#gridrow.id#
 			</cfquery>
 			
 			<cfset var delete_from_parent_table = "">
 			<cfquery name="delete_from_parent_table" datasource="bont">
-				DELETE FROM item WHERE item.id = <cfoutput>#gridrow.id#</cfoutput>
+				DELETE FROM item WHERE item.id = #gridrow.id#
 			</cfquery>
 		</cfif>
 	</cfif>

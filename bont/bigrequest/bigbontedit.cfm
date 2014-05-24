@@ -89,6 +89,19 @@ alert("Error while updating\n Error code: "+id+"\n Message: "+message);
 	<cfreturn valueList(get_csm_id.mod_id)>
 </cffunction>
 
+<cffunction name="getColorId" description="get list of id's for each color">
+	<cfset var get_color_id = "">
+	<cfquery name="get_color_id" dataSource="bont">SELECT color.id as id FROM color</cfquery>
+	<cfreturn valueList(get_color_id.id)>
+</cffunction>
+
+<cffunction name="getConsignmentStatusId" description="get list of id's for each color">
+	<cfset var get_color_id = "">
+	<cfquery name="get_color_id" dataSource="bont">SELECT s.id as id, name_rus from statuses s WHERE s.consignment=b'1'</cfquery>
+	<cfreturn valueList(get_color_id.id)>
+</cffunction>
+
+
 
 <cfquery name="getModel" datasource="bont">
 	SELECT concat(csm.name_eng, IF(!csm.note, concat(' ', csm.note), '')) AS model_name, item_model_id as mod_id FROM cycling_shoe_model csm ORDER BY csm.name_eng
@@ -96,6 +109,9 @@ alert("Error while updating\n Error code: "+id+"\n Message: "+message);
 <cfquery name="getBrand" datasource="bont">SELECT brand.id, brand.name_eng as name_eng FROM brand</cfquery>
 <cfquery name="getEuroSizeRange" datasource="bont">SELECT sm.euro_size FROM size_map sm</cfquery>
 <cfquery name="getCleatType" datasource="bont">SELECT ct.id as id, name_eng from cleat_type ct where id!=1</cfquery>
+<cfquery name="getLastWidth" datasource="bont">SELECT lw.id as id, name_eng from last_width lw where id!=5</cfquery>
+<cfquery name="getColor" datasource="bont">SELECT clr.id as id, name_eng from color as clr</cfquery>
+<cfquery name="getConsignmentStatus" datasource="bont">SELECT s.id as id, name_rus from statuses s WHERE s.consignment=b'1'</cfquery>
 
 
 
@@ -106,6 +122,9 @@ alert("Error while updating\n Error code: "+id+"\n Message: "+message);
 		<tr><td>Тип шипа</td><td><cfselect name="cleat_type" query="getCleatType" value="id" display="name_eng" multiple="yes" selected="2,3"/></td></tr>
 		<tr><td>Размер от</td><td><cfselect name="euroSizeMin" query="getEuroSizeRange"  value="euro_size" /></td></tr>
 		<tr><td>Размер до</td><td><cfselect name="euroSizeMin" query="getEuroSizeRange"  value="euro_size" selected="50.0" /></td></tr>
+		<tr><td>Ширина колодки</td><td><cfselect name="lastWidth" query="getLastWidth"  value="id" display="name_eng" multiple="yes" selected="1,2,3,4" /></td></tr>
+		<tr><td>Цвет</td><td><cfselect name="color" query="getColor"  value="id" display="name_eng" multiple="yes" selected="#getColorId()#" /></td></tr>
+		<tr><td>Статус поставки,<br>в которой шел товар</td><td><cfselect name="consignmentStatus" query="getConsignmentStatus"  value="id" display="name_rus" multiple="yes" selected="#getConsignmentStatusId()#" /></td></tr>
 	</table>
 </cfform>
 
