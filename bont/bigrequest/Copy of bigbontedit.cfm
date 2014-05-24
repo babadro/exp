@@ -25,6 +25,7 @@ alert("Error while updating\n Error code: "+id+"\n Message: "+message);
 	<cfreturn resultList>
 </cffunction>
 ---->
+<!---
 <cffunction name="getCyclingShoeModelName">
 	<cfset var get_cycling_shoe_model = "">
 	<cfquery name="get_cycling_shoe_model" dataSource="bont">SELECT concat(csm.name_eng, ' ', IF(!csm.note, concat(csm.note, ' '), ''), 'id', csm.item_model_id) AS model_name FROM cycling_shoe_model csm ORDER BY csm.name_eng</cfquery>
@@ -88,17 +89,18 @@ alert("Error while updating\n Error code: "+id+"\n Message: "+message);
 	<cfquery name="get_csm_id" dataSource="bont">SELECT item_model_id as mod_id FROM cycling_shoe_model;</cfquery>
 	<cfreturn valueList(get_csm_id.mod_id)>
 </cffunction>
+---->
 
-
+<!---
 <cfquery name="getModel" datasource="bont">
 	SELECT concat(csm.name_eng, IF(!csm.note, concat(' ', csm.note), '')) AS model_name, item_model_id as mod_id FROM cycling_shoe_model csm ORDER BY csm.name_eng
 </cfquery>
 <cfquery name="getBrand" datasource="bont">SELECT brand.id, brand.name_eng as name_eng FROM brand</cfquery>
 <cfquery name="getEuroSizeRange" datasource="bont">SELECT sm.euro_size FROM size_map sm</cfquery>
 <cfquery name="getCleatType" datasource="bont">SELECT ct.id as id, name_eng from cleat_type ct where id!=1</cfquery>
+---->
 
-
-
+<!---
 <cfform style="float:left">
 	<table align="left">
 		<tr><td>Бренд</td><td><cfselect name="brand" query="getBrand"  value="id" display="name_eng" selected="2" multiple="yes" /></td></tr>
@@ -108,11 +110,11 @@ alert("Error while updating\n Error code: "+id+"\n Message: "+message);
 		<tr><td>Размер до</td><td><cfselect name="euroSizeMin" query="getEuroSizeRange"  value="euro_size" selected="50.0" /></td></tr>
 	</table>
 </cfform>
-
+---->
 <cfform name="form01">
 	
 	<cfgrid format="html" name="grid01" pagesize=40 
-	stripeRowColor="gray"
+	stripeRows=true stripeRowColor="gray"
 	bind="cfc:places.getData({cfgridpage},{cfgridpagesize},{cfgridsortcolumn},{cfgridsortdirection})"
 	delete="yes" selectmode="edit"
 	onchange="cfc:places.editData({cfgridaction},{cfgridrow},{cfgridchanged})">
@@ -128,11 +130,11 @@ alert("Error while updating\n Error code: "+id+"\n Message: "+message);
 		<cfgridcolumn name="euro_size" display=true header="размер euro" type="numeric"/>
 		<!---
 		<cfgridcolumn name="bont_size" display=true header="размер bont" values=#StructStringToList(APPLICATION.bontSizeRange)# valuesdisplay=#StructStringToList(APPLICATION.bontSizeRange)#/>
-		---->
+		--->
 		<cfgridcolumn name="last_len" display=true header="длина" type="numeric"/>
-		<cfgridcolumn name="width" display=true header="ширина" type="combobox" values="#lastWidthNames()#" valuesdisplay="#lastWidthNames()#"/>
-		<cfgridcolumn name="color" display=true header="цвет" values=#colorNames()# valuesdisplay=#colorNames()# />
-		<cfgridcolumn name="model" display=true header="модель" values=#getCyclingShoeModelName()# valuesdisplay=#getCyclingShoeModelName()#/>
+		<cfgridcolumn name="width" display=true header="ширина" <!---type="combobox" values="#lastWidthNames()#" valuesdisplay="#lastWidthNames()#"---> />
+		<cfgridcolumn name="color" display=true header="цвет" <!---values=#colorNames()# valuesdisplay=#colorNames()#---> />
+		<cfgridcolumn name="model" display=true header="модель" <!---values=#getCyclingShoeModelName()# valuesdisplay=#getCyclingShoeModelName()#--->/>
 		<cfgridcolumn name="weight" display=true header="вес" type="numeric" />
 		<cfgridcolumn name="upper_material" display=true header="материал верха" select="no"/>
 		<cfgridcolumn name="invoice" display=true header="инвойс поставки" select="no" />
@@ -140,9 +142,9 @@ alert("Error while updating\n Error code: "+id+"\n Message: "+message);
 		<cfgridcolumn name="expect_arrival" display=true header="ожидаемое прибытие поставки" select="no"/>
 		<cfgridcolumn name="cons_note" display=true header="примечание к поставке" select="no"/>
 		<cfgridcolumn name="cons_status" display=true header="статус поставки" select="no"/>
-		<cfgridcolumn name="i_status" display=true header="статус товара" values="#statusNames()#" valuesdisplay="#statusNames()#"/>
-		<cfgridcolumn name="retailer" display=true header="Где находится" values="#retailerNames()#"/>
-		<cfgridcolumn name="buyer" display=true header="покупатель" values="#buyerNames()#" valuesdisplay="#buyerNames()#"/>
+		<cfgridcolumn name="i_status" display=true header="статус товара" <!---values="#statusNames()#" valuesdisplay="#statusNames()#"--->/>
+		<cfgridcolumn name="retailer" display=true header="Где находится" <!---values="#retailerNames()#"--->/>
+		<cfgridcolumn name="buyer" display=true header="покупатель" <!---values="#buyerNames()#" valuesdisplay="#buyerNames()#"--->/>
 		
 	</cfgrid>
 

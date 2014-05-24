@@ -83,7 +83,7 @@
 			<cfset var sentValue = structfind(gridchanged, #colname#)>
 			<cfset var lastPartSentValue = listLast(sentValue, ' ')>
 			<!---Если при изменении значения ячейки вместе с основной
-			посылается служебная информация вида "id11" или "idc34", то ее надо удалить.--->
+			посылается служебная информация вида "id11" или "idc34", то ее для временной таблицы надо удалить.--->
 			<cfif (Find('id', lastPartSentValue))>
 				<cfset var newValue=listDeleteAt(sentValue, listlen((sentValue), ' '), ' ')>
 			<cfelse>
@@ -246,7 +246,7 @@
 			<cfquery name="delete_row_from_itemtemp" datasource="bont">
 				DELETE FROM itemtemp where id=<cfoutput>#gridrow.id#</cfoutput>
 			</cfquery>
-			<!---Надо выяснить, в из какой таблицы, кроме главной, надо удалить запись--->
+			<!---Надо выяснить, из какой таблицы, кроме главной, надо удалить запись--->
 			<cfset var select_pattern = "">
 			<cfquery name="select_pattern" datasource="bont">
 				SELECT p.pattern as p FROM
