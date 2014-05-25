@@ -51,8 +51,9 @@ alert("Error while updating\n Error code: "+id+"\n Message: "+message);
 	<cfreturn valueList(get_status_name.statusname)>
 </cffunction>
 
+
+	
 <cffunction name="retailerNames">
-	<cfset var get_retailer_name = "">
 	<cfquery name="get_retailer_name" dataSource="bont">
 		SELECT CONCAT(
 		  IF((!p.fname_rus OR p.fname_rus!=''), concat(p.fname_rus, ' '), ''),
@@ -82,6 +83,7 @@ alert("Error while updating\n Error code: "+id+"\n Message: "+message);
 	<cfreturn valueList(get_buyer_name.buyer)>
 </cffunction>
 
+<!---
 
 <cffunction name="getCSMid" description="get list of id's for each cycling shoe model">
 	<cfset var get_csm_id = "">
@@ -100,7 +102,7 @@ alert("Error while updating\n Error code: "+id+"\n Message: "+message);
 	<cfquery name="get_color_id" dataSource="bont">SELECT s.id as id, name_rus from statuses s WHERE s.consignment=b'1'</cfquery>
 	<cfreturn valueList(get_color_id.id)>
 </cffunction>
-
+---->
 
 
 <cfquery name="getModel" datasource="bont">
@@ -111,20 +113,22 @@ alert("Error while updating\n Error code: "+id+"\n Message: "+message);
 <cfquery name="getCleatType" datasource="bont">SELECT ct.id as id, name_eng from cleat_type ct where id!=1</cfquery>
 <cfquery name="getLastWidth" datasource="bont">SELECT lw.id as id, name_eng from last_width lw where id!=5</cfquery>
 <cfquery name="getColor" datasource="bont">SELECT clr.id as id, name_eng from color as clr</cfquery>
-<cfquery name="getConsignmentStatus" datasource="bont">SELECT s.id as id, name_rus from statuses s WHERE s.consignment=b'1'</cfquery>
-
-
+<cfquery name="getConsignmentStatus" datasource="bont">SELECT s.id as id, name_rus from statuses s WHERE s.consignment=b'1' AND id!=1</cfquery>
+<cfquery name="getItemStatus" datasource="bont">SELECT s.id as id, name_rus from statuses s WHERE s.item=b'1'</cfquery>
+<cfquery name="getPlace" datasource="bont">SELECT lw.id as id, name_eng from last_width lw where id!=5</cfquery>
 
 <cfform style="float:left">
 	<table align="left">
-		<tr><td>Бренд</td><td><cfselect name="brand" query="getBrand"  value="id" display="name_eng" selected="2" multiple="yes" /></td></tr>
-		<tr><td>Модель</td><td><cfselect name="model" query="getModel"  value="mod_id" display="model_name" multiple="yes" selected="#getCSMid()#" /></td></tr>
-		<tr><td>Тип шипа</td><td><cfselect name="cleat_type" query="getCleatType" value="id" display="name_eng" multiple="yes" selected="2,3"/></td></tr>
+		<tr><td>Бренд</td><td><cfselect name="brand" query="getBrand"  value="id" display="name_eng" multiple="yes" /></td></tr>
+		<tr><td>Модель</td><td><cfselect name="model" query="getModel"  value="mod_id" display="model_name" multiple="yes" /></td></tr>
+		<tr><td>Тип шипа</td><td><cfselect name="cleat_type" query="getCleatType" value="id" display="name_eng" multiple="yes"/></td></tr>
 		<tr><td>Размер от</td><td><cfselect name="euroSizeMin" query="getEuroSizeRange"  value="euro_size" /></td></tr>
 		<tr><td>Размер до</td><td><cfselect name="euroSizeMin" query="getEuroSizeRange"  value="euro_size" selected="50.0" /></td></tr>
-		<tr><td>Ширина колодки</td><td><cfselect name="lastWidth" query="getLastWidth"  value="id" display="name_eng" multiple="yes" selected="1,2,3,4" /></td></tr>
-		<tr><td>Цвет</td><td><cfselect name="color" query="getColor"  value="id" display="name_eng" multiple="yes" selected="#getColorId()#" /></td></tr>
-		<tr><td>Статус поставки,<br>в которой шел товар</td><td><cfselect name="consignmentStatus" query="getConsignmentStatus"  value="id" display="name_rus" multiple="yes" selected="#getConsignmentStatusId()#" /></td></tr>
+		<tr><td>Ширина колодки</td><td><cfselect name="lastWidth" query="getLastWidth"  value="id" display="name_eng" multiple="yes"/></td></tr>
+		<tr><td>Цвет</td><td><cfselect name="color" query="getColor"  value="id" display="name_eng" multiple="yes"/></td></tr>
+		<tr><td>Статус поставки,<br>в которой шел товар</td><td><cfselect name="consignmentStatus" query="getConsignmentStatus"  value="id" display="name_rus" multiple="yes" /></td></tr>
+		<tr><td>Статус товара</td><td><cfselect name="itemStatus" query="getItemStatus"  value="id" display="name_rus" multiple="yes" /></td></tr>
+		<tr><td>Где находится</td><td><cfselect name="retailer" query="getRetailerName"  value="getRetailerName" display="name_rus" multiple="yes" /></td></tr>
 	</table>
 </cfform>
 
