@@ -254,7 +254,7 @@
 			</cfquery>
 			<cfset var table = select_pattern.p>
 			
-			<cfset var delete_from_childe_table = "">
+			<cfset var delete_from_child_table = "">
 			<cfquery name="delete_from_child_table" datasource="bont">
 				DELETE FROM #table# WHERE #table#.item_id=#gridrow.id#
 			</cfquery>

@@ -115,7 +115,30 @@ alert("Error while updating\n Error code: "+id+"\n Message: "+message);
 <cfquery name="getColor" datasource="bont">SELECT clr.id as id, name_eng from color as clr</cfquery>
 <cfquery name="getConsignmentStatus" datasource="bont">SELECT s.id as id, name_rus from statuses s WHERE s.consignment=b'1' AND id!=1</cfquery>
 <cfquery name="getItemStatus" datasource="bont">SELECT s.id as id, name_rus from statuses s WHERE s.item=b'1'</cfquery>
-<cfquery name="getPlace" datasource="bont">SELECT lw.id as id, name_eng from last_width lw where id!=5</cfquery>
+<cfquery name="getRetailer" datasource="bont">
+	SELECT CONCAT(
+		  IF((!p.fname_rus OR p.fname_rus!=''), concat(p.fname_rus, ' '), ''),
+		  IF((!p.sname_rus OR p.sname_rus!=''), concat(p.sname_rus, ' '), '')
+  )
+		 	AS retailer,
+      CONCAT('people_id_', id) AS id
+  			FROM people p WHERE p.store=b'1' AND p.id!=1
+ 		UNION
+    SELECT CONCAT(
+      IF((!c.name_rus OR c.name_rus!=''), CONCAT(c.name_rus, ' '), '')
+      ),
+      CONCAT('company_id', id)
+			FROM company c WHERE c.store=b'1' AND c.id!=1
+</cfquery>
+
+<cfif not isDefined("SESSION.conditionQuery")>
+ <cfset SESSION.conditionQuery = structNew()>
+ <cfset SESSION.conditionQuery.brand_id = "">
+ <cfset SESSION.conditionQuery.model_id = "">
+ <cfset SESSION.conditionQuery.cleat_type_id = "">
+ <cfset SESSION.conditionQuery.euroSizeMin = "">
+ <cfset SESSION.conditionQuery.EuroSizeMax = "">
+  
 
 <cfform style="float:left">
 	<table align="left">
@@ -123,12 +146,13 @@ alert("Error while updating\n Error code: "+id+"\n Message: "+message);
 		<tr><td>Модель</td><td><cfselect name="model" query="getModel"  value="mod_id" display="model_name" multiple="yes" /></td></tr>
 		<tr><td>Тип шипа</td><td><cfselect name="cleat_type" query="getCleatType" value="id" display="name_eng" multiple="yes"/></td></tr>
 		<tr><td>Размер от</td><td><cfselect name="euroSizeMin" query="getEuroSizeRange"  value="euro_size" /></td></tr>
-		<tr><td>Размер до</td><td><cfselect name="euroSizeMin" query="getEuroSizeRange"  value="euro_size" selected="50.0" /></td></tr>
+		<tr><td>Размер до</td><td><cfselect name="euroSizeMax" query="getEuroSizeRange"  value="euro_size" selected="50.0" /></td></tr>
 		<tr><td>Ширина колодки</td><td><cfselect name="lastWidth" query="getLastWidth"  value="id" display="name_eng" multiple="yes"/></td></tr>
 		<tr><td>Цвет</td><td><cfselect name="color" query="getColor"  value="id" display="name_eng" multiple="yes"/></td></tr>
 		<tr><td>Статус поставки,<br>в которой шел товар</td><td><cfselect name="consignmentStatus" query="getConsignmentStatus"  value="id" display="name_rus" multiple="yes" /></td></tr>
 		<tr><td>Статус товара</td><td><cfselect name="itemStatus" query="getItemStatus"  value="id" display="name_rus" multiple="yes" /></td></tr>
-		<tr><td>Где находится</td><td><cfselect name="retailer" query="getRetailerName"  value="getRetailerName" display="name_rus" multiple="yes" /></td></tr>
+		<tr><td>Где находится</td><td><cfselect name="retailer" query="getRetailer"  value="id" display="retailer" multiple="yes" /></td></tr>
+		<tr><td><input type="submit" value="сделать выборку"></td></tr>
 	</table>
 </cfform>
 
@@ -141,35 +165,32 @@ alert("Error while updating\n Error code: "+id+"\n Message: "+message);
 	onchange="cfc:places.editData({cfgridaction},{cfgridrow},{cfgridchanged})">
 		
 		<cfgridcolumn name="id" display=true header="id" select="no"/>
-		<cfgridcolumn name="sold_for" display=true header="цена продажи" type="numeric"/>
-		<cfgridcolumn name="sale_date" display=true header="дата продажи" type="date"/>
-		<cfgridcolumn name="i_note" display=true header="примечание к товару"/>
-		<cfgridcolumn name="i_pubnote" display=true header="публичное примечание к товару"/>
-		<cfgridcolumn name="brand" display=true header="бренд" select="no"/>
+		<cfgridcolumn name="sold_for" display=false header="цена продажи" type="numeric"/>
+		<cfgridcolumn name="sale_date" display=false header="дата продажи" type="date"/>
+		<cfgridcolumn name="i_note" display=false header="примечание к товару"/>
+		<cfgridcolumn name="i_pubnote" display=false header="публичное примечание к товару"/>
+		<cfgridcolumn name="brand" display=false header="бренд" select="no"/>
 		<cfgridcolumn name="rub" display=true header="цена в рублях" select="no"/>
-		<cfgridcolumn name="usd" display=true header="цена в долларах" select="no"/>
+		<cfgridcolumn name="usd" display=false header="цена в долларах" select="no"/>
 		<cfgridcolumn name="euro_size" display=true header="размер euro" type="numeric"/>
 		<!---
 		<cfgridcolumn name="bont_size" display=true header="размер bont" values=#StructStringToList(APPLICATION.bontSizeRange)# valuesdisplay=#StructStringToList(APPLICATION.bontSizeRange)#/>
 		---->
-		<cfgridcolumn name="last_len" display=true header="длина" type="numeric"/>
+		<cfgridcolumn name="last_len" display=false header="длина" type="numeric"/>
 		<cfgridcolumn name="width" display=true header="ширина" type="combobox" values="#lastWidthNames()#" valuesdisplay="#lastWidthNames()#"/>
 		<cfgridcolumn name="color" display=true header="цвет" values=#colorNames()# valuesdisplay=#colorNames()# />
 		<cfgridcolumn name="model" display=true header="модель" values=#getCyclingShoeModelName()# valuesdisplay=#getCyclingShoeModelName()#/>
-		<cfgridcolumn name="weight" display=true header="вес" type="numeric" />
-		<cfgridcolumn name="upper_material" display=true header="материал верха" select="no"/>
-		<cfgridcolumn name="invoice" display=true header="инвойс поставки" select="no" />
-		<cfgridcolumn name="fact_arrival" display=true header="фактическое прибытие поставки" select="no"/>
-		<cfgridcolumn name="expect_arrival" display=true header="ожидаемое прибытие поставки" select="no"/>
-		<cfgridcolumn name="cons_note" display=true header="примечание к поставке" select="no"/>
-		<cfgridcolumn name="cons_status" display=true header="статус поставки" select="no"/>
-		<cfgridcolumn name="i_status" display=true header="статус товара" values="#statusNames()#" valuesdisplay="#statusNames()#"/>
+		<cfgridcolumn name="weight" display=false header="вес" type="numeric" />
+		<cfgridcolumn name="upper_material" display=false header="материал верха" select="no"/>
+		<cfgridcolumn name="invoice" display=false header="инвойс поставки" select="no" />
+		<cfgridcolumn name="fact_arrival" display=false header="фактическое прибытие поставки" select="no"/>
+		<cfgridcolumn name="expect_arrival" display=false header="ожидаемое прибытие поставки" select="no"/>
+		<cfgridcolumn name="cons_note" display=false header="примечание к поставке" select="no"/>
+		<cfgridcolumn name="cons_status" display=false header="статус поставки" select="no"/>
+		<cfgridcolumn name="i_status" display=false header="статус товара" values="#statusNames()#" valuesdisplay="#statusNames()#"/>
 		<cfgridcolumn name="retailer" display=true header="Где находится" values="#retailerNames()#"/>
-		<cfgridcolumn name="buyer" display=true header="покупатель" values="#buyerNames()#" valuesdisplay="#buyerNames()#"/>
-		
+		<cfgridcolumn name="buyer" display=false header="покупатель" values="#buyerNames()#" valuesdisplay="#buyerNames()#"/>
 	</cfgrid>
-
-
 </cfform>
 
 
