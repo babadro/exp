@@ -136,7 +136,7 @@ alert("Error while updating\n Error code: "+id+"\n Message: "+message);
  <cfset SESSION.conditionQuery.brand_id = "">
  <cfset SESSION.conditionQuery.model_id = "">
  <cfset SESSION.conditionQuery.cleat_type_id = "">
- <cfset SESSION.conditionQuery.euroSizeMin = "">
+ <cfset SESSION.conditionQuery.euroSizeMin = ""> 
  <cfset SESSION.conditionQuery.EuroSizeMax = "">
   
 
