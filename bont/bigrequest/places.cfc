@@ -6,12 +6,12 @@
 		CREATE TEMPORARY TABLE IF NOT EXISTS itemtemp as (
 		SELECT 
 		  i.id AS id, i.sold_for AS sold_for, i.sale_date AS sale_date, i.note AS i_note, i.pub_note AS i_pubnote,
-		  br.name_eng AS brand,
+		  br.name_eng AS brand, br.id as brand_id,
 		  prc.rub AS rub, prc.usd AS usd, prc.note AS price_note,
 		  cs.euro_size AS euro_size, cs.bont_size AS bont_size, cs.last_length AS last_len,
 		  lw.name_eng AS width,
 		  CONCAT(clr.name_eng, ' ', clr.name_rus) AS color,
-		  csm.name_eng AS model, csm.weight AS weight, 
+		  csm.item_model_id AS model_id, csm.name_eng AS model, csm.weight AS weight, 
 		  m1.name_rus AS upper_material,
 		  cons.invoice AS invoice, cons.fact_arrival as fact_arrival, cons.expect_arrival AS expect_arrival, cons.note as cons_note,
 		  st2.name_rus as cons_status,
@@ -59,6 +59,16 @@
 		<cfif gridsortcolumn neq "" and gridsortdirection neq "">
 			order by #gridsortcolumn# #gridsortdirection#
 		</cfif>
+		<!---- в разработке
+		<cfif isDefined("SESSION.conditionQuery.model_id")>
+			<cfset var list_model_id = #SESSION.conditionQuery.model_id#>
+			<cfloop list="#list_model_id#" index="id" >
+				<cfif id eq 1><cfoutupt>WHERE model_id=#listGetAt(list_model_id, 1)#</cfoutupt>
+				<cfelse>
+				</cfif>
+			</cfloop> 
+		</cfif>
+		---->
 	</cfquery>
 	
 	<cfreturn QueryConvertForGrid(cyclingshoe, page, pageSize)>

@@ -131,16 +131,24 @@ alert("Error while updating\n Error code: "+id+"\n Message: "+message);
 			FROM company c WHERE c.store=b'1' AND c.id!=1
 </cfquery>
 
-<cfif not isDefined("SESSION.conditionQuery")>
- <cfset SESSION.conditionQuery = structNew()>
- <cfset SESSION.conditionQuery.brand_id = "">
- <cfset SESSION.conditionQuery.model_id = "">
- <cfset SESSION.conditionQuery.cleat_type_id = "">
- <cfset SESSION.conditionQuery.euroSizeMin = ""> 
- <cfset SESSION.conditionQuery.EuroSizeMax = "">
-  
+<cfif not isDefined("SESSION.conditionQuery")><cfset SESSION.conditionQuery = structNew()></cfif>
+<!---
+<cfif isDefined("FORM.brand")><cfset SESSION.conditionQuery.brand_id = FORM.brand></cfif>
+---->
+<cfif isDefined("FORM.model")><cfset SESSION.conditionQuery.model_id = FORM.model></cfif>
+<!---
+<cfif isDefined("FORM.cleat_type")><cfset SESSION.conditionQuery.cleat_type_id = FORM.cleat_type></cfif>
 
-<cfform style="float:left">
+<cfset SESSION.conditionQuery.brand_id = "">
+<cfset SESSION.conditionQuery.model_id = "">
+<cfset SESSION.conditionQuery.cleat_type_id = "">
+<cfset SESSION.conditionQuery.euroSizeMin = ""> 
+<cfset SESSION.conditionQuery.EuroSizeMax = "">
+---->
+<cfoutput>#SESSION.conditionQuery.model_id#</cfoutput>  
+
+<cfform name="form01">
+	
 	<table align="left">
 		<tr><td>Бренд</td><td><cfselect name="brand" query="getBrand"  value="id" display="name_eng" multiple="yes" /></td></tr>
 		<tr><td>Модель</td><td><cfselect name="model" query="getModel"  value="mod_id" display="model_name" multiple="yes" /></td></tr>
@@ -154,9 +162,6 @@ alert("Error while updating\n Error code: "+id+"\n Message: "+message);
 		<tr><td>Где находится</td><td><cfselect name="retailer" query="getRetailer"  value="id" display="retailer" multiple="yes" /></td></tr>
 		<tr><td><input type="submit" value="сделать выборку"></td></tr>
 	</table>
-</cfform>
-
-<cfform name="form01">
 	
 	<cfgrid format="html" name="grid01" pagesize=40 
 	stripeRowColor="gray"
