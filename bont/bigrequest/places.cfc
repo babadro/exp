@@ -69,31 +69,92 @@
 	<cfset var cyclingshoe="">
 	<cfquery name="cyclingshoe" datasource="bont">
 		SELECT * FROM itemtemp 
-		<cfif gridsortcolumn neq "" and gridsortdirection neq "">
-			order by #gridsortcolumn# #gridsortdirection#
-		</cfif>
+		WHERE
+		
 		<cfif isDefined("SESSION.conditionQuery.model_id")>
-			<cfset list_model_id = #SESSION.conditionQuery.model_id#>
+			(
+			<cfset var list_model_id = #SESSION.conditionQuery.model_id#>
 			<cfloop list= "#list_model_id#" index="id" >
 				<cfif listFind(list_model_id, id) eq 1>
-					WHERE model_id=#id#
+					model_id=#id#
 				<cfelse>
 					OR model_id=#id#
 				</cfif>
-			</cfloop> 
+			</cfloop>
+			) AND
 		</cfif>
-		<!---
+		
 		<cfif isDefined("SESSION.conditionQuery.brand_id")>
-			<cfset list_model_id = #SESSION.conditionQuery.brand_id#>
+			(
+			<cfset var list_brand_id = #SESSION.conditionQuery.brand_id#>
 			<cfloop list= "#list_brand_id#" index="id" >
 				<cfif listFind(list_brand_id, id) eq 1>
-					WHERE brand_id=#id#
+					brand_id=#id#
 				<cfelse>
 					OR brand_id=#id#
 				</cfif>
-			</cfloop> 
+			</cfloop>
+			) AND		
 		</cfif>
-		---->
+		
+		<cfif isDefined("SESSION.conditionQuery.cleat_type_id")>
+			(
+			<cfset var list_cleat_type_id = #SESSION.conditionQuery.cleat_type_id#>
+			<cfloop list= "#list_cleat_type_id#" index="id" >
+				<cfif listFind(list_cleat_type_id, id) eq 1>
+					cleat_type_id=#id#
+				<cfelse>
+					OR cleat_type_id=#id#
+				</cfif>
+			</cfloop>
+			) AND		
+		</cfif>
+		
+		<cfif isDefined("SESSION.conditionQuery.last_width_id")>
+			(
+			<cfset var list_last_width_id = #SESSION.conditionQuery.last_width_id#>
+			<cfloop list= "#list_last_width_id#" index="id" >
+				<cfif listFind(list_last_width_id, id) eq 1>
+					last_width_id=#id#
+				<cfelse>
+					OR last_width_id=#id#
+				</cfif>
+			</cfloop>
+			) AND		
+		</cfif>
+		
+		<cfif isDefined("SESSION.conditionQuery.color_id")>
+			(
+			<cfset var list_color_id = #SESSION.conditionQuery.color_id#>
+			<cfloop list= "#list_color_id#" index="id" >
+				<cfif listFind(list_color_id, id) eq 1>
+					color_id=#id#
+				<cfelse>
+					OR color_id=#id#
+				</cfif>
+			</cfloop>
+			) AND		
+		</cfif>
+		
+		<cfif isDefined("SESSION.conditionQuery.consignment_status_id")>
+			(
+			<cfset var list_consignment_status_id = #SESSION.conditionQuery.consignment_status_id#>
+			<cfloop list= "#list_consignment_status_id#" index="id">
+				<cfif listFind(list_consignment_status_id, id) eq 1>
+					cons_status_id=#id#
+				<cfelse>
+					OR cons_status_id=#id#
+				</cfif>
+			</cfloop>
+			) AND		
+		</cfif>
+		
+		<cfif gridsortcolumn neq "" and gridsortdirection neq "">
+			order by #gridsortcolumn# #gridsortdirection#
+		</cfif>
+		
+		<!--- Техническая часть, иначе запрос окончится на AND--->
+		1=1
 	</cfquery>
 	
 	<cfreturn QueryConvertForGrid(cyclingshoe, page, pageSize)>
@@ -167,7 +228,7 @@
 							UPDATE cycling_shoe cs set cs.euro_size=#gridchanged.euro_size#
 							WHERE cs.item_id=#gridrow.id#
 					</cfquery>
-					<!---
+					<!--- Разработка этого участка кода отложена
 					<cfset var newEuroSize = newValue>
 					<cfif gridrow.brand EQ "BONT" AND structKeyExists(APPLICATION.bontSizeRange, newEuroSize)>
 						<cfset newBontSize = newEuroSize & "/" & structFind(APPLICATION.bontSizeRange, newEuroSize)>
@@ -191,7 +252,7 @@
 					</cfif>
 					---->
 				</cfcase>
-				<!---
+				<!--- Разработка этого участка кода отложена
 				<cfcase value="bont_size">
 					<cfset var change_bont_size = "">
 					<cfquery name="change_bont_size" datasource="bont">

@@ -138,6 +138,9 @@ alert("Error while updating\n Error code: "+id+"\n Message: "+message);
 <cfif isDefined("FORM.cleat_type")><cfset SESSION.conditionQuery.cleat_type_id = FORM.cleat_type></cfif>
 <cfif isDefined("FORM.lastWidth")><cfset SESSION.conditionQuery.last_width_id = FORM.lastWidth></cfif>
 <cfif isDefined("FORM.color")><cfset SESSION.conditionQuery.color_id = FORM.color></cfif>
+<cfif isDefined("FORM.consignmentStatus")><cfset SESSION.conditionQuery.consignment_status_id = FORM.consignmentStatus></cfif>
+<cfif isDefined("FORM.itemStatus")><cfset SESSION.conditionQuery.item_status_id = FORM.itemStatus></cfif>
+<cfif isDefined("FORM.retailer")><cfset SESSION.conditionQuery.retailer_data = FORM.retailer></cfif>
 
 <!---
 <cfif isDefined("FORM.cleat_type")><cfset SESSION.conditionQuery.cleat_type_id = FORM.cleat_type></cfif>
@@ -149,11 +152,30 @@ alert("Error while updating\n Error code: "+id+"\n Message: "+message);
 <cfset SESSION.conditionQuery.EuroSizeMax = "">
 ---->
 <cfif isDefined("SESSION.conditionQuery.model_id")>
-	<cfoutput>#SESSION.conditionQuery.model_id#</cfoutput>  
+	<cfoutput>model_id=#SESSION.conditionQuery.model_id# </cfoutput>  
 </cfif>
-<cfif isDefined("SESSION.conditionQuery.model_id")>
-	<cfoutput>#SESSION.conditionQuery.brand_id#</cfoutput>  
+<cfif isDefined("SESSION.conditionQuery.brand_id")>
+	<cfoutput>brand_id=#SESSION.conditionQuery.brand_id# </cfoutput>  
 </cfif>
+<cfif isDefined("SESSION.conditionQuery.cleat_type_id")>
+	<cfoutput>cleat_type_id=#SESSION.conditionQuery.cleat_type_id# </cfoutput>  
+</cfif>
+<cfif isDefined("SESSION.conditionQuery.last_width_id")>
+	<cfoutput>last_width_id=#SESSION.conditionQuery.last_width_id#</cfoutput>  
+</cfif>
+<cfif isDefined("SESSION.conditionQuery.color_id")>
+	<cfoutput>color_id=#SESSION.conditionQuery.color_id#</cfoutput>  
+</cfif>
+<cfif isDefined("SESSION.conditionQuery.consignment_status_id")>
+	<cfoutput>consignment_status_id=#SESSION.conditionQuery.consignment_status_id#</cfoutput>  
+</cfif>
+<cfif isDefined("SESSION.conditionQuery.item_status_id")>
+	<cfoutput>item_status_id=#SESSION.conditionQuery.item_status_id#</cfoutput>  
+</cfif>
+<cfif isDefined("SESSION.conditionQuery.retailer_data")>
+	<cfoutput>retailer_data=#SESSION.conditionQuery.retailer_data#</cfoutput>  
+</cfif>
+
 <cfform name="form01">
 	
 	<table align="left">
@@ -167,6 +189,7 @@ alert("Error while updating\n Error code: "+id+"\n Message: "+message);
 		<tr><td>Статус поставки,<br>в которой шел товар</td><td><cfselect name="consignmentStatus" query="getConsignmentStatus"  value="id" display="name_rus" multiple="yes" /></td></tr>
 		<tr><td>Статус товара</td><td><cfselect name="itemStatus" query="getItemStatus"  value="id" display="name_rus" multiple="yes" /></td></tr>
 		<tr><td>Где находится</td><td><cfselect name="retailer" query="getRetailer"  value="id" display="retailer" multiple="yes" /></td></tr>
+		<tr><td><input type="submit" value="сделать выборку"></td></tr>
 		<tr><td><input type="submit" value="сделать выборку"></td></tr>
 	</table>
 	
