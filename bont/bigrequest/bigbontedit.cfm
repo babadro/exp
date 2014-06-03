@@ -127,15 +127,18 @@ alert("Error while updating\n Error code: "+id+"\n Message: "+message);
     SELECT CONCAT(
       IF((!c.name_rus OR c.name_rus!=''), CONCAT(c.name_rus, ' '), '')
       ),
-      CONCAT('company_id', id)
+      CONCAT('company_id_', id)
 			FROM company c WHERE c.store=b'1' AND c.id!=1
 </cfquery>
 
 <cfif not isDefined("SESSION.conditionQuery")><cfset SESSION.conditionQuery = structNew()></cfif>
-<!---
+
 <cfif isDefined("FORM.brand")><cfset SESSION.conditionQuery.brand_id = FORM.brand></cfif>
----->
 <cfif isDefined("FORM.model")><cfset SESSION.conditionQuery.model_id = FORM.model></cfif>
+<cfif isDefined("FORM.cleat_type")><cfset SESSION.conditionQuery.cleat_type_id = FORM.cleat_type></cfif>
+<cfif isDefined("FORM.lastWidth")><cfset SESSION.conditionQuery.last_width_id = FORM.lastWidth></cfif>
+<cfif isDefined("FORM.color")><cfset SESSION.conditionQuery.color_id = FORM.color></cfif>
+
 <!---
 <cfif isDefined("FORM.cleat_type")><cfset SESSION.conditionQuery.cleat_type_id = FORM.cleat_type></cfif>
 
@@ -145,8 +148,12 @@ alert("Error while updating\n Error code: "+id+"\n Message: "+message);
 <cfset SESSION.conditionQuery.euroSizeMin = ""> 
 <cfset SESSION.conditionQuery.EuroSizeMax = "">
 ---->
-<cfoutput>#SESSION.conditionQuery.model_id#</cfoutput>  
-
+<cfif isDefined("SESSION.conditionQuery.model_id")>
+	<cfoutput>#SESSION.conditionQuery.model_id#</cfoutput>  
+</cfif>
+<cfif isDefined("SESSION.conditionQuery.model_id")>
+	<cfoutput>#SESSION.conditionQuery.brand_id#</cfoutput>  
+</cfif>
 <cfform name="form01">
 	
 	<table align="left">

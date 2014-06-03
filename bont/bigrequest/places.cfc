@@ -9,15 +9,18 @@
 		  br.name_eng AS brand, br.id as brand_id,
 		  prc.rub AS rub, prc.usd AS usd, prc.note AS price_note,
 		  cs.euro_size AS euro_size, cs.bont_size AS bont_size, cs.last_length AS last_len,
-		  lw.name_eng AS width,
-		  CONCAT(clr.name_eng, ' ', clr.name_rus) AS color,
-		  csm.item_model_id AS model_id, csm.name_eng AS model, csm.weight AS weight, 
+		  lw.name_eng AS width, lw.id AS last_width_id,
+		  CONCAT(clr.name_eng, ' ', clr.name_rus) AS color, clr.id AS color_id,
+		  csm.item_model_id AS model_id, csm.name_eng AS model, csm.weight AS weight,
+      	  ct.id AS cleat_type_id, 
 		  m1.name_rus AS upper_material,
 		  cons.invoice AS invoice, cons.fact_arrival as fact_arrival, cons.expect_arrival AS expect_arrival, cons.note as cons_note,
-		  st2.name_rus as cons_status,
-		  stat.name_rus AS i_status,
+		  st2.name_rus AS cons_status, st2.id AS cons_status_id,
+		  stat.name_rus AS i_status, stat.id AS i_status_id,
 		  CONCAT(comp1.name_rus, ' ', p1.fname_rus, ' ', p1.sname_rus) AS retailer,
-		  CONCAT(comp2.name_rus, ' ', p2.fname_rus, ' ', p2.sname_rus) AS buyer  
+		  comp1.id AS company_retailer_id, p1.id AS people_retailer_id, 
+		  CONCAT(comp2.name_rus, ' ', p2.fname_rus, ' ', p2.sname_rus) AS buyer,
+     	  comp2.id AS company_buyer_id, p2.id AS people_buyer_id  
 		FROM item i JOIN (
 		  (item_model im JOIN (brand br, statuses st, price prc) ON (im.brand_id=br.id AND im.status_id=st.id AND im.price_id=prc.id)),
 		  (cycling_shoe cs JOIN (last_width lw, color clr) ON (cs.last_width_id=lw.id AND cs.color_id=clr.id)),
@@ -45,6 +48,16 @@
 	
 	</cfquery>
 </cffunction>
+
+<!----
+<cffunction name="insertWhereOrStatement" output="true">
+	<cfargument name="структура какая нибудь">
+	<cfloop через структуру>
+		<cfif элемент без окончания Мин или МАХ></cfif>
+	</cfloop>
+</cffunction>
+---->
+
 	
 <cffunction name="getData" access="remote" output="false">
 	<cfargument name="page">
@@ -59,12 +72,24 @@
 		<cfif gridsortcolumn neq "" and gridsortdirection neq "">
 			order by #gridsortcolumn# #gridsortdirection#
 		</cfif>
-		<!---- в разработке
 		<cfif isDefined("SESSION.conditionQuery.model_id")>
-			<cfset var list_model_id = #SESSION.conditionQuery.model_id#>
-			<cfloop list="#list_model_id#" index="id" >
-				<cfif id eq 1><cfoutupt>WHERE model_id=#listGetAt(list_model_id, 1)#</cfoutupt>
+			<cfset list_model_id = #SESSION.conditionQuery.model_id#>
+			<cfloop list= "#list_model_id#" index="id" >
+				<cfif listFind(list_model_id, id) eq 1>
+					WHERE model_id=#id#
 				<cfelse>
+					OR model_id=#id#
+				</cfif>
+			</cfloop> 
+		</cfif>
+		<!---
+		<cfif isDefined("SESSION.conditionQuery.brand_id")>
+			<cfset list_model_id = #SESSION.conditionQuery.brand_id#>
+			<cfloop list= "#list_brand_id#" index="id" >
+				<cfif listFind(list_brand_id, id) eq 1>
+					WHERE brand_id=#id#
+				<cfelse>
+					OR brand_id=#id#
 				</cfif>
 			</cfloop> 
 		</cfif>
