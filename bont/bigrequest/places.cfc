@@ -84,6 +84,25 @@
 			) AND
 		</cfif>
 		
+			<cffunction name="insertWhereOrStatToQuery" description="Insert where-or statement to query">
+				<cfargument name="param" required="true">
+				<cfargument name="colName" required="true">
+				<cfoutput>	
+					<cfif isDefined("param")>
+						(
+						<cfset var list_val = #param#>
+						<cfloop list= "#list_val#" index="val" >
+							<cfif listFind(list_val, val) eq 1>
+								#colName#=#val#
+							<cfelse>
+								OR #colName#=#val#
+							</cfif>
+						</cfloop>
+						) AND
+					</cfif>
+				</cfoutput>
+			</cffunction>
+		
 		<cfif isDefined("SESSION.conditionQuery.brand_id")>
 			(
 			<cfset var list_brand_id = #SESSION.conditionQuery.brand_id#>
@@ -149,12 +168,52 @@
 			) AND		
 		</cfif>
 		
+		<cfif isDefined("SESSION.conditionQuery.item_status_id")>
+			(
+			<cfset var list_item_status_id = #SESSION.conditionQuery.item_status_id#>
+			<cfloop list= "#list_item_status_id#" index="id">
+				<cfif listFind(list_item_status_id, id) eq 1>
+					i_status_id=#id#
+				<cfelse>
+					OR i_status_id=#id#
+				</cfif>
+			</cfloop>
+			) AND		
+		</cfif>
+	
+		<cfif isDefined("SESSION.conditionQuery.retailer_data")>
+			(
+			<cfset var list_retailer_data = #SESSION.conditionQuery.retailer_data#>
+			<cfloop list= "#list_retailer_data#" index="retailer">
+				<cfif listFind(list_retailer_data, retailer) eq 1>
+					<cfswitch expression="#listFirst(retailer, '_')#">
+						<cfcase value="people">people_retailer_id=#listLast(retailer, '_')#</cfcase>
+						<cfcase value="company">company_retailer_id=#listLast(retailer, '_')#</cfcase>
+					</cfswitch>
+				<cfelse>
+					<cfswitch expression="#listFirst(retailer, '_')#">
+						<cfcase value="people">OR people_retailer_id=#listLast(retailer, '_')#</cfcase>
+						<cfcase value="company">OR company_retailer_id=#listLast(retailer, '_')#</cfcase>
+					</cfswitch>
+				</cfif>
+			</cfloop>
+			) AND		
+		</cfif>
+		
+		<cfif isDefined("SESSION.conditionQuery.euro_size_min")>
+			<cfset var euroSizeMin=#SESSION.conditionQuery.euro_size_min#>
+			euro_size>=#euroSizeMin# AND 			
+		</cfif>
+		<cfif isDefined("SESSION.conditionQuery.euro_size_max")>
+			<cfset var euroSizeMax=#SESSION.conditionQuery.euro_size_max#>
+			euro_size<=#euroSizeMax# AND 			
+		</cfif>
+		<!--- Техническая часть, иначе запрос окончится на AND--->
+		1=1
+		
 		<cfif gridsortcolumn neq "" and gridsortdirection neq "">
 			order by #gridsortcolumn# #gridsortdirection#
 		</cfif>
-		
-		<!--- Техническая часть, иначе запрос окончится на AND--->
-		1=1
 	</cfquery>
 	
 	<cfreturn QueryConvertForGrid(cyclingshoe, page, pageSize)>

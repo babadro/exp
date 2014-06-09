@@ -132,10 +132,13 @@ alert("Error while updating\n Error code: "+id+"\n Message: "+message);
 </cfquery>
 
 <cfif not isDefined("SESSION.conditionQuery")><cfset SESSION.conditionQuery = structNew()></cfif>
+<cfif isDefined("FORM.clearConditionQuery")><cfset structClear(SESSION.conditionQuery)></cfif>
 
 <cfif isDefined("FORM.brand")><cfset SESSION.conditionQuery.brand_id = FORM.brand></cfif>
 <cfif isDefined("FORM.model")><cfset SESSION.conditionQuery.model_id = FORM.model></cfif>
 <cfif isDefined("FORM.cleat_type")><cfset SESSION.conditionQuery.cleat_type_id = FORM.cleat_type></cfif>
+<cfif isDefined("FORM.euroSizeMin")><cfset SESSION.conditionQuery.euro_size_min = FORM.euroSizeMin></cfif>
+<cfif isDefined("FORM.euroSizeMax")><cfset SESSION.conditionQuery.euro_size_max = FORM.euroSizeMax></cfif>
 <cfif isDefined("FORM.lastWidth")><cfset SESSION.conditionQuery.last_width_id = FORM.lastWidth></cfif>
 <cfif isDefined("FORM.color")><cfset SESSION.conditionQuery.color_id = FORM.color></cfif>
 <cfif isDefined("FORM.consignmentStatus")><cfset SESSION.conditionQuery.consignment_status_id = FORM.consignmentStatus></cfif>
@@ -159,6 +162,12 @@ alert("Error while updating\n Error code: "+id+"\n Message: "+message);
 </cfif>
 <cfif isDefined("SESSION.conditionQuery.cleat_type_id")>
 	<cfoutput>cleat_type_id=#SESSION.conditionQuery.cleat_type_id# </cfoutput>  
+</cfif>
+<cfif isDefined("SESSION.conditionQuery.euro_size_min")>
+	<cfoutput>euroSizeMin=#SESSION.conditionQuery.euro_size_min# </cfoutput>  
+</cfif>
+<cfif isDefined("SESSION.conditionQuery.euro_size_max")>
+	<cfoutput>euroSizeMax=#SESSION.conditionQuery.euro_size_max# </cfoutput>  
 </cfif>
 <cfif isDefined("SESSION.conditionQuery.last_width_id")>
 	<cfoutput>last_width_id=#SESSION.conditionQuery.last_width_id#</cfoutput>  
@@ -190,7 +199,8 @@ alert("Error while updating\n Error code: "+id+"\n Message: "+message);
 		<tr><td>Статус товара</td><td><cfselect name="itemStatus" query="getItemStatus"  value="id" display="name_rus" multiple="yes" /></td></tr>
 		<tr><td>Где находится</td><td><cfselect name="retailer" query="getRetailer"  value="id" display="retailer" multiple="yes" /></td></tr>
 		<tr><td><input type="submit" value="сделать выборку"></td></tr>
-		<tr><td><input type="submit" value="сделать выборку"></td></tr>
+		<tr><td><cfinput type="reset" name="resetForm" value="очистить форму"></td></tr>
+		<tr><td><cfinput type="submit" name="clearConditionQuery" value="Сбросить условия запроса"></td></tr>
 	</table>
 	
 	<cfgrid format="html" name="grid01" pagesize=40 
