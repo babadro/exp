@@ -13,6 +13,8 @@
 <cfif isDefined("Form.statusId")><cfset SESSION.consWiz.statusId = FORM.statusId></cfif>
 <cfif isDefined("Form.note")><cfset SESSION.consWiz.note = FORM.note></cfif>
 
+<cfinclude template="queryFunctions.cfm" >
+
 <html>
 <head><title>Добавляем новую поставку</title></head>
 <body>
@@ -26,7 +28,7 @@
 		<tr><td>Инвойс поставки</td><td><cfinput name="invoice" size="45" required="Yes" message="Введите инвойс поставки" value="#SESSION.consWiz.invoice#"></td></tr>
 		<tr><td>Ожидаемая дата прибытия</td><td><cfinput name="expectArrival" type="datefield" value="#SESSION.consWiz.expectArrival#"></td></tr>
 		<tr><td>Фактическая дата прибытия</td><td><cfinput name="factArrival" type="datefield" value="#SESSION.consWiz.factArrival#"></td></tr>
-		<tr><td>Статус</td><td><cfselect name="statusId" value="#SESSION.consWiz.statusId#"></td></tr>
+		<tr><td>Статус</td><td><cfselect name="statusId" query="getConsignmentStatus" value="#SESSION.consWiz.statusId#"></td></tr>
 		<tr><td><input type="submit" value="сделать выборку"></td></tr>
 		<tr><td><cfinput type="reset" name="resetForm" value="очистить форму"></td></tr>
 		<tr><td><cfinput type="submit" name="clearConditionQuery" value="Сбросить условия запроса"></td></tr>
