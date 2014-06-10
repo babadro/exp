@@ -1,5 +1,8 @@
+
+
 <cfif not isDefined("SESSION.consWiz")>
 	<cfset SESSION.consWiz = structNew()>
+	<cfset SESSION.consWiz.step = "primaryData">
 	<cfset SESSION.consWiz.invoice = "">
 	<cfset SESSION.consWiz.expectArrival = "">
 	<cfset SESSION.consWiz.factArrival = "">
@@ -13,7 +16,7 @@
 <cfif isDefined("Form.statusId")><cfset SESSION.consWiz.statusId = FORM.statusId></cfif>
 <cfif isDefined("Form.note")><cfset SESSION.consWiz.note = FORM.note></cfif>
 
-<cfinclude template="queryFunctions.cfm" >
+<cfinclude template="queryFunctions.cfm">
 
 <html>
 <head><title>Добавляем новую поставку</title></head>
@@ -21,18 +24,47 @@
 
 <cfoutput><b>Мастер новых поставок</b><br></cfoutput>
 
-<cfform name="form03" action="newConsignmentCommit.cfm" method="post">
-	
-	 
-	<table align="left">
+
+<cfmenu name="menu" type="vertical" fontsize="14" bgcolor="##CCFFFF" width="150" menustyle="float:left; margin-right:100px;">
+<cfmenuitem name="primaryData" href="#CGI.SCRIPT_NAME#?Step=primaryData" display="Первичные данные"/>
+<cfmenuitem name="primaryDat2a" href="#CGI.SCRIPT_NAME#?Step=primaryData2" display="Первичные данные2"/>
+<cfmenuitem name="aftereffects" href="http://www.adobe.com/aftereffects"
+display="After Effects"/>
+<!--- The ColdFusion menu item has a pop-up menu. --->
+<cfmenuitem name="coldfusion"
+href="http://www.adobe.com/products/coldfusion" display="ColdFusion">
+<cfmenuitem name="buy"
+href="http://www.adobe.com/products/coldfusion/buy/" display="Buy"/>
+<cfmenuitem name="devcenter"
+href="http://www.adobe.com/devnet/coldfusion/" display="Developer Center"/>
+<cfmenuitem name="documentation"
+href="http://www.adobe.com/support/documentation/en/coldfusion/"
+display="Documentation"/>
+<cfmenuitem name="support" href="http://www.adobe.com/support/coldfusion/"
+display="Support"/>
+</cfmenuitem>
+<cfmenuitem name="flex" href="http://www.adobe.com/flex" display="Flex"/>
+</cfmenu>
+
+
+<cfform name="form03" action="newConsignmentCommit.cfm" method="post" style="float:left">
+
+<cfswitch expression="#URL.step#" >
+	<cfcase value="primaryData">
+		<table align="left">
 		<tr><td>Инвойс поставки</td><td><cfinput name="invoice" size="45" required="Yes" message="Введите инвойс поставки" value="#SESSION.consWiz.invoice#"></td></tr>
 		<tr><td>Ожидаемая дата прибытия</td><td><cfinput name="expectArrival" type="datefield" value="#SESSION.consWiz.expectArrival#"></td></tr>
 		<tr><td>Фактическая дата прибытия</td><td><cfinput name="factArrival" type="datefield" value="#SESSION.consWiz.factArrival#"></td></tr>
-		<tr><td>Статус</td><td><cfselect name="statusId" query="getConsignmentStatus" value="#SESSION.consWiz.statusId#"></td></tr>
-		<tr><td><input type="submit" value="сделать выборку"></td></tr>
+		<tr><td>Статус</td><td><cfselect name="statusId" query="getConsignmentStatus" selected="#SESSION.consWiz.statusId#" value="id" display="name_rus" /></td></tr>
+		<tr><td>Примечание к поставке</td><td><cfinput name="note" type="text" value="#SESSION.consWiz.note#"></td></tr>
+		<tr><td><input type="submit" value="Внести поставку в базу данных"></td></tr>
 		<tr><td><cfinput type="reset" name="resetForm" value="очистить форму"></td></tr>
-		<tr><td><cfinput type="submit" name="clearConditionQuery" value="Сбросить условия запроса"></td></tr>
-	</table>
+		</table>
+	</cfcase>	
+</cfswitch>
+	
+	 
+	
 	<!---
 	<cfgrid format="html" name="grid01" pagesize=40 
 	stripeRowColor="gray"
