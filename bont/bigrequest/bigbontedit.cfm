@@ -91,7 +91,9 @@ alert("Error while updating\n Error code: "+id+"\n Message: "+message);
 		
 		<cfgridcolumn name="id" display=true header="id" select="no"/>
 		<cfgridcolumn name="sold_for" display=false header="цена продажи" type="numeric"/>
+		<!---
 		<cfgridcolumn name="sale_date" display=false header="дата продажи" type="date"/>
+		---->
 		<cfgridcolumn name="i_note" display=false header="примечание к товару"/>
 		<cfgridcolumn name="i_pubnote" display=false header="публичное примечание к товару"/>
 		<cfgridcolumn name="brand" display=false header="бренд" select="no"/>

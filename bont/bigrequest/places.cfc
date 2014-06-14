@@ -265,12 +265,12 @@
 				<cfcase value="sale_date">
 					<cfset var update_temp_table = "">
 					<cfquery name="update_temp_table" datasource="bont">
-						update itemtemp set #colname#=#ParseDateTime(newValue)#
+						update itemtemp set #colname#='#CreateODBCdate(ParseDateTime(newValue))#'
 						where itemtemp.id=#gridrow.id#
 					</cfquery>
 					<cfset var change_item_sale_date = "">
 					<cfquery name="change_item_sale_date" datasource="bont">
-						UPDATE item i set i.sale_date=#ParseDateTime(gridchanged.sale_date)#
+						UPDATE item i set i.sale_date='#CreateODBCdate(ParseDateTime(gridchanged.sale_date))#'
 						WHERE i.id=#gridrow.id#
 					</cfquery>
 				</cfcase>

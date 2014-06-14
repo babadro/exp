@@ -12,8 +12,8 @@
 
 <cfif isDefined("URL.step")><cfset SESSION.consWiz.step = URL.step></cfif>
 <cfif isDefined("Form.invoice")><cfset SESSION.consWiz.invoice = FORM.invoice></cfif>
-<cfif isDefined("Form.expectArrival")><cfset SESSION.consWiz.expectArrival = ParseDateTime(FORM.expectArrival)></cfif>
-<cfif isDefined("Form.factArrival")><cfset SESSION.consWiz.factArrival = ParseDateTime(FORM.factArrival)></cfif>
+<cfif isDefined("Form.expectArrival")><cfset SESSION.consWiz.expectArrival = parseDateTime(FORM.expectArrival)></cfif>
+<cfif isDefined("Form.factArrival")><cfset SESSION.consWiz.factArrival = parseDateTime(FORM.factArrival)></cfif>
 <cfif isDefined("Form.statusId")><cfset SESSION.consWiz.statusId = FORM.statusId></cfif>
 <cfif isDefined("Form.note")><cfset SESSION.consWiz.note = FORM.note></cfif>
 
@@ -32,20 +32,19 @@
 <cfmenuitem name="cyclingShoePart" href="#CGI.SCRIPT_NAME#?Step=cyclingShoePart" display="Запчасти"/>
 </cfmenu>
 
-
-<cfform name="form03" action="#CGI.SRIPT_NAME#" method="post" style="float:left">
+<cfif isDefined("FORM.factArrival")><cfoutput>#tostring(parseDateTime(FORM.factArrival))#</cfoutput></cfif>
+<cfform name="form03" format="html" action="#CGI.SRIPT_NAME#" method="post" style="float:left">
 	
 	<cfswitch expression="#SESSION.consWiz.step#" >
 		<cfcase value="primaryData">
 			<table align="left">
 				<tr><td>Инвойс поставки</td><td><cfinput name="invoice" size="45" required="Yes" message="Введите инвойс поставки" value="#SESSION.consWiz.invoice#"></td></tr>
-				<tr><td>Ожидаемая дата прибытия</td><td><cfinput name="expectArrival" type="datefield" validateAt="onBlur" value="#SESSION.consWiz.expectArrival#"></td></tr>
-				<tr><td>Фактическая дата прибытия</td><td><cfinput name="factArrival" type="datefield" validateAt="onBlur" value="#SESSION.consWiz.factArrival#"></td></tr>
+				<tr><td>Ожидаемая дата прибытия</td><td><cfinput name="expectArrival" type="datefield" required="true" validate="date" message="некорректная дата" validateAt="onSubmit,onServer" value="#SESSION.consWiz.expectArrival#"></td></tr>
+				<tr><td>Фактическая дата прибытия</td><td><cfinput name="factArrival" type="datefield" required="true" validate="date" message="некорректная дата" validateAt="onSubmit,onServer" value="#SESSION.consWiz.factArrival#"></td></tr>
 				<tr><td>Статус</td><td><cfselect name="statusId" query="getConsignmentStatus" selected="#SESSION.consWiz.statusId#" value="id" display="name_rus" /></td></tr>
 				<tr><td>Примечание к поставке</td><td><cfinput name="note" type="text" value="#SESSION.consWiz.note#"></td></tr>
-				
-				<tr><td><cfinput type="reset" name="resetForm" value="очистить форму"></td></tr>
 				<tr><td><input type="submit" name="recForm" value="Запомнить данные в форме"></td></tr>
+				<tr><td><input type="reset" name="resetForm" value="очистить форму"></td></tr>
 			</table>
 		</cfcase>	 
 		<cfcase value="cyclingShoe"> 
