@@ -1,42 +1,52 @@
-
+<cfset NumberOfSteps = 3>
 
 <cfif not isDefined("SESSION.consWiz")>
 	<cfset SESSION.consWiz = structNew()>
-	<cfset SESSION.consWiz.step = "primaryData">
+	<cfset SESSION.consWiz.stepNum = 1>
 	<cfset SESSION.consWiz.invoice = "">
 	<cfset SESSION.consWiz.expectArrival = "">
 	<cfset SESSION.consWiz.factArrival = "">
 	<cfset SESSION.consWiz.statusId = "">
 	<cfset SESSION.consWiz.note = "">
 </cfif>
-
-<cfif isDefined("URL.step")><cfset SESSION.consWiz.step = URL.step></cfif>
+<!---<cfif isDefined("URL.stepNum")><cfset SESSION.consWiz.stepNum = URL.stepNum></cfif>---->
 <cfif isDefined("Form.invoice")><cfset SESSION.consWiz.invoice = FORM.invoice></cfif>
 <cfif isDefined("Form.expectArrival")><cfset SESSION.consWiz.expectArrival = parseDateTime(FORM.expectArrival)></cfif>
 <cfif isDefined("Form.factArrival")><cfset SESSION.consWiz.factArrival = parseDateTime(FORM.factArrival)></cfif>
 <cfif isDefined("Form.statusId")><cfset SESSION.consWiz.statusId = FORM.statusId></cfif>
 <cfif isDefined("Form.note")><cfset SESSION.consWiz.note = FORM.note></cfif>
 
+<cfif isDefined("FORM.goBack")>
+ <cfset SESSION.movWiz.stepNum = URL.stepNum - 1>
+<cfelseif isDefined("FORM.goNext")>
+ <cfset SESSION.movWiz.stepNum = URL.stepNum + 1>
+<cfelseif isDefined("FORM.goDone")>
+ <cflocation url="consignmentCommit.cfm">
+</cfif>
+
 <cfinclude template="queryFunctions.cfm">
 
 <html>
-<head><title>Добавляем новую поставку</title></head>
+<head><title>Работа с поставкой</title></head>
 <body>
 
-<cfoutput><b>Мастер новых поставок</b><br></cfoutput>
+<cfoutput>
+	<b>Работа с поставкой</b><br>
+	Шаг #SESSION.consWiz.stepNum# из #numberOfSteps#<br>		
+</cfoutput>
 
-
+<!---
 <cfmenu name="menu" type="vertical" fontsize="14" bgcolor="##CCFFFF" width="150" menustyle="float:left; margin-right:100px;">
-<cfmenuitem name="primaryData" href="#CGI.SCRIPT_NAME#?Step=primaryData" display="Первичные данные"/>
-<cfmenuitem name="cyclingShoe" href="#CGI.SCRIPT_NAME#?Step=cyclingShoe" display="Велотуфли"/>
-<cfmenuitem name="cyclingShoePart" href="#CGI.SCRIPT_NAME#?Step=cyclingShoePart" display="Запчасти"/>
+<cfmenuitem name="primaryData" href="#CGI.SCRIPT_NAME#?stepNum=1" display="Первичные данные"/>
+<cfmenuitem name="cyclingShoe" href="#CGI.SCRIPT_NAME#?stepNum=2" display="Велотуфли"/>
+<cfmenuitem name="cyclingShoePart" href="#CGI.SCRIPT_NAME#?stepNum=3" display="Запчасти"/>
 </cfmenu>
-
+---->
 <cfif isDefined("FORM.factArrival")><cfoutput>#tostring(parseDateTime(FORM.factArrival))#</cfoutput></cfif>
-<cfform name="form03" format="html" action="#CGI.SRIPT_NAME#" method="post" style="float:left">
+<cfform name="form03" format="html" action="#CGI.SRIPT_NAME#?stepNum=#SESSION.consWiz.stepNum#" method="post" style="float:left">
 	
-	<cfswitch expression="#SESSION.consWiz.step#" >
-		<cfcase value="primaryData">
+	<cfswitch expression="#SESSION.consWiz.stepNum#">
+		<cfcase value="1">
 			<table align="center" bgcolor="orange">
 				<tr><th colspan="2">Данные поставки</th</tr>
 				<tr><td>Инвойс поставки</td><td><cfinput name="invoice" size="45" required="Yes" message="Введите инвойс поставки" value="#SESSION.consWiz.invoice#"></td></tr>
@@ -44,11 +54,10 @@
 				<tr><td>Фактическая дата прибытия</td><td><cfinput name="factArrival" type="datefield" required="true" validate="date" message="некорректная дата" validateAt="onSubmit,onServer" value="#SESSION.consWiz.factArrival#"></td></tr>
 				<tr><td>Статус</td><td><cfselect name="statusId" query="getConsignmentStatus" selected="#SESSION.consWiz.statusId#" value="id" display="name_rus" /></td></tr>
 				<tr><td>Примечание к поставке</td><td><textarea name="note" cols="40" rows="5"><cfoutput>#SESSION.consWiz.note#</cfoutput></textarea></td></tr>
-				<tr><td><input type="submit" name="recForm" value="Запомнить данные в форме"></td></tr>
 				<tr><td><input type="reset" name="resetForm" value="отменить изменения формы"></td></tr>
 			</table>
 		</cfcase>	 
-		<cfcase value="cyclingShoe"> 
+		<cfcase value="2"> 
 			<!---
 			<cfgrid format="html" name="grid01" pagesize=40 
 			stripeRowColor="gray"
@@ -86,5 +95,11 @@
 			---->
 		</cfcase>		
 	</cfswitch>
-	<cfinput type="submit" name="insertConsToDB" value="Внести поставку в базу данных">
+	 <p>
+	 <cfif SESSION.consWiz.stepNum gt 1><INPUT type="Submit" NAME="Назад" value="&lt;&lt; Back"></cfif> 
+	 <cfif SESSION.consWiz.stepNum lt numberOfSteps>
+	 	<INPUT type="Submit" NAME="Вперед" value="Next &gt;&gt;">
+	 <cfelse>
+	 	<INPUT type="Submit" NAME="закончить" value="Finish">
+	 </cfif>
 </cfform>

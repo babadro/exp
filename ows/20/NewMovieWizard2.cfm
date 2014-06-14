@@ -7,7 +7,7 @@
 <!--- Total Number of Steps in the Wizard --->
 <cfset NumberOfSteps = 6>
 
-<!--- The SESSION.movWiz structure holds usersÕ entries --->
+<!--- The SESSION.movWiz structure holds usersï¿½ entries --->
 <!--- as they move through wizard. Make sure it exists! --->
 <cfif not isDefined("SESSION.movWiz")>
  <!--- If structure undefined, create/initialize it --->
@@ -55,7 +55,7 @@
 <!--- If user clicked "Next" button, go forward one --->
 <cfelseif isDefined("FORM.goNext")>
  <cfset SESSION.movWiz.stepNum = URL.stepNum + 1>
-<!--- If user clicked "Finished" button, weÕre done --->
+<!--- If user clicked "Finished" button, weï¿½re done --->
 <cfelseif isDefined("FORM.goDone")>
  <cflocation url="NewMovieCommit2.cfm">
 </cfif>
@@ -93,7 +93,7 @@
  name="movieTitle" 
  size="50"
  required="Yes"
- message="Please donÕt leave the movie title blank."
+ message="Please donï¿½t leave the movie title blank."
  value="#SESSION.movWiz.movieTitle#">
 
  <!--- Show text entry field for title --->
@@ -210,7 +210,7 @@
  ORDER BY NameLast
  </cfquery>
 
- <!--- DirectorÕs Salary --->
+ <!--- Directorï¿½s Salary --->
  <p>How much will we pay the Director?<br>
  <cfinput 
  type="text"
@@ -218,27 +218,27 @@
  name="directorSal"
  required="Yes"
  validate="float"
- message="Please provide a number for the directorÕs salary."
+ message="Please provide a number for the directorï¿½s salary."
  value="#SESSION.movWiz.directorSal#">
  
  <!--- Salary for each actor --->
  <p>How much will we pay the Actors?<br>
  <cfloop query="getActors">
- <!--- Grab actorsÕs salary from ActorSals structure --->
+ <!--- Grab actorsï¿½s salary from ActorSals structure --->
  <!--- Initialize to "" if no salary for actor yet --->
  <cfif not structKeyExists(SESSION.movWiz.actorSals, actorID)>
  <cfset SESSION.movWiz.actorSals[actorID] = "">
  </cfif>
- <!--- Text field for actorÕs salary --->
+ <!--- Text field for actorï¿½s salary --->
  <cfinput 
  type="text"
  size="10"
  name="actorSal#actorID#"
  required="Yes"
  validate="float"
- message="Please provide a number for each actorÕs salary."
+ message="Please provide a number for each actorï¿½s salary."
  value="#SESSION.movWiz.actorSals[actorID]#">
- <!--- ActorÕs name --->
+ <!--- Actorï¿½s name --->
  <cfoutput>for #nameFirst# #nameLast#<br></cfoutput>
  </cfloop> 
  
@@ -264,7 +264,7 @@
  </cfswitch>
  
 
- <p>
+# <p>
  <!--- Show Back button, unless at first step ---> 
  <cfif SESSION.movWiz.stepNum gt 1>
  <INPUT type="Submit" NAME="goBack" value="&lt;&lt; Back">
