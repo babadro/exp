@@ -37,14 +37,15 @@
 	
 	<cfswitch expression="#SESSION.consWiz.step#" >
 		<cfcase value="primaryData">
-			<table align="left">
+			<table align="center" bgcolor="orange">
+				<tr><th colspan="2">Данные поставки</th</tr>
 				<tr><td>Инвойс поставки</td><td><cfinput name="invoice" size="45" required="Yes" message="Введите инвойс поставки" value="#SESSION.consWiz.invoice#"></td></tr>
 				<tr><td>Ожидаемая дата прибытия</td><td><cfinput name="expectArrival" type="datefield" required="true" validate="date" message="некорректная дата" validateAt="onSubmit,onServer" value="#SESSION.consWiz.expectArrival#"></td></tr>
 				<tr><td>Фактическая дата прибытия</td><td><cfinput name="factArrival" type="datefield" required="true" validate="date" message="некорректная дата" validateAt="onSubmit,onServer" value="#SESSION.consWiz.factArrival#"></td></tr>
 				<tr><td>Статус</td><td><cfselect name="statusId" query="getConsignmentStatus" selected="#SESSION.consWiz.statusId#" value="id" display="name_rus" /></td></tr>
-				<tr><td>Примечание к поставке</td><td><cfinput name="note" type="text" value="#SESSION.consWiz.note#"></td></tr>
+				<tr><td>Примечание к поставке</td><td><textarea name="note" cols="40" rows="5"><cfoutput>#SESSION.consWiz.note#</cfoutput></textarea></td></tr>
 				<tr><td><input type="submit" name="recForm" value="Запомнить данные в форме"></td></tr>
-				<tr><td><input type="reset" name="resetForm" value="очистить форму"></td></tr>
+				<tr><td><input type="reset" name="resetForm" value="отменить изменения формы"></td></tr>
 			</table>
 		</cfcase>	 
 		<cfcase value="cyclingShoe"> 
