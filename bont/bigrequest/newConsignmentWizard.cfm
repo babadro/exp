@@ -12,8 +12,8 @@
 
 <cfif isDefined("URL.step")><cfset SESSION.consWiz.step = URL.step></cfif>
 <cfif isDefined("Form.invoice")><cfset SESSION.consWiz.invoice = FORM.invoice></cfif>
-<cfif isDefined("Form.expectArrival")><cfset SESSION.consWiz.expectArrival = FORM.expectArrival></cfif>
-<cfif isDefined("Form.factArrival")><cfset SESSION.consWiz.factArrival = FORM.factArrival></cfif>
+<cfif isDefined("Form.expectArrival")><cfset SESSION.consWiz.expectArrival = ParseDateTime(FORM.expectArrival)></cfif>
+<cfif isDefined("Form.factArrival")><cfset SESSION.consWiz.factArrival = ParseDateTime(FORM.factArrival)></cfif>
 <cfif isDefined("Form.statusId")><cfset SESSION.consWiz.statusId = FORM.statusId></cfif>
 <cfif isDefined("Form.note")><cfset SESSION.consWiz.note = FORM.note></cfif>
 
@@ -39,8 +39,8 @@
 		<cfcase value="primaryData">
 			<table align="left">
 				<tr><td>Инвойс поставки</td><td><cfinput name="invoice" size="45" required="Yes" message="Введите инвойс поставки" value="#SESSION.consWiz.invoice#"></td></tr>
-				<tr><td>Ожидаемая дата прибытия</td><td><cfinput name="expectArrival" type="datefield" value="#SESSION.consWiz.expectArrival#"></td></tr>
-				<tr><td>Фактическая дата прибытия</td><td><cfinput name="factArrival" type="datefield" value="#SESSION.consWiz.factArrival#"></td></tr>
+				<tr><td>Ожидаемая дата прибытия</td><td><cfinput name="expectArrival" type="datefield" validateAt="onBlur" value="#SESSION.consWiz.expectArrival#"></td></tr>
+				<tr><td>Фактическая дата прибытия</td><td><cfinput name="factArrival" type="datefield" validateAt="onBlur" value="#SESSION.consWiz.factArrival#"></td></tr>
 				<tr><td>Статус</td><td><cfselect name="statusId" query="getConsignmentStatus" selected="#SESSION.consWiz.statusId#" value="id" display="name_rus" /></td></tr>
 				<tr><td>Примечание к поставке</td><td><cfinput name="note" type="text" value="#SESSION.consWiz.note#"></td></tr>
 				

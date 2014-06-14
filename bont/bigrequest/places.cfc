@@ -245,12 +245,14 @@
 				<cfset var newValue = sentValue>
 			</cfif>
 			
-			<!--- Правим временнную таблицу --->
-			<cfset var update_temp_table = "">
-			<cfquery name="update_temp_table" datasource="bont">
-				update itemtemp set #colname#='#newValue#'
-				where itemtemp.id=#gridrow.id#
-			</cfquery>
+			<!--- Правим временнную таблицу одинаковым образом для всех, кроме колонки "дата продажи, ее обработаем в switch"--->
+			<cfif colname NEQ "sale_date">
+				<cfset var update_temp_table = "">
+				<cfquery name="update_temp_table" datasource="bont">
+					update itemtemp set #colname#='#newValue#'
+					where itemtemp.id=#gridrow.id#
+				</cfquery>
+			</cfif>
 			<!--- Правим разные исходные (постоянные) таблицы, в зависимости от выбранного столбца во временной таблице --->
 			<cfswitch expression="#colname#">
 				<cfcase value="sold_for">
@@ -261,9 +263,14 @@
 					</cfquery>
 				</cfcase>
 				<cfcase value="sale_date">
+					<cfset var update_temp_table = "">
+					<cfquery name="update_temp_table" datasource="bont">
+						update itemtemp set #colname#=#ParseDateTime(newValue)#
+						where itemtemp.id=#gridrow.id#
+					</cfquery>
 					<cfset var change_item_sale_date = "">
 					<cfquery name="change_item_sale_date" datasource="bont">
-						UPDATE item i set i.sale_date='#gridchanged.sale_date#'
+						UPDATE item i set i.sale_date=#ParseDateTime(gridchanged.sale_date)#
 						WHERE i.id=#gridrow.id#
 					</cfquery>
 				</cfcase>
