@@ -49,15 +49,6 @@
 	</cfquery>
 </cffunction>
 
-<!----
-<cffunction name="insertWhereOrStatement" output="true">
-	<cfargument name="структура какая нибудь">
-	<cfloop через структуру>
-		<cfif элемент без окончания Мин или МАХ></cfif>
-	</cfloop>
-</cffunction>
----->
-
 	
 <cffunction name="getData" access="remote" output="false">
 	<cfargument name="page">
@@ -265,12 +256,12 @@
 				<cfcase value="sale_date">
 					<cfset var update_temp_table = "">
 					<cfquery name="update_temp_table" datasource="bont">
-						update itemtemp set #colname#='#CreateODBCdate(ParseDateTime(newValue))#'
+						update itemtemp set #colname#='#newValue#'
 						where itemtemp.id=#gridrow.id#
 					</cfquery>
 					<cfset var change_item_sale_date = "">
 					<cfquery name="change_item_sale_date" datasource="bont">
-						UPDATE item i set i.sale_date='#CreateODBCdate(ParseDateTime(gridchanged.sale_date))#'
+						UPDATE item i set i.sale_date='#gridchanged.sale_date#'
 						WHERE i.id=#gridrow.id#
 					</cfquery>
 				</cfcase>
