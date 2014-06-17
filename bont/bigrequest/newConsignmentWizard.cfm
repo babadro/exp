@@ -17,9 +17,9 @@
 <cfif isDefined("Form.note")><cfset SESSION.consWiz.note = FORM.note></cfif>
 
 <cfif isDefined("FORM.goBack")>
- <cfset SESSION.movWiz.stepNum = URL.stepNum - 1>
+ <cfset SESSION.consWiz.stepNum = URL.stepNum - 1>
 <cfelseif isDefined("FORM.goNext")>
- <cfset SESSION.movWiz.stepNum = URL.stepNum + 1>
+ <cfset SESSION.consWiz.stepNum = URL.stepNum + 1>
 <cfelseif isDefined("FORM.goDone")>
  <cflocation url="consignmentCommit.cfm">
 </cfif>
@@ -58,6 +58,7 @@
 			</table>
 		</cfcase>	 
 		<cfcase value="2"> 
+			<cfoutput>cycling shoe</cfoutput>
 			<!---
 			<cfgrid format="html" name="grid01" pagesize=40 
 			stripeRowColor="gray"
@@ -96,10 +97,10 @@
 		</cfcase>		
 	</cfswitch>
 	 <p>
-	 <cfif SESSION.consWiz.stepNum gt 1><INPUT type="Submit" NAME="Назад" value="&lt;&lt; Back"></cfif> 
+	 <cfif SESSION.consWiz.stepNum gt 1><INPUT type="Submit" NAME="goBack" value="&lt;&lt; назад"></cfif> 
 	 <cfif SESSION.consWiz.stepNum lt numberOfSteps>
-	 	<INPUT type="Submit" NAME="Вперед" value="Next &gt;&gt;">
+	 	<INPUT type="Submit" NAME="goNext" value="вперед &gt;&gt;">
 	 <cfelse>
-	 	<INPUT type="Submit" NAME="закончить" value="Finish">
+	 	<INPUT type="Submit" NAME="goDone" value="завершить">
 	 </cfif>
 </cfform>
