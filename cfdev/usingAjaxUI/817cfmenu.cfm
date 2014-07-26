@@ -16,14 +16,12 @@ function. --->
 selecteditemcolor="##ddddff">
 <cfmenuitem display="Home" href="javascript:selected('Home');" />
 <cfmenuitem display="File">
-<cfmenuitem display="Open...">
-<cfmenuitem display="Template" href="javascript:selected('File &gt;
-Open... &gt; Template');" />
-<cfmenuitem divider="true" />
-<cfmenuitem display="CSS" href="javascript:selected('File &gt; Open... &gt;
-CSS');" />
-</cfmenuitem>
-<cfmenuitem display="Close" href="javascript:selected('File &gt; Close');" />
+	<cfmenuitem display="Open...">
+		<cfmenuitem display="Template" href="javascript:selected('File &gt;Open... &gt; Template');" />
+		<cfmenuitem divider="true" />
+		<cfmenuitem display="CSS" href="javascript:selected('File &gt; Open... &gt;CSS');" />
+	</cfmenuitem>
+	<cfmenuitem display="Close" href="javascript:selected('File &gt; Close');" />
 </cfmenuitem>
 <cfmenuitem display="Help">
 <cfmenuitem display="About" href="javascript:selected('Help &gt; About');" />
