@@ -1,9 +1,0 @@
-#
-# Flex event gateway configuration
-#
-
-# This is the destination of the messages.
-#destination=ColdFusion_example4
-
-# Hostname or IP address of the Flex Enterprise Server
-#host=127.0.0.1
