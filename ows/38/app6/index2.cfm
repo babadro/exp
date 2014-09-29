@@ -1,4 +1,4 @@
-<cfset contacts = entityLoad("contact",{}, "lastname,firstname")>
+<cfset contacts = entityLoad("contact",{}, "lastname, firstname")>
 
 <h2>Contacts</h2>
 

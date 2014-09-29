@@ -6,6 +6,8 @@ Function:       Film/Expense report
 
 <cfset films = entityLoad("film", {}, "title asc")>
 
+<cfdump var="#films#">
+
 <h1>Film Report</h1>
 
 <table border="1">
